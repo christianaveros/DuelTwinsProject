@@ -1,0 +1,46 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Textures/dock.png" type="Texture" id=1]
+
+[sub_resource type="RectangleShape2D" id=1]
+
+custom_solver_bias = 0.0
+extents = Vector2( 16, 16 )
+
+[node name="player_dock" type="KinematicBody2D"]
+
+input_pickable = true
+collision_layer = 1
+collision_mask = 1
+collision/safe_margin = 0.08
+_sections_unfolded = [ "Transform" ]
+
+[node name="shape 0" type="CollisionShape2D" parent="." index="0"]
+
+shape = SubResource( 1 )
+
+[node name="shape 1" type="CollisionShape2D" parent="." index="1"]
+
+position = Vector2( 0, 40 )
+shape = SubResource( 1 )
+
+[node name="shape 2" type="CollisionShape2D" parent="." index="2"]
+
+position = Vector2( 0, 80 )
+shape = SubResource( 1 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." index="3"]
+
+layer = 1
+offset = Vector2( 0, 0 )
+rotation = 0.0
+scale = Vector2( 1, 1 )
+transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+
+[node name="sprite" type="Sprite" parent="CanvasLayer" index="0"]
+
+texture = ExtResource( 1 )
+offset = Vector2( 0, 40 )
+_sections_unfolded = [ "Offset", "Z Index" ]
+
+
