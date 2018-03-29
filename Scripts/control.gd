@@ -1,7 +1,11 @@
 extends Node
 
 #global vars
-onready var player_turn = 1 #P1 = 1, P2 = -1
+onready var player_turn = 1 setget set_player_turn, get_player_turn #P1 = 1, P2 = -1
+var player = {
+	-1:[0,0,0,0,0,0,0,0,0,0],
+	1:[0,0,0,0,0,0,0,0,0,0]
+} setget set_player, get_player
 
 #name, left, top, right, bottom
 onready var card_values = {
@@ -15,18 +19,39 @@ onready var card_values = {
 	21:["bahamut", 7,7,10,6], 22:["villain", 5,10,5,10]
 }
 
-#set up cards here
+#set player turn
+func set_player_turn(value):
+	player_turn = value
+#get player turn
+func get_player_turn():
+	return player_turn
+
+#set player
+func set_player(value):
+	player = value
+#get player
+func get_player():
+	return player
+
+#set up cards
 func set_cards():
-	pass
+	#set random cards
+	for y in range(10):
+		player[-1][y] = randi()%23 #set random int number
+	for y in range(10):
+		player[1][y] = randi()%23 #set random int number
+	print(player)
 
 func end_turn():
 	print("signal received")
 	player_turn *= -1
 	
 func _ready():
+	randomize() #randomize seed
 	print("Master Control: Ready!")
+	set_cards()
 	set_physics_process(true)
 
 func _physics_process(delta):
-	get_node("player").set_text("Player: 1" + str(player_turn))
+	get_node("player").set_text("Player: " + str(player_turn))
 
