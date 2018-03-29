@@ -10,7 +10,7 @@ source_file="res://Textures/card_placeholder.png"
 source_md5="1c6d7418819da567ef5ec4211aff9bd9"
 
 dest_files=[ "res://.import/card_placeholder.png-8193ae310ed95e81343b680632fd9fd8.stex" ]
-dest_md5="9ece2c82e63cf0f3c1487d72fb164cc3"
+dest_md5="3fe9a65636bcde83463796f3f85bf2b9"
 
 [params]
 
@@ -19,7 +19,7 @@ compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=true
+flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2
@@ -28,5 +28,5 @@ process/premult_alpha=false
 process/HDR_as_SRGB=false
 stream=false
 size_limit=0
-detect_3d=true
+detect_3d=false
 svg/scale=1.0

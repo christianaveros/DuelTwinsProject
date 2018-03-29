@@ -1,14 +1,27 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://Entities/background.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Entities/card.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scripts/game_scene.gd" type="Script" id=1]
+[ext_resource path="res://Entities/background.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Entities/card_default.tscn" type="PackedScene" id=3]
 
 [node name="game_scene" type="Node2D"]
 
-[node name="background" parent="." index="0" instance=ExtResource( 1 )]
+script = ExtResource( 1 )
 
-[node name="card" parent="." index="1" instance=ExtResource( 2 )]
+[node name="background" parent="." index="0" instance=ExtResource( 2 )]
 
-position = Vector2( 213.304, 59.5822 )
+[node name="card2" parent="." index="1" instance=ExtResource( 3 )]
+
+margin_left = 111.0
+margin_top = 44.0
+margin_right = 147.0
+margin_bottom = 80.0
+
+[node name="card" parent="." index="2" instance=ExtResource( 3 )]
+
+margin_left = 190.782
+margin_top = 74.112
+margin_right = 226.782
+margin_bottom = 110.112
 
 

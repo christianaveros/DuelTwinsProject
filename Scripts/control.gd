@@ -3,7 +3,7 @@ extends Node
 #global vars
 onready var player_turn = 1 #P1 = 1, P2 = -1
 
-#name	#left, top, right, bottom
+#name, left, top, right, bottom
 onready var card_values = {
 	0:["slime", 3,4,4,4], 1:["tork", 5,1,5,4], 2:["emuk", 4,4,4,3],
 	3:["worm", 5,4,8,3], 4:["kobra", 3,7,3,2], 5:["bat", 1,4,1,4],
@@ -22,15 +22,11 @@ func set_cards():
 func end_turn():
 	print("signal received")
 	player_turn *= -1
-
-func _input(event):
-	if event.is_pressed() and event is InputEventScreenTouch:
-		print("emitting signal")
-		emit_signal("turn_end")
 	
 func _ready():
 	print("Master Control: Ready!")
-	var card = get_node("/root/game_scene/card")
-	self.connect("turn_end", card, "change_color", [])
-	set_process_input(true)
+	set_physics_process(true)
+
+func _physics_process(delta):
+	get_node("player").set_text("Player: 1" + str(player_turn))
 
