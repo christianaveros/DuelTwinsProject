@@ -6,7 +6,8 @@ var player = {
 	-1:[0,0,0,0,0,0,0,0,0,0],
 	1:[0,0,0,0,0,0,0,0,0,0]
 } setget set_player, get_player
-const card_default = preload("res://Entities/card_default.tscn") #object call
+var s_card = [0,0,0,0,0,0] setget set_s_card, get_s_card
+const dock = preload("res://Entities/player_dock.tscn") #object call
 
 #name, left, top, right, bottom
 onready var card_values = {
@@ -34,6 +35,13 @@ func set_player(value):
 func get_player():
 	return player
 
+#set s_cards
+func set_s_card(value):
+	s_card = value
+#get s_cards
+func get_s_card():
+	return s_card
+
 #set up cards
 func set_cards():
 	#set random cards
@@ -54,16 +62,19 @@ func set_cards():
 				b = false
 	#print(card_values) #card values
 	#set 3 starting cards
-	var s_card = [0,0,0,0,0,0]
 	var arr_size = 10
 	for x in range(3):
 		s_card[x] = player[-1][randi()%arr_size] #set random from before
 		s_card[(s_card.size() -1) - x] = player[1][randi()%arr_size]
 		arr_size -= 1
 	
+	#print test
 	print(s_card)
-	
 	print(player)
+	
+	#create 2 player docks
+	#var dock_1 = dock.instance()
+	#dock.position = Vector2()
 
 func end_turn():
 	print("signal received")
@@ -71,11 +82,12 @@ func end_turn():
 	
 func _ready():
 	randomize() #randomize seed
-	print("Master Control: Ready!")
-	set_cards()
+	set_cards() #create cards
 	set_physics_process(true)
+	print("Master Control: Ready!")
 
 func _physics_process(delta):
+	#label for turn
 	var player_num = player_turn if player_turn == 1 else 2
-	get_node("player").set_text("Player: " + str(player_num) + "'s Turn")
+	get_node("player").set_text("Player " + str(player_num) + "'s Turn")
 
