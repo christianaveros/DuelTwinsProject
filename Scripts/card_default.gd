@@ -1,7 +1,7 @@
 extends Control
 
 const CARD_OFFSET = 16 # extent area
-var player_ind = 1 # need to be assigned
+var player_ind = 0 # need to be assigned
 var monster_name = "" # need to be assigned 
 var stats = [0,0,0,0] # need to be assigned
 onready var pressed = -1 # -1, not_pressed, 1, pressed
@@ -27,6 +27,7 @@ func _physics_process(delta):
 		get_node("card_area/player_ind").set_texture(load("res://Textures/red.png"))
 	else:
 		get_node("card_area/player_ind").set_texture(load("res://Textures/blue.png"))
+		
 	#set monster sprite
 	if monster_name == "":
 		get_node("card_area/card_holder/card_sprite").set_texture(load("res://Textures/unknown.png"))

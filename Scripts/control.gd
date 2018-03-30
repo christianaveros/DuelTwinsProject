@@ -75,31 +75,96 @@ func set_cards():
 	
 	#create 2 player docks
 	var dock_1 = dock.instance()
-	dock_1.player_ind = 1
-	dock_1.position = Vector2(230,28) #get_viewport().size.x*.25, get_viewport().size.y*.8
-	get_node("/root/game_scene").add_child(dock_1)
-	#print(dock_1.position)
 	var dock_2 = dock.instance()
+	dock_1.player_ind = 1
 	dock_2.player_ind = -1
+	dock_1.position = Vector2(230,28) #get_viewport().size.x*.25, get_viewport().size.y*.8
+	dock_1.get_node("position 0").position = Vector2(230,28)
+	dock_1.get_node("position 1").position = Vector2(230,68)
+	dock_1.get_node("position 2").position = Vector2(230,108)
 	dock_2.position = Vector2(26,32) #get_viewport().size.x*.25, get_viewport().size.y*.8
+	dock_2.get_node("position 0").position = Vector2(26,32)
+	dock_2.get_node("position 1").position = Vector2(26,72)
+	dock_2.get_node("position 2").position = Vector2(26,112)
+	
+	get_node("/root/game_scene").add_child(dock_1)
 	get_node("/root/game_scene").add_child(dock_2)
-	#print(dock_2.position)
 	
 	#create cards
-	var card1_0 = card.instance() #create
+	var card1_0 = card.instance()
+	var card1_1 = card.instance()
+	var card1_2 = card.instance()
+	var card2_0 = card.instance()
+	var card2_1 = card.instance()
+	var card2_2 = card.instance()
+	
+	# set card 0
 	card1_0.player_ind = 1 # player owned for sprite
+	card1_1.player_ind = 1 # player owned for sprite
+	card1_2.player_ind = 1 # player owned for sprite
+	card2_0.player_ind = -1 # player owned for sprite
+	card2_1.player_ind = -1 # player owned for sprite
+	card2_2.player_ind = -1 # player owned for sprite
 	card1_0.monster_name = card_values[s_card[0]][0] # monster name for sprite
-	for x in range(4):
-		#[1] = [1]
+	card1_1.monster_name = card_values[s_card[1]][0] # monster name for sprite
+	card1_2.monster_name = card_values[s_card[2]][0] # monster name for sprite
+	card2_0.monster_name = card_values[s_card[3]][0] # monster name for sprite
+	card2_1.monster_name = card_values[s_card[4]][0] # monster name for sprite
+	card2_2.monster_name = card_values[s_card[5]][0] # monster name for sprite
+	for x in range(4): #[0] = [1] 0,1,2,3 = 1,2,3,4
 		card1_0.stats[x] = card_values[s_card[0]][x+1]
+		card1_1.stats[x] = card_values[s_card[1]][x+1]
+		card1_2.stats[x] = card_values[s_card[2]][x+1]
+		card2_0.stats[x] = card_values[s_card[3]][x+1]
+		card2_1.stats[x] = card_values[s_card[4]][x+1]
+		card2_2.stats[x] = card_values[s_card[5]][x+1]
+	#left
 	card1_0.get_node("left").set_text(str(card1_0.stats[0]))
+	card1_1.get_node("left").set_text(str(card1_1.stats[0]))
+	card1_2.get_node("left").set_text(str(card1_2.stats[0]))
+	card2_0.get_node("left").set_text(str(card2_0.stats[0]))
+	card2_1.get_node("left").set_text(str(card2_1.stats[0]))
+	card2_2.get_node("left").set_text(str(card2_2.stats[0]))
+	#top
 	card1_0.get_node("top").set_text(str(card1_0.stats[1]))
+	card1_1.get_node("top").set_text(str(card1_1.stats[1]))
+	card1_2.get_node("top").set_text(str(card1_2.stats[1]))
+	card2_0.get_node("top").set_text(str(card2_0.stats[1]))
+	card2_1.get_node("top").set_text(str(card2_1.stats[1]))
+	card2_2.get_node("top").set_text(str(card2_2.stats[1]))
+	#right
 	card1_0.get_node("right").set_text(str(card1_0.stats[2]))
+	card1_1.get_node("right").set_text(str(card1_1.stats[2]))
+	card1_2.get_node("right").set_text(str(card1_2.stats[2]))
+	card2_0.get_node("right").set_text(str(card2_0.stats[2]))
+	card2_1.get_node("right").set_text(str(card2_1.stats[2]))
+	card2_2.get_node("right").set_text(str(card2_2.stats[2]))
+	#bottom
 	card1_0.get_node("bottom").set_text(str(card1_0.stats[3]))
+	card1_1.get_node("bottom").set_text(str(card1_1.stats[3]))
+	card1_2.get_node("bottom").set_text(str(card1_2.stats[3]))
+	card2_0.get_node("bottom").set_text(str(card2_0.stats[3]))
+	card2_1.get_node("bottom").set_text(str(card2_1.stats[3]))
+	card2_2.get_node("bottom").set_text(str(card2_2.stats[3]))
+	
+	#set card position
 	card1_0.rect_position = dock_1.get_node("position 0").position # place at position 0
+	card1_1.rect_position = dock_1.get_node("position 1").position # place at position 1
+	card1_2.rect_position = dock_1.get_node("position 2").position # place at position 2
+	card2_0.rect_position = dock_2.get_node("position 0").position # place at position 0
+	card2_1.rect_position = dock_2.get_node("position 1").position # place at position 1
+	card2_2.rect_position = dock_2.get_node("position 2").position # place at position 2
+	
+	#add child
 	get_node("/root/game_scene").add_child(card1_0)
+	get_node("/root/game_scene").add_child(card1_1)
+	get_node("/root/game_scene").add_child(card1_2)
+	get_node("/root/game_scene").add_child(card2_0)
+	get_node("/root/game_scene").add_child(card2_1)
+	get_node("/root/game_scene").add_child(card2_2)
 	#print(card_values[s_card[0]][0]) #debug
-	print(card1_0.stats)
+	print("Card 1 stats:"+str(card1_0.stats)+ " " + card1_0.monster_name)
+	print("Card 1 position:" +str(card1_0.rect_position))
 
 func end_turn():
 	print("signal received")
