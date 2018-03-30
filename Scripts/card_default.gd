@@ -7,10 +7,6 @@ var stats = [0,0,0,0] # need to be assigned
 onready var pressed = -1 # -1, not_pressed, 1, pressed
 
 func _ready():
-	get_node("left").set_text(str(stats[0]))
-	get_node("top").set_text(str(stats[1]))
-	get_node("right").set_text(str(stats[2]))
-	get_node("bottom").set_text(str(stats[3]))
 	set_process_input(true)
 	set_physics_process(true)
 

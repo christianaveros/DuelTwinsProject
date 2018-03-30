@@ -86,7 +86,20 @@ func set_cards():
 	#print(dock_2.position)
 	
 	#create cards
-	var card1_0 = card.instance()
+	var card1_0 = card.instance() #create
+	card1_0.player_ind = 1 # player owned for sprite
+	card1_0.monster_name = card_values[s_card[0]][0] # monster name for sprite
+	for x in range(4):
+		#[1] = [1]
+		card1_0.stats[x] = card_values[s_card[0]][x+1]
+	card1_0.get_node("left").set_text(str(card1_0.stats[0]))
+	card1_0.get_node("top").set_text(str(card1_0.stats[1]))
+	card1_0.get_node("right").set_text(str(card1_0.stats[2]))
+	card1_0.get_node("bottom").set_text(str(card1_0.stats[3]))
+	card1_0.rect_position = dock_1.get_node("position 0").position # place at position 0
+	get_node("/root/game_scene").add_child(card1_0)
+	#print(card_values[s_card[0]][0]) #debug
+	print(card1_0.stats)
 
 func end_turn():
 	print("signal received")

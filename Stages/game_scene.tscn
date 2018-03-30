@@ -1,8 +1,7 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://Scripts/game_scene.gd" type="Script" id=1]
-[ext_resource path="res://Entities/card_default.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Entities/background.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Entities/background.tscn" type="PackedScene" id=2]
 
 [node name="game_scene" type="Node2D"]
 
@@ -12,14 +11,6 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="card" parent="." index="0" instance=ExtResource( 2 )]
-
-margin_left = 128.0
-margin_top = 72.0
-margin_right = 164.0
-margin_bottom = 108.0
-_sections_unfolded = [ "Mouse", "Rect" ]
-
-[node name="background" parent="." index="1" instance=ExtResource( 3 )]
+[node name="background" parent="." index="0" instance=ExtResource( 2 )]
 
 

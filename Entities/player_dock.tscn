@@ -3,7 +3,7 @@
 [ext_resource path="res://Scripts/player_dock.gd" type="Script" id=1]
 [ext_resource path="res://Textures/dock.png" type="Texture" id=2]
 
-[node name="player_dock" type="Position2D"]
+[node name="player_dock" type="Position2D" index="0"]
 
 script = ExtResource( 1 )
 _sections_unfolded = [ "Transform", "Z Index" ]
@@ -17,12 +17,16 @@ _sections_unfolded = [ "Offset", "Z Index" ]
 
 [node name="position 0" type="Position2D" parent="." index="1"]
 
+_sections_unfolded = [ "Transform" ]
+
 [node name="position 1" type="Position2D" parent="." index="2"]
 
 position = Vector2( 0, 40 )
+_sections_unfolded = [ "Transform" ]
 
 [node name="position 2" type="Position2D" parent="." index="3"]
 
 position = Vector2( 0, 80 )
+_sections_unfolded = [ "Transform" ]
 
 
