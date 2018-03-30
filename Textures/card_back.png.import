@@ -7,10 +7,10 @@ path="res://.import/card_back.png-526837a2abeab462597c66efe44ef0cb.stex"
 [deps]
 
 source_file="res://Textures/card_back.png"
-source_md5="3e6e5086465a5e6ac56ac78fa28d5c15"
+source_md5="7bef1732e7b7f462ee9b7b2f3cbbfd96"
 
 dest_files=[ "res://.import/card_back.png-526837a2abeab462597c66efe44ef0cb.stex" ]
-dest_md5="08e65b0be5e45042cf8ecd15b2dcb67e"
+dest_md5="fa63c9cf5267a0052ed308353a49598f"
 
 [params]
 
@@ -19,7 +19,7 @@ compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=true
+flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2

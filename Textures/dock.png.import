@@ -10,7 +10,7 @@ source_file="res://Textures/dock.png"
 source_md5="d4dcf217f1b9fefd99775bdaf2067e45"
 
 dest_files=[ "res://.import/dock.png-eeecfd8a229155d6e554ce44a58789bd.stex" ]
-dest_md5="9792c66608f17f9aa93250de8509e7fb"
+dest_md5="1dd90c5bb603388725bff60ddcd5656b"
 
 [params]
 
@@ -19,7 +19,7 @@ compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=true
+flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2

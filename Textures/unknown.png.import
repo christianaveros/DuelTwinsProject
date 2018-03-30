@@ -10,7 +10,7 @@ source_file="res://Textures/unknown.png"
 source_md5="a686cd9aff1edcc15399dd88cd85be8e"
 
 dest_files=[ "res://.import/unknown.png-262edd0bed8e8c9a20fdf7a21698ce78.stex" ]
-dest_md5="0589cf599604247685127eaac41b4ab6"
+dest_md5="f321b8925dfa6efe7b220bf494440de8"
 
 [params]
 
@@ -19,7 +19,7 @@ compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=true
+flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2

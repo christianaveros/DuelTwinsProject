@@ -10,7 +10,7 @@ source_file="res://Textures/blue.png"
 source_md5="3f0db9daf75e4133fea3bdb131a73056"
 
 dest_files=[ "res://.import/blue.png-1d8e7136ec8a99f4b36636ebe743d32a.stex" ]
-dest_md5="742fa5ed9c315b7b96d86eb29d7ef0da"
+dest_md5="db513d49b42151e099664acdc57de362"
 
 [params]
 
@@ -19,7 +19,7 @@ compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=true
+flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2

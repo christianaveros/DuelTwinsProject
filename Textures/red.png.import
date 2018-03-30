@@ -10,7 +10,7 @@ source_file="res://Textures/red.png"
 source_md5="a1a6e59c79ff62127593b13e29d9c883"
 
 dest_files=[ "res://.import/red.png-8696b1d4cecea20dc0bf01647aef59d4.stex" ]
-dest_md5="d130df6b7d9758b4e8a35dd4ca991979"
+dest_md5="3fbf88245c9257da8fa7c2dcc734196d"
 
 [params]
 
@@ -19,7 +19,7 @@ compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=true
+flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2

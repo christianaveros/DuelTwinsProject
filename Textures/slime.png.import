@@ -7,10 +7,10 @@ path="res://.import/slime.png-73b45882e19490d008a1d52f629aed30.stex"
 [deps]
 
 source_file="res://Textures/slime.png"
-source_md5="a61ed92cbb5a2036e29bad52954f3ade"
+source_md5="55f4b742e5fa9bfcd12d91bccc270a4e"
 
 dest_files=[ "res://.import/slime.png-73b45882e19490d008a1d52f629aed30.stex" ]
-dest_md5="52e21a12c0e7c444d877639f8d3bae06"
+dest_md5="f3dbf939bf84afa6b7293a14a729113d"
 
 [params]
 
@@ -19,7 +19,7 @@ compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=true
+flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2
