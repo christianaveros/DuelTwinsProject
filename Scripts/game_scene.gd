@@ -5,4 +5,5 @@ func _ready():
 	pass
 
 func _input(event):
-	print(event)
+	#print(event.position)
+	pass

@@ -7,10 +7,10 @@ path="res://.import/tork.png-4aa96b878bb161d0e620debb8a5951f6.stex"
 [deps]
 
 source_file="res://Textures/tork.png"
-source_md5="8b37d7b32326c9417eb4c34165a75a54"
+source_md5="e28bc8064f3d8ba0c1b872b993617fc8"
 
 dest_files=[ "res://.import/tork.png-4aa96b878bb161d0e620debb8a5951f6.stex" ]
-dest_md5="01ae3b106ec05ce4d382425e4b00816c"
+dest_md5="a56dacb1b63b8aabde47614a843a05cb"
 
 [params]
 

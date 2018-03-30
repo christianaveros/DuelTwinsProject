@@ -8,6 +8,7 @@ var player = {
 } setget set_player, get_player
 var s_card = [0,0,0,0,0,0] setget set_s_card, get_s_card
 const dock = preload("res://Entities/player_dock.tscn") #object call
+const card = preload("res://Entities/card_default.tscn") #object call
 
 #name, left, top, right, bottom
 onready var card_values = {
@@ -73,8 +74,19 @@ func set_cards():
 	print(player)
 	
 	#create 2 player docks
-	#var dock_1 = dock.instance()
-	#dock.position = Vector2()
+	var dock_1 = dock.instance()
+	dock_1.player_ind = 1
+	dock_1.position = Vector2(230,28) #get_viewport().size.x*.25, get_viewport().size.y*.8
+	get_node("/root/game_scene").add_child(dock_1)
+	#print(dock_1.position)
+	var dock_2 = dock.instance()
+	dock_2.player_ind = -1
+	dock_2.position = Vector2(26,32) #get_viewport().size.x*.25, get_viewport().size.y*.8
+	get_node("/root/game_scene").add_child(dock_2)
+	#print(dock_2.position)
+	
+	#create cards
+	var card1_0 = card.instance()
 
 func end_turn():
 	print("signal received")
