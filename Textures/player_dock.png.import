@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/wasp.png-97bea57e1fa01fc6711423fa8a4d0a1c.stex"
+path="res://.import/player_dock.png-ff557788adddbc05916b481a7cde587a.stex"
 
 [deps]
 
-source_file="res://Textures/wasp.png"
-source_md5="5dadf9d53313fc3132cb2948f5b49d65"
+source_file="res://Textures/player_dock.png"
+source_md5="33c5a02ae7085e009d3e55610654b4b2"
 
-dest_files=[ "res://.import/wasp.png-97bea57e1fa01fc6711423fa8a4d0a1c.stex" ]
-dest_md5="72052a6b104bc259ab6fd94fd5449a58"
+dest_files=[ "res://.import/player_dock.png-ff557788adddbc05916b481a7cde587a.stex" ]
+dest_md5="267ff25f348a24d18b1effb129614412"
 
 [params]
 

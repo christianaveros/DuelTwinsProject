@@ -10,7 +10,7 @@ source_file="res://Textures/wizard.png"
 source_md5="8c003dad9b32d1405884eaeaa2295ad3"
 
 dest_files=[ "res://.import/wizard.png-e6d6485246428c4c044c6e0999051f34.stex" ]
-dest_md5="aceafea92bfdb55ff479784c154e5499"
+dest_md5="2e1550f42fb832ba33232bf5cf02ce30"
 
 [params]
 
@@ -19,7 +19,7 @@ compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=true
+flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2

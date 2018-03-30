@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/wasp.png-97bea57e1fa01fc6711423fa8a4d0a1c.stex"
+path="res://.import/grid_dock.png-be025cd805bf7a02f06972252dc48330.stex"
 
 [deps]
 
-source_file="res://Textures/wasp.png"
-source_md5="5dadf9d53313fc3132cb2948f5b49d65"
+source_file="res://Textures/grid_dock.png"
+source_md5="4d45fe2d599ed42a52ec04e9984fba46"
 
-dest_files=[ "res://.import/wasp.png-97bea57e1fa01fc6711423fa8a4d0a1c.stex" ]
-dest_md5="72052a6b104bc259ab6fd94fd5449a58"
+dest_files=[ "res://.import/grid_dock.png-be025cd805bf7a02f06972252dc48330.stex" ]
+dest_md5="9451c499919d60411b695ac0bec97b6a"
 
 [params]
 

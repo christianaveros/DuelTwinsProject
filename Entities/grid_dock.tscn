@@ -1,0 +1,7 @@
+[gd_scene format=2]
+
+[node name="grid_dock" type="Position2D"]
+
+[node name="position 0" type="Position2D" parent="." index="0"]
+
+
