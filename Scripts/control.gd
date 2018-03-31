@@ -76,23 +76,21 @@ func set_cards():
 		arr_size -= 1
 	
 	#print test
-	print(s_card)
-	print(player)
+	print("all starting cards: ", s_card)
+	print("all players cards: ", player)
 	
 	#create 2 player docks
-	var dock_1 = dock.instance()
-	var dock_2 = dock.instance()
+	var docks = {
+		1: dock.instance(),
+		-1: dock.instance()
+	} 
 	var y_offset = 40
-	dock_1.player_ind = 1
-	dock_2.player_ind = -1
-	dock_1.position = Vector2(230,28) #get_viewport().size.x*.25, get_viewport().size.y*.8
-	dock_2.position = Vector2(26,32) #get_viewport().size.x*.25, get_viewport().size.y*.8
-	for x in range(3):
-		dock_1.get_node("position "+str(x)).position = Vector2(230,28+(y_offset*x))
-		dock_2.get_node("position "+str(x)).position = Vector2(26,32+(y_offset*x))
-	
-	get_node("/root/game_scene").add_child(dock_1)
-	get_node("/root/game_scene").add_child(dock_2)
+	for z in [-1, 1]:
+		docks[z].player_ind = z
+		docks[z].position = Vector2(230 if z == 1 else 26, 28 if z == 1 else 32) #get_viewport().size.x*.25, get_viewport().size.y*.8
+		for x in range(3):
+			docks[z].get_node("position "+str(x)).position = Vector2(230 if z == 1 else 26,28+(y_offset*x) if z == 1 else 32+(y_offset*x))
+		get_node("/root/game_scene").add_child(docks[z])
 	
 	#create cards
 	var cards = {
@@ -106,22 +104,18 @@ func set_cards():
 		3:"bottom"
 	}
 	# set card 1, -1
-	for y in range(3): #0-2
-		cards[1][y].player_ind = 1 # player owned for sprite
-		cards[-1][y].player_ind = -1 # player owned for sprite
-		cards[1][y].monster_name = card_values[s_card[y]][0] # monster name for sprite
-		cards[-1][y].monster_name = card_values[s_card[y+3]][0] # monster name for sprite
-		for x in range(4): #[0] = [1] 0,1,2,3 = 1,2,3,4
-			cards[1][y].stats[x] = card_values[s_card[y]][x+1]
-			cards[1][y].get_node(dir[x]).set_text(str(cards[1][y].stats[x]))
-			cards[-1][y].stats[x] = card_values[s_card[y+3]][x+1]
-			cards[-1][y].get_node(dir[x]).set_text(str(cards[-1][y].stats[x]))
-		cards[1][y].rect_position = dock_1.get_node("position "+str(y)).position # place at position 0
-		cards[-1][y].rect_position = dock_2.get_node("position "+str(y)).position # place at position 0
-		get_node("/root/game_scene").add_child(cards[1][y]) # add child
-		get_node("/root/game_scene").add_child(cards[-1][y])
-		print("card "+str(y)+": "+cards[1][y].monster_name+" stats: "+str(cards[1][y].stats)+" position:"+str(cards[1][y].rect_position)) # debug mode
-		print("card "+str(y)+": "+cards[-1][y].monster_name+" stats:"+str(cards[-1][y].stats)+" position:"+str(cards[1][y].rect_position))
+	for z in [-1, 1]:
+		for y in range(3): #0-2
+			#var area = get_node("position "+str(y)+"/area")
+			#dic[z].area.connect("card_entered", cards[1][y], "set_card_position")
+			cards[z][y].player_ind = z # player owned for sprite
+			cards[z][y].monster_name = card_values[s_card[y if z == 1 else y+3]][0] # monster name for sprite
+			for x in range(4): #[0] = [1] 0,1,2,3 = 1,2,3,4
+				cards[z][y].stats[x] = card_values[s_card[y if z == 1 else y+3]][x+1]
+				cards[z][y].get_node(dir[x]).set_text(str(cards[z][y].stats[x]))
+			cards[z][y].rect_position = docks[z].get_node("position "+str(y)).position # place at position y
+			get_node("/root/game_scene").add_child(cards[z][y]) # add child
+			print("card "+str(y)+": "+cards[z][y].monster_name+" stats: "+str(cards[z][y].stats)+" position:"+str(cards[z][y].rect_position)) # debug mode
 
 func end_turn():
 	print("signal received")

@@ -4,7 +4,9 @@ const CARD_OFFSET = 16 # extent area
 var player_ind = 0 # need to be assigned
 var monster_name = "" # need to be assigned 
 var stats = [0,0,0,0] # need to be assigned
+var within_area = 0
 onready var pressed = -1 # -1, not_pressed, 1, pressed
+signal card_entered
 
 func _ready():
 	set_process_input(true)
@@ -20,7 +22,10 @@ func _input(event):
 func _physics_process(delta):
 	#drag
 	if pressed == 1:
-		rect_position = get_viewport().get_mouse_position()
+		if within_area == 1:
+			rect_position = Vector2(1,2)
+		else:
+			rect_position = get_viewport().get_mouse_position()
 	
 	#set color
 	if player_ind == 1:
@@ -33,6 +38,6 @@ func _physics_process(delta):
 		get_node("card_area/card_holder/card_sprite").set_texture(load("res://Textures/unknown.png"))
 	else:
 		get_node("card_area/card_holder/card_sprite").set_texture(load(str("res://Textures/"+monster_name+".png")))
-	
-	
-	
+
+func set_card_position(area):
+	pass
