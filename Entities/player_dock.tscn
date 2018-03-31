@@ -1,7 +1,9 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Scripts/player_dock.gd" type="Script" id=1]
 [ext_resource path="res://Textures/dock.png" type="Texture" id=2]
+[ext_resource path="res://Scripts/area.gd" type="Script" id=3]
+[ext_resource path="res://Textures/card_back.png" type="Texture" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -43,11 +45,16 @@ linear_damp = 0.0
 angular_damp = 0.0
 audio_bus_override = false
 audio_bus_name = "Master"
+script = ExtResource( 3 )
 _sections_unfolded = [ "Pause" ]
 
 [node name="shape" type="CollisionShape2D" parent="position 0/area" index="0"]
 
 shape = SubResource( 1 )
+
+[node name="sprite" type="Sprite" parent="position 0/area" index="1"]
+
+texture = ExtResource( 4 )
 
 [node name="position 1" type="Position2D" parent="." index="2"]
 
@@ -63,10 +70,15 @@ linear_damp = 0.0
 angular_damp = 0.0
 audio_bus_override = false
 audio_bus_name = "Master"
+script = ExtResource( 3 )
 
 [node name="shape" type="CollisionShape2D" parent="position 1/area" index="0"]
 
 shape = SubResource( 2 )
+
+[node name="sprite" type="Sprite" parent="position 1/area" index="1"]
+
+texture = ExtResource( 4 )
 
 [node name="position 2" type="Position2D" parent="." index="3"]
 
@@ -82,9 +94,14 @@ linear_damp = 0.0
 angular_damp = 0.0
 audio_bus_override = false
 audio_bus_name = "Master"
+script = ExtResource( 3 )
 
 [node name="shape" type="CollisionShape2D" parent="position 2/area" index="0"]
 
 shape = SubResource( 3 )
+
+[node name="sprite" type="Sprite" parent="position 2/area" index="1"]
+
+texture = ExtResource( 4 )
 
 
