@@ -1,10 +1,13 @@
 extends Control
 
-const CARD_OFFSET = 16 # extent area
+const CARD_OFFSET = 12 # extent area
 var player_ind = 0 # need to be assigned
 var monster_name = "" # need to be assigned 
 var stats = [0,0,0,0] # need to be assigned
-var within_area = 0
+
+#area related
+onready var within_area = 1
+var area_pos = Vector2(0,0) setget set_area_pos, get_area_pos
 onready var pressed = -1 # -1, not_pressed, 1, pressed
 
 func _ready():
@@ -22,12 +25,13 @@ func _input(event):
 				print("released")
 
 func _physics_process(delta):
-	#drag
-	if pressed == 1:
-		if within_area == 1:
-			rect_position = Vector2(1,2)
+	if within_area == 1 and pressed == -1:
+		rect_position = area_pos # stay
+	elif pressed == 1: # drag
+		if get_viewport().get_mouse_position().distance_to(area_pos) > CARD_OFFSET: #within_area == 1:
+			rect_position = get_viewport().get_mouse_position() # !within_area, pos = mouse pos
 		else:
-			rect_position = get_viewport().get_mouse_position()
+			rect_position = area_pos # stay
 	
 	#set color
 	if player_ind == 1:
@@ -40,3 +44,9 @@ func _physics_process(delta):
 		get_node("card_area/card_holder/card_sprite").set_texture(load("res://Textures/unknown.png"))
 	else:
 		get_node("card_area/card_holder/card_sprite").set_texture(load(str("res://Textures/"+monster_name+".png")))
+
+func set_area_pos(value):
+	area_pos = value
+
+func get_area_pos():
+	return area_pos

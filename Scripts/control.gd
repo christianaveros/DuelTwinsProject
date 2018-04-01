@@ -121,10 +121,12 @@ func set_cards():
 				cards[z][y].stats[x] = card_values[s_card[y if z == 1 else y+3]][x+1]
 				cards[z][y].get_node(dir[x]).set_text(str(cards[z][y].stats[x]))
 			cards[z][y].rect_position = Vector2(x_pos[z], 32+docks[z].get_node("position "+str(y)).position.y)# place at position y
+			cards[z][y].area_pos = Vector2(x_pos[z], 32+docks[z].get_node("position "+str(y)).position.y)
+			print(cards[z][y].area_pos)
 			var game_scene_node = get_node("/root/game_scene")
 			game_scene_node.add_child(cards[z][y]) # add child
-			docks[z].get_node("position "+str(y)+"/area").connect("area_entered", cards[z][y].get_node("card_area"), "display_position")
-			docks[z].get_node("position "+str(y)+"/area").connect("area_exited", cards[z][y].get_node("card_area"), "display_position2")
+			docks[z].get_node("position "+str(y)+"/area").connect("area_entered", cards[z][y].get_node("card_area"), "area_entered", [x_pos[z], 32+docks[z].get_node("position "+str(y)).position.y])
+			docks[z].get_node("position "+str(y)+"/area").connect("mouse_exited", cards[z][y].get_node("card_area"), "mouse_exited", [x_pos[z], 32+docks[z].get_node("position "+str(y)).position.y])
 			print("card "+str(y)+": "+cards[z][y].monster_name+" stats: "+str(cards[z][y].stats)+" position:"+str(cards[z][y].rect_position)) # debug mode
 
 func end_turn():
@@ -140,5 +142,5 @@ func _ready():
 func _physics_process(delta):
 	#label for turn
 	var player_num = player_turn if player_turn == 1 else 2
-	get_node("player").set_text("Player " + str(player_num) + "'s Turn")
+	get_node("player turn label").set_text("Player " + str(player_num) + "'s Turn")
 

@@ -22,6 +22,7 @@ extents = Vector2( 16, 16 )
 
 [node name="player_dock" type="Position2D"]
 
+visible = false
 script = ExtResource( 1 )
 _sections_unfolded = [ "Transform", "Z Index" ]
 
