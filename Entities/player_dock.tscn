@@ -20,7 +20,7 @@ extents = Vector2( 16, 16 )
 custom_solver_bias = 0.0
 extents = Vector2( 16, 16 )
 
-[node name="player_dock" type="Position2D"]
+[node name="player_dock" type="Position2D" index="0"]
 
 visible = false
 script = ExtResource( 1 )

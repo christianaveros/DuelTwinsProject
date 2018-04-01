@@ -15,6 +15,7 @@ func area_entered(area, area_x, area_y): # if signal area_entered is emitted pri
 
 func mouse_exited(area_x, area_y): # if signal area_entered is emitted print this
 	var card = get_node("../")
+	print("Pressed?: ", card.pressed)
 	if card.pressed == 1: # area exited while carrying the card
 		card.within_area = 0
 		card.area_pos = get_viewport().get_mouse_position()

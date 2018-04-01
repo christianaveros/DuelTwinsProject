@@ -1,6 +1,6 @@
 extends Node2D
 
-const card_default = preload("res://Entities/card_default.tscn")
+#const card_default = preload("res://Entities/card_default.tscn")
 var player_ind = 0 # not onready for this is needed to be assigned!
 
 func _ready():

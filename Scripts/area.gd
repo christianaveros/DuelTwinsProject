@@ -1,10 +1,10 @@
 extends Area2D
 
 const offset = 12
-onready var parent_pos = { # 'x' = x, 'y' = y
-	'x': get_parent().position.x,
-	'y': get_parent().position.y
-}
+#onready var parent_pos = { # 'x' = x, 'y' = y
+#	'x': get_parent().position.x,
+#	'y': get_parent().position.y
+#}
 
 func _ready():
 	set_physics_process(true)

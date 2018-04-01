@@ -92,13 +92,6 @@ func set_cards():
 	for z in [-1, 1]:
 		docks[z].player_ind = z
 		docks[z].position = Vector2(x_pos[z], 32) #get_viewport().size.x*.25, get_viewport().size.y*.8
-		for x in range(3):
-			#docks[z].get_node("position "+str(x)).position = Vector2(x_pos[z], y_pos[z]+(y_offset*x))
-			#docks[z].get_node("position "+str(x)+"/area").position = Vector2(0, y_offset*x)#docks[z].get_node("position "+str(x)).position
-			#var children = docks[z].get_node("position "+str(x)+"/area").get_children()
-			#for y in range(2): #sprite, shape
-				#children[y].position = docks[z].get_node("position "+str(x)).position
-			print(docks[z].get_node("position "+str(x)).position)
 		get_node("/root/game_scene").add_child(docks[z])
 	
 	#create cards
@@ -122,12 +115,10 @@ func set_cards():
 				cards[z][y].get_node(dir[x]).set_text(str(cards[z][y].stats[x]))
 			cards[z][y].rect_position = Vector2(x_pos[z], 32+docks[z].get_node("position "+str(y)).position.y)# place at position y
 			cards[z][y].area_pos = Vector2(x_pos[z], 32+docks[z].get_node("position "+str(y)).position.y)
-			print(cards[z][y].area_pos)
-			var game_scene_node = get_node("/root/game_scene")
-			game_scene_node.add_child(cards[z][y]) # add child
+			get_node("/root/game_scene").add_child(cards[z][y]) # add child
 			docks[z].get_node("position "+str(y)+"/area").connect("area_entered", cards[z][y].get_node("card_area"), "area_entered", [x_pos[z], 32+docks[z].get_node("position "+str(y)).position.y])
 			docks[z].get_node("position "+str(y)+"/area").connect("mouse_exited", cards[z][y].get_node("card_area"), "mouse_exited", [x_pos[z], 32+docks[z].get_node("position "+str(y)).position.y])
-			print("card "+str(y)+": "+cards[z][y].monster_name+" stats: "+str(cards[z][y].stats)+" position:"+str(cards[z][y].rect_position)) # debug mode
+			#print("card "+str(y)+": "+cards[z][y].monster_name+" stats: "+str(cards[z][y].stats)+" position:"+str(cards[z][y].rect_position)) # debug mode
 
 func end_turn():
 	print("signal received")

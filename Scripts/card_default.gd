@@ -22,28 +22,40 @@ func _input(event):
 			if pressed == 1:
 				print("pressed")
 			else:
+				
 				print("released")
 
 func _physics_process(delta):
 	if within_area == 1 and pressed == -1:
 		rect_position = area_pos # stay
 	elif pressed == 1: # drag
-		if get_viewport().get_mouse_position().distance_to(area_pos) > CARD_OFFSET: #within_area == 1:
-			rect_position = get_viewport().get_mouse_position() # !within_area, pos = mouse pos
-		else:
+		if get_viewport().get_mouse_position().distance_to(area_pos) < CARD_OFFSET and within_area == 1:
 			rect_position = area_pos # stay
+		elif get_viewport().get_mouse_position().distance_to(area_pos) > CARD_OFFSET: #within_area == 1:
+			rect_position = get_viewport().get_mouse_position() # !within_area, pos = mouse pos
 	
 	#set color
 	if player_ind == 1:
 		get_node("card_area/player_ind").set_texture(load("res://Textures/red.png"))
 	else:
 		get_node("card_area/player_ind").set_texture(load("res://Textures/blue.png"))
-		
+	
 	#set monster sprite
 	if monster_name == "":
 		get_node("card_area/card_holder/card_sprite").set_texture(load("res://Textures/unknown.png"))
 	else:
-		get_node("card_area/card_holder/card_sprite").set_texture(load(str("res://Textures/"+monster_name+".png")))
+		if control.player_turn == player_ind:
+			get_node("card_area/card_holder/card_sprite").set_texture(load(str("res://Textures/"+monster_name+".png")))
+			get_node("left").set_text(str(stats[0]))
+			get_node("top").set_text(str(stats[1]))
+			get_node("right").set_text(str(stats[2]))
+			get_node("bottom").set_text(str(stats[3]))
+		else:
+			get_node("card_area/card_holder/card_sprite").set_texture(load("res://Textures/unknown.png"))
+			get_node("left").set_text("")
+			get_node("top").set_text("")
+			get_node("right").set_text("")
+			get_node("bottom").set_text("")
 
 func set_area_pos(value):
 	area_pos = value
