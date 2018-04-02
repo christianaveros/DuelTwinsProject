@@ -6,6 +6,7 @@
 
 custom_solver_bias = 0.0
 extents = Vector2( 16, 16 )
+_sections_unfolded = [ "Resource" ]
 
 [node name="grid_dock" type="Position2D"]
 
@@ -18,14 +19,17 @@ linear_damp = 0.1
 angular_damp = 1.0
 audio_bus_override = false
 audio_bus_name = "Master"
+_sections_unfolded = [ "Transform" ]
 
 [node name="shape" type="CollisionShape2D" parent="area 0" index="0"]
 
 shape = SubResource( 1 )
+_sections_unfolded = [ "Transform" ]
 
 [node name="sprite" type="Sprite" parent="area 0" index="1"]
 
 texture = ExtResource( 1 )
+_sections_unfolded = [ "Transform" ]
 
 [node name="area 1" type="Area2D" parent="." index="1"]
 
@@ -42,6 +46,7 @@ _sections_unfolded = [ "Transform" ]
 [node name="shape" type="CollisionShape2D" parent="area 1" index="0"]
 
 shape = SubResource( 1 )
+_sections_unfolded = [ "Transform" ]
 
 [node name="sprite" type="Sprite" parent="area 1" index="1"]
 
@@ -62,10 +67,12 @@ _sections_unfolded = [ "Transform" ]
 [node name="shape" type="CollisionShape2D" parent="area 2" index="0"]
 
 shape = SubResource( 1 )
+_sections_unfolded = [ "Transform" ]
 
 [node name="sprite" type="Sprite" parent="area 2" index="1"]
 
 texture = ExtResource( 1 )
+_sections_unfolded = [ "Transform" ]
 
 [node name="area 3" type="Area2D" parent="." index="3"]
 

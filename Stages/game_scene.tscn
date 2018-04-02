@@ -1,9 +1,19 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Scripts/game_scene.gd" type="Script" id=1]
 [ext_resource path="res://Entities/background.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Textures/grid_dock.png" type="Shape2D" id=3]
 
-[node name="game_scene" type="Node2D"]
+[sub_resource type="ImageTexture" id=1]
+
+flags = 7
+storage = 0
+lossy_quality = 0.7
+flags = 7
+size = Vector2( 0, 0 )
+_sections_unfolded = [ "Resource" ]
+
+[node name="game_scene" type="Node2D" index="0"]
 
 script = ExtResource( 1 )
 _sections_unfolded = [ "Transform" ]
@@ -12,5 +22,205 @@ __meta__ = {
 }
 
 [node name="background" parent="." index="0" instance=ExtResource( 2 )]
+
+[node name="Grid" type="Node2D" parent="." index="1"]
+
+[node name="id_0" type="Area2D" parent="Grid" index="0"]
+
+position = Vector2( 92, 42 )
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
+_sections_unfolded = [ "Transform" ]
+
+[node name="shape" type="CollisionShape2D" parent="Grid/id_0" index="0"]
+
+shape = ExtResource( 3 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="Sprite" type="Sprite" parent="Grid/id_0" index="1"]
+
+texture = SubResource( 1 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="id_1" type="Area2D" parent="Grid" index="1"]
+
+position = Vector2( 124, 42 )
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
+_sections_unfolded = [ "Transform" ]
+
+[node name="shape" type="CollisionShape2D" parent="Grid/id_1" index="0"]
+
+shape = ExtResource( 3 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="Sprite" type="Sprite" parent="Grid/id_1" index="1"]
+
+texture = SubResource( 1 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="id_2" type="Area2D" parent="Grid" index="2"]
+
+position = Vector2( 156, 42 )
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
+_sections_unfolded = [ "Transform" ]
+
+[node name="shape" type="CollisionShape2D" parent="Grid/id_2" index="0"]
+
+shape = ExtResource( 3 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="Sprite" type="Sprite" parent="Grid/id_2" index="1"]
+
+texture = SubResource( 1 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="id_3" type="Area2D" parent="Grid" index="3"]
+
+position = Vector2( 92, 74 )
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
+_sections_unfolded = [ "Transform" ]
+
+[node name="shape" type="CollisionShape2D" parent="Grid/id_3" index="0"]
+
+shape = ExtResource( 3 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="Sprite" type="Sprite" parent="Grid/id_3" index="1"]
+
+texture = SubResource( 1 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="id_4" type="Area2D" parent="Grid" index="4"]
+
+position = Vector2( 124, 74 )
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
+_sections_unfolded = [ "Transform" ]
+
+[node name="shape" type="CollisionShape2D" parent="Grid/id_4" index="0"]
+
+shape = ExtResource( 3 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="Sprite" type="Sprite" parent="Grid/id_4" index="1"]
+
+texture = SubResource( 1 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="id_5" type="Area2D" parent="Grid" index="5"]
+
+position = Vector2( 156, 74 )
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
+_sections_unfolded = [ "Transform" ]
+
+[node name="shape" type="CollisionShape2D" parent="Grid/id_5" index="0"]
+
+shape = ExtResource( 3 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="Sprite" type="Sprite" parent="Grid/id_5" index="1"]
+
+texture = SubResource( 1 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="id_6" type="Area2D" parent="Grid" index="6"]
+
+position = Vector2( 92, 106 )
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
+_sections_unfolded = [ "Transform" ]
+
+[node name="shape" type="CollisionShape2D" parent="Grid/id_6" index="0"]
+
+shape = ExtResource( 3 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="Sprite" type="Sprite" parent="Grid/id_6" index="1"]
+
+texture = SubResource( 1 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="id_7" type="Area2D" parent="Grid" index="7"]
+
+position = Vector2( 124, 106 )
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
+_sections_unfolded = [ "Transform" ]
+
+[node name="shape" type="CollisionShape2D" parent="Grid/id_7" index="0"]
+
+shape = ExtResource( 3 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="Sprite" type="Sprite" parent="Grid/id_7" index="1"]
+
+texture = SubResource( 1 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="id_8" type="Area2D" parent="Grid" index="8"]
+
+position = Vector2( 156, 106 )
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
+_sections_unfolded = [ "Transform" ]
+
+[node name="shape" type="CollisionShape2D" parent="Grid/id_8" index="0"]
+
+shape = ExtResource( 3 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="Sprite" type="Sprite" parent="Grid/id_8" index="1"]
+
+texture = SubResource( 1 )
+_sections_unfolded = [ "Transform" ]
 
 
