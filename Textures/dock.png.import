@@ -7,10 +7,10 @@ path="res://.import/dock.png-eeecfd8a229155d6e554ce44a58789bd.stex"
 [deps]
 
 source_file="res://Textures/dock.png"
-source_md5="d4dcf217f1b9fefd99775bdaf2067e45"
+source_md5="7f560094d18b50257ecc468f70dcaa6d"
 
 dest_files=[ "res://.import/dock.png-eeecfd8a229155d6e554ce44a58789bd.stex" ]
-dest_md5="1dd90c5bb603388725bff60ddcd5656b"
+dest_md5="6914f9163d2d47da92cf54de56483e89"
 
 [params]
 

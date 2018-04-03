@@ -9,7 +9,7 @@
 custom_solver_bias = 0.0
 extents = Vector2( 16.0555, 16 )
 
-[node name="card" type="Control"]
+[node name="card" type="Control" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -33,6 +33,7 @@ gravity_vec = Vector2( 0, 0 )
 gravity = 0.0
 linear_damp = 0.0
 angular_damp = 0.0
+priority = 1.0
 audio_bus_override = false
 audio_bus_name = "Master"
 script = ExtResource( 2 )
@@ -128,7 +129,7 @@ valign = 1
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
-_sections_unfolded = [ "Rect", "custom_colors" ]
+_sections_unfolded = [ "custom_colors" ]
 
 [node name="bottom" type="Label" parent="." index="4"]
 

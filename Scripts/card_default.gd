@@ -9,6 +9,7 @@ var stats = [0,0,0,0] # need to be assigned
 onready var within_area = 1
 var area_pos = Vector2(0,0) setget set_area_pos, get_area_pos
 onready var pressed = -1 # -1, not_pressed, 1, pressed
+onready var placed = 0 # placed = 1, !placed = -1 # need to be assigned
 
 func _ready():
 	set_process_input(true)
@@ -16,13 +17,17 @@ func _ready():
 
 func _input(event):
 	if event is InputEventMouseButton and event.is_pressed() and !event.is_echo() and player_ind == control.player_turn:
-		if (rect_position.x-CARD_OFFSET < event.position.x) and (rect_position.x+CARD_OFFSET > event.position.x)\
-		and (rect_position.y-CARD_OFFSET < event.position.y) and (rect_position.y+CARD_OFFSET > event.position.y):
+		if (event.position.distance_to(rect_position) < CARD_OFFSET):
+		#if (rect_position.x-CARD_OFFSET < event.position.x) and (rect_position.x+CARD_OFFSET > event.position.x)\
+		#and (rect_position.y-CARD_OFFSET < event.position.y) and (rect_position.y+CARD_OFFSET > event.position.y):
 			pressed *= -1
 			if pressed == 1:
+				control.handle = self
 				print("pressed")
 			else:
-				
+				area_pos = rect_position
+				control.player_turn *= -1
+				placed = 1
 				print("released")
 
 func _physics_process(delta):
@@ -35,17 +40,19 @@ func _physics_process(delta):
 			rect_position = get_viewport().get_mouse_position() # !within_area, pos = mouse pos
 	
 	#set color
-	if player_ind == 1:
-		get_node("card_area/player_ind").set_texture(load("res://Textures/red.png"))
-	else:
-		get_node("card_area/player_ind").set_texture(load("res://Textures/blue.png"))
+	match(player_ind):
+		1:get_node("card_area/player_ind").set_texture(load("res://Textures/red.png"))
+		-1:get_node("card_area/player_ind").set_texture(load("res://Textures/blue.png"))
 	
-	#set monster sprite
-	if monster_name == "":
-		get_node("card_area/card_holder/card_sprite").set_texture(load("res://Textures/unknown.png"))
+	if player_ind == control.player_turn:
+		get_node("card_area/card_holder/card_sprite").set_texture(load("res://Textures/"+monster_name+".png"))
+		get_node("left").set_text(str(stats[0]))
+		get_node("top").set_text(str(stats[1]))
+		get_node("right").set_text(str(stats[2]))
+		get_node("bottom").set_text(str(stats[3]))
 	else:
-		if control.player_turn == player_ind:
-			get_node("card_area/card_holder/card_sprite").set_texture(load(str("res://Textures/"+monster_name+".png")))
+		if placed == 1:
+			get_node("card_area/card_holder/card_sprite").set_texture(load("res://Textures/"+monster_name+".png"))
 			get_node("left").set_text(str(stats[0]))
 			get_node("top").set_text(str(stats[1]))
 			get_node("right").set_text(str(stats[2]))

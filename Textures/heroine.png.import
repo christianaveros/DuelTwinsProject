@@ -7,10 +7,10 @@ path="res://.import/heroine.png-c5bb817692c1307256094fcfa2e89a63.stex"
 [deps]
 
 source_file="res://Textures/heroine.png"
-source_md5="ed162a0197b1e6c522f93faaa1f33b9e"
+source_md5="dd28ce2d4554808490c20c473c6e3f86"
 
 dest_files=[ "res://.import/heroine.png-c5bb817692c1307256094fcfa2e89a63.stex" ]
-dest_md5="bf26c02ab4f76fbd9732b77bd4fe3d89"
+dest_md5="771feffb1737819b95bd0d8c4f0f9860"
 
 [params]
 

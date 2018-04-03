@@ -20,14 +20,14 @@ extents = Vector2( 16, 16 )
 custom_solver_bias = 0.0
 extents = Vector2( 16, 16 )
 
-[node name="player_dock" type="Position2D" index="0"]
+[node name="player_dock" type="Position2D"]
 
-visible = false
 script = ExtResource( 1 )
 _sections_unfolded = [ "Transform", "Z Index" ]
 
 [node name="sprite" type="Sprite" parent="." index="0"]
 
+visible = false
 z_index = -1
 texture = ExtResource( 2 )
 offset = Vector2( 0, 40 )
