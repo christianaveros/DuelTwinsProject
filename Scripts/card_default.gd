@@ -23,13 +23,14 @@ func _input(event):
 		#and (rect_position.y-CARD_OFFSET < event.position.y) and (rect_position.y+CARD_OFFSET > event.position.y):
 			pressed *= -1
 			if pressed == 1:
-				control.handle = self
 				print("pressed")
+				control.handle = self
 			else:
-				area_pos = rect_position
+				print("released")
+				area_pos = rect_position #set new position
 				control.player_turn *= -1
 				placed = 1
-				print("released")
+				#call function here
 
 func _physics_process(delta):
 	if within_area == 1 and pressed == -1:

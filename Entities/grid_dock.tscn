@@ -9,7 +9,7 @@
 custom_solver_bias = 0.0
 extents = Vector2( 16, 16 )
 
-[node name="grid_dock" type="Position2D" index="0"]
+[node name="grid_dock" type="Position2D"]
 
 script = ExtResource( 1 )
 
@@ -32,6 +32,7 @@ shape = SubResource( 1 )
 
 [node name="sprite" type="Sprite" parent="area 0" index="1"]
 
+visible = false
 texture = ExtResource( 3 )
 
 [node name="area 1" type="Area2D" parent="." index="1"]

@@ -14,7 +14,7 @@ export onready var player_num = {
 	1: "Red"
 }
  
-export onready var x_pos = {
+export(int) onready var x_pos = {
 	1: 230-32,
 	-1: 26+32
 }
@@ -24,7 +24,7 @@ var player = {
 	1:[0,0,0,0,0,0,0,0,0,0]
 } setget set_player, get_player
 
-var s_card = [0,0,0,0,0,0] setget set_s_card, get_s_card
+var s_card = [0,0,0,0,0,0,0,0,0,0] setget set_s_card, get_s_card
 const dock = preload("res://Entities/player_dock.tscn") #object call
 const grid_dock = preload("res://Entities/grid_dock.tscn") # object call
 const card = preload("res://Entities/card_default.tscn") #object call
@@ -84,10 +84,9 @@ func set_cards():
 			if !player[1].has(val):
 				player[1][y] = val
 				b = false
-	#print(card_values) #card values
 	
 	#set 3 starting cards
-	var arr_size = 10
+	var arr_size = 5
 	for x in range(3):
 		val = randi()%arr_size
 		s_card[x] = player[-1][val] #set random from before
