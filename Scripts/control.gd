@@ -2,20 +2,28 @@ extends Node
 
 #global vars
 onready var player_turn = 1 setget set_player_turn, get_player_turn #P1 = 1, P2 = -1
+
 #create 2 player docks
 export onready var docks = {
 	1: dock.instance(),
 	0: grid_dock.instance(),
 	-1: dock.instance()
-} 
+}
+export onready var player_num = {
+	-1: "Blue",
+	1: "Red"
+}
+ 
 export onready var x_pos = {
 	1: 230-32,
 	-1: 26+32
 }
+
 var player = {
 	-1:[0,0,0,0,0,0,0,0,0,0],
 	1:[0,0,0,0,0,0,0,0,0,0]
 } setget set_player, get_player
+
 var s_card = [0,0,0,0,0,0] setget set_s_card, get_s_card
 const dock = preload("res://Entities/player_dock.tscn") #object call
 const grid_dock = preload("res://Entities/grid_dock.tscn") # object call
@@ -33,8 +41,8 @@ onready var card_values = {
 	22:["bahamut", 7,7,10,6], 23:["villain", 5,10,5,10]
 }
 
-onready var handle = ""
-
+onready var handle = card.instance()
+var area = ""
 
 #set player turn
 func set_player_turn(value):
@@ -154,7 +162,6 @@ func _ready():
 
 func _physics_process(delta):
 	#label for turn
-	var player_num = player_turn if player_turn == 1 else 2
-	get_node("player turn label").set_text("Player " + str(player_num) + "'s Turn")
+	get_node("player turn label").set_text(player_num[player_turn] + "'s Turn")
 	#print(handle)
 

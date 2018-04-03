@@ -8,7 +8,7 @@
 script = ExtResource( 1 )
 _sections_unfolded = [ "Transform", "Z Index" ]
 __meta__ = {
-"_edit_lock_": true
+"_edit_group_": true
 }
 
 [node name="background" parent="." index="0" instance=ExtResource( 2 )]

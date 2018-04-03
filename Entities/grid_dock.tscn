@@ -1,17 +1,21 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://Scripts/grid area.gd" type="Script" id=1]
-[ext_resource path="res://Textures/card_back.png" type="Texture" id=2]
+[ext_resource path="res://Scripts/grid_dock.gd" type="Script" id=1]
+[ext_resource path="res://Scripts/grid area.gd" type="Script" id=2]
+[ext_resource path="res://Textures/card_back.png" type="Texture" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 
 custom_solver_bias = 0.0
 extents = Vector2( 16, 16 )
 
-[node name="grid_dock" type="Position2D"]
+[node name="grid_dock" type="Position2D" index="0"]
+
+script = ExtResource( 1 )
 
 [node name="area 0" type="Area2D" parent="." index="0"]
 
+z_as_relative = false
 input_pickable = true
 gravity_vec = Vector2( 0, 0 )
 gravity = 0.0
@@ -19,7 +23,7 @@ linear_damp = 0.0
 angular_damp = 0.0
 audio_bus_override = false
 audio_bus_name = "Master"
-script = ExtResource( 1 )
+script = ExtResource( 2 )
 _sections_unfolded = [ "Z Index" ]
 
 [node name="shape" type="CollisionShape2D" parent="area 0" index="0"]
@@ -28,12 +32,12 @@ shape = SubResource( 1 )
 
 [node name="sprite" type="Sprite" parent="area 0" index="1"]
 
-visible = false
-texture = ExtResource( 2 )
+texture = ExtResource( 3 )
 
 [node name="area 1" type="Area2D" parent="." index="1"]
 
-position = Vector2( 32, 0 )
+position = Vector2( 33, 0 )
+z_as_relative = false
 input_pickable = true
 gravity_vec = Vector2( 0, 0 )
 gravity = 0.0
@@ -41,8 +45,8 @@ linear_damp = 0.0
 angular_damp = 0.0
 audio_bus_override = false
 audio_bus_name = "Master"
-script = ExtResource( 1 )
-_sections_unfolded = [ "Transform" ]
+script = ExtResource( 2 )
+_sections_unfolded = [ "Transform", "Z Index" ]
 
 [node name="shape" type="CollisionShape2D" parent="area 1" index="0"]
 
@@ -51,11 +55,12 @@ shape = SubResource( 1 )
 [node name="sprite" type="Sprite" parent="area 1" index="1"]
 
 visible = false
-texture = ExtResource( 2 )
+texture = ExtResource( 3 )
 
 [node name="area 2" type="Area2D" parent="." index="2"]
 
-position = Vector2( 64, 0 )
+position = Vector2( 66, 0 )
+z_as_relative = false
 input_pickable = true
 gravity_vec = Vector2( 0, 0 )
 gravity = 0.0
@@ -63,8 +68,8 @@ linear_damp = 0.0
 angular_damp = 0.0
 audio_bus_override = false
 audio_bus_name = "Master"
-script = ExtResource( 1 )
-_sections_unfolded = [ "Transform" ]
+script = ExtResource( 2 )
+_sections_unfolded = [ "Transform", "Z Index" ]
 
 [node name="shape" type="CollisionShape2D" parent="area 2" index="0"]
 
@@ -73,11 +78,11 @@ shape = SubResource( 1 )
 [node name="sprite" type="Sprite" parent="area 2" index="1"]
 
 visible = false
-texture = ExtResource( 2 )
+texture = ExtResource( 3 )
 
 [node name="area 3" type="Area2D" parent="." index="3"]
 
-position = Vector2( 0, 32 )
+position = Vector2( 0, 33 )
 input_pickable = true
 gravity_vec = Vector2( 0, 0 )
 gravity = 0.0
@@ -85,7 +90,7 @@ linear_damp = 0.0
 angular_damp = 0.0
 audio_bus_override = false
 audio_bus_name = "Master"
-script = ExtResource( 1 )
+script = ExtResource( 2 )
 _sections_unfolded = [ "Audio Bus", "Transform" ]
 
 [node name="shape" type="CollisionShape2D" parent="area 3" index="0"]
@@ -95,11 +100,12 @@ shape = SubResource( 1 )
 [node name="sprite" type="Sprite" parent="area 3" index="1"]
 
 visible = false
-texture = ExtResource( 2 )
+texture = ExtResource( 3 )
 
 [node name="area 4" type="Area2D" parent="." index="4"]
 
-position = Vector2( 32, 32 )
+position = Vector2( 33, 33 )
+z_as_relative = false
 input_pickable = true
 gravity_vec = Vector2( 0, 0 )
 gravity = 0.0
@@ -107,8 +113,8 @@ linear_damp = 0.0
 angular_damp = 0.0
 audio_bus_override = false
 audio_bus_name = "Master"
-script = ExtResource( 1 )
-_sections_unfolded = [ "Audio Bus", "Transform" ]
+script = ExtResource( 2 )
+_sections_unfolded = [ "Audio Bus", "Transform", "Z Index" ]
 
 [node name="shape" type="CollisionShape2D" parent="area 4" index="0"]
 
@@ -117,11 +123,12 @@ shape = SubResource( 1 )
 [node name="sprite" type="Sprite" parent="area 4" index="1"]
 
 visible = false
-texture = ExtResource( 2 )
+texture = ExtResource( 3 )
 
 [node name="area 5" type="Area2D" parent="." index="5"]
 
-position = Vector2( 64, 32 )
+position = Vector2( 66, 33 )
+z_as_relative = false
 input_pickable = true
 gravity_vec = Vector2( 0, 0 )
 gravity = 0.0
@@ -129,8 +136,8 @@ linear_damp = 0.0
 angular_damp = 0.0
 audio_bus_override = false
 audio_bus_name = "Master"
-script = ExtResource( 1 )
-_sections_unfolded = [ "Audio Bus", "Transform" ]
+script = ExtResource( 2 )
+_sections_unfolded = [ "Audio Bus", "Transform", "Z Index" ]
 
 [node name="shape" type="CollisionShape2D" parent="area 5" index="0"]
 
@@ -139,11 +146,12 @@ shape = SubResource( 1 )
 [node name="sprite" type="Sprite" parent="area 5" index="1"]
 
 visible = false
-texture = ExtResource( 2 )
+texture = ExtResource( 3 )
 
 [node name="area 6" type="Area2D" parent="." index="6"]
 
-position = Vector2( 0, 64 )
+position = Vector2( 0, 66 )
+z_as_relative = false
 input_pickable = true
 gravity_vec = Vector2( 0, 0 )
 gravity = 0.0
@@ -151,8 +159,8 @@ linear_damp = 0.0
 angular_damp = 0.0
 audio_bus_override = false
 audio_bus_name = "Master"
-script = ExtResource( 1 )
-_sections_unfolded = [ "Audio Bus", "Transform" ]
+script = ExtResource( 2 )
+_sections_unfolded = [ "Audio Bus", "Transform", "Z Index" ]
 
 [node name="shape" type="CollisionShape2D" parent="area 6" index="0"]
 
@@ -161,11 +169,12 @@ shape = SubResource( 1 )
 [node name="sprite" type="Sprite" parent="area 6" index="1"]
 
 visible = false
-texture = ExtResource( 2 )
+texture = ExtResource( 3 )
 
 [node name="area 7" type="Area2D" parent="." index="7"]
 
-position = Vector2( 32, 64 )
+position = Vector2( 33, 66 )
+z_as_relative = false
 input_pickable = true
 gravity_vec = Vector2( 0, 0 )
 gravity = 0.0
@@ -173,8 +182,8 @@ linear_damp = 0.0
 angular_damp = 0.0
 audio_bus_override = false
 audio_bus_name = "Master"
-script = ExtResource( 1 )
-_sections_unfolded = [ "Audio Bus", "Transform" ]
+script = ExtResource( 2 )
+_sections_unfolded = [ "Audio Bus", "Transform", "Z Index" ]
 
 [node name="shape" type="CollisionShape2D" parent="area 7" index="0"]
 
@@ -183,11 +192,12 @@ shape = SubResource( 1 )
 [node name="sprite" type="Sprite" parent="area 7" index="1"]
 
 visible = false
-texture = ExtResource( 2 )
+texture = ExtResource( 3 )
 
 [node name="area 8" type="Area2D" parent="." index="8"]
 
-position = Vector2( 64, 64 )
+position = Vector2( 66, 66 )
+z_as_relative = false
 input_pickable = true
 gravity_vec = Vector2( 0, 0 )
 gravity = 0.0
@@ -195,8 +205,8 @@ linear_damp = 0.0
 angular_damp = 0.0
 audio_bus_override = false
 audio_bus_name = "Master"
-script = ExtResource( 1 )
-_sections_unfolded = [ "Audio Bus", "Transform" ]
+script = ExtResource( 2 )
+_sections_unfolded = [ "Audio Bus", "Transform", "Z Index" ]
 
 [node name="shape" type="CollisionShape2D" parent="area 8" index="0"]
 
@@ -205,6 +215,7 @@ shape = SubResource( 1 )
 [node name="sprite" type="Sprite" parent="area 8" index="1"]
 
 visible = false
-texture = ExtResource( 2 )
+texture = ExtResource( 3 )
+_sections_unfolded = [ "Z Index" ]
 
 

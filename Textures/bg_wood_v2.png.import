@@ -7,10 +7,10 @@ path="res://.import/bg_wood_v2.png-b53363e250e47e3f1a5c85b01a90a9c8.stex"
 [deps]
 
 source_file="res://Textures/bg_wood_v2.png"
-source_md5="b131d0dbd9e58124106802ccef556848"
+source_md5="8b8ba0ef11a04400ca94f6e99f46c1b1"
 
 dest_files=[ "res://.import/bg_wood_v2.png-b53363e250e47e3f1a5c85b01a90a9c8.stex" ]
-dest_md5="1da1b871f09137b3c8d5419cf9bd6068"
+dest_md5="ecbc80532e85cdb812016afb70145966"
 
 [params]
 
