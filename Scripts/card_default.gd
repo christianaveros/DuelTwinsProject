@@ -9,14 +9,15 @@ var stats = [0,0,0,0] # need to be assigned
 onready var within_area = 1
 var area_pos = Vector2(0,0) setget set_area_pos, get_area_pos
 onready var pressed = -1 # -1, not_pressed, 1, pressed
-onready var placed = 0 # placed = 1, !placed = -1 # need to be assigned
+onready var placed = -1 # placed = 1, !placed = -1 # need to be assigned
 
 func _ready():
 	set_process_input(true)
 	set_physics_process(true)
 
 func _input(event):
-	if event is InputEventMouseButton and event.is_pressed() and !event.is_echo() and player_ind == control.player_turn:
+	if event is InputEventMouseButton and event.is_pressed() and !event.is_echo()\
+		 and player_ind == control.player_turn:
 		if (event.position.distance_to(rect_position) < CARD_OFFSET):
 		#if (rect_position.x-CARD_OFFSET < event.position.x) and (rect_position.x+CARD_OFFSET > event.position.x)\
 		#and (rect_position.y-CARD_OFFSET < event.position.y) and (rect_position.y+CARD_OFFSET > event.position.y):

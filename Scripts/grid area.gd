@@ -12,12 +12,13 @@ func _ready():
 
 func _physics_process(delta):
 	if within_area == 1:
-		print("Distance: ", get_viewport().get_mouse_position().distance_to(grid_dock.position+position))#Vector2(grid_dock.position.x + position.x, grid_dock.position.y + position.y)))
-
+		#print("Distance: ", get_viewport().get_mouse_position().distance_to(grid_dock.position+position))#Vector2(grid_dock.position.x + position.x, grid_dock.position.y + position.y)))
 		if get_viewport().get_mouse_position().distance_to(grid_dock.position+position) < AREA_OFFSET:
-			card.within_area = 1
-			card.area_pos = grid_dock.position+position
-			#print(card.get_name())
+			if card.pressed == 1: #print(card.get_name())
+				card.within_area = 1
+				card.area_pos = grid_dock.position+position
+				card.placed = 1
+			
 			#print("within area!")
 
 func area_entered(area):
