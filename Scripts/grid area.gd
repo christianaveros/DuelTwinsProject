@@ -2,7 +2,7 @@ extends Area2D
 
 onready var within_area = 0
 onready var occufied = -1 # 
-const AREA_OFFSET = 8
+const AREA_OFFSET = 12
 onready var grid_dock = get_node("../")
 var card = preload("res://Entities/card_default.tscn").instance()
 
@@ -17,9 +17,20 @@ func _physics_process(delta):
 			if card.pressed == 1:# and card.placed == -1: #print(card.get_name())
 				card.within_area = 1
 				card.area_pos = grid_dock.position+position
-				card.placed = 1
+				#card.placed = 1
 				occufied = 1
-				print("occupied")
+				print("occufied")
+				match get_name(): # this area card, 
+					"area 0":	control.area_0(card, get_node("../area 1").card, get_node("../area 3").card)
+					"area 1":	control.area_1(card, get_node("../area 0").card, get_node("../area 2"), get_node("../area 4").card)
+					"area 2":	control.area_2(card, get_node("../area 1").card, get_node("../area 5").card)
+					"area 3":	control.area_3(card, get_node("../area 0").card, get_node("../area 4").card, get_node("../area 6").card)
+					"area 4":	control.area_4(card, get_node("../area 1").card, get_node("../area 3").card, get_node("../area 5").card, get_node("../area 7").card)
+					"area 5":	control.area_5(card, get_node("../area 2").card, get_node("../area 4").card, get_node("../area 8").card)
+					"area 6":	control.area_6(card, get_node("../area 3").card, get_node("../area 7").card)
+					"area 7":	control.area_7(card, get_node("../area 4").card, get_node("../area 6").card, get_node("../area 8").card)
+					"area 8":	control.area_8(card, get_node("../area 5").card, get_node("../area 7").card)
+					_: print("area not found!")
 				#card.occufying = 1
 			#if card.pressed == -1:
 			#	occupied = 1

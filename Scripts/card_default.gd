@@ -19,16 +19,17 @@ func _input(event):
 	if event is InputEventMouseButton and event.is_pressed() and !event.is_echo()\
 		 and player_ind == control.player_turn:
 		if (event.position.distance_to(rect_position) < CARD_OFFSET):
-		#if (rect_position.x-CARD_OFFSET < event.position.x) and (rect_position.x+CARD_OFFSET > event.position.x)\
-		#and (rect_position.y-CARD_OFFSET < event.position.y) and (rect_position.y+CARD_OFFSET > event.position.y):
 			pressed *= -1
 			if pressed == 1:
 				print("pressed")
+				#control.selecting = 1
+				placed = -1
 				control.handle = self
 			else:
 				print("released")
 				area_pos = rect_position #set new position
 				control.player_turn *= -1
+				#control.selecting = -1
 				placed = 1
 				#call function here
 

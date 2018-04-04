@@ -13,7 +13,12 @@ export onready var player_num = {
 	-1: "Blue",
 	1: "Red"
 }
- 
+onready var dir = {
+	0:"left",
+	1:"top",
+	2:"right",
+	3:"bottom"
+}
 export(int) onready var x_pos = {
 	1: 230-32,
 	-1: 26+32
@@ -43,6 +48,7 @@ onready var card_values = {
 
 onready var handle = card.instance()
 var area = ""
+onready var selecting_card = 1 # selecting 1, not selecting
 
 #set player turn
 func set_player_turn(value):
@@ -112,12 +118,6 @@ func set_cards():
 		1:[card.instance(), card.instance(), card.instance()],
 		-1:[card.instance(), card.instance(), card.instance()]
 	}
-	var dir = {
-		0:"left",
-		1:"top",
-		2:"right",
-		3:"bottom"
-	}
 	# set card 1, -1
 	for z in [-1, 1]:
 		for y in range(3): #0-2
@@ -164,3 +164,62 @@ func _physics_process(delta):
 	get_node("player turn label").set_text(player_num[player_turn] + "'s Turn")
 	#print(handle)
 
+func area_0(area_card, right_card, bottom_card):
+	print("FUNCTION: area 0 "+area_card.get_name()+" stats: "+str(area_card.stats))
+	print("Right Card: ", right_card)
+	print("Bottom Card: ", bottom_card)
+	pass
+
+func area_1(area_card, left_card, right_card, bottom_card):
+	print("FUNCTION: area 1 "+area_card.get_name()+" stats: "+str(area_card.stats))
+	print("Left Card: ", left_card)
+	print("Right Card: ", right_card)
+	print("Bottom Card: ", bottom_card)
+	pass
+
+func area_2(area_card, left_card, bottom_card):
+	print("FUNCTION: area 2 "+area_card.get_name()+" stats: "+str(area_card.stats))
+	print("Left Card: ", left_card)
+	print("Bottom Card: ", bottom_card)
+	pass
+
+func area_3(area_card, top_card, right_card, bottom_card):
+	print("FUNCTION: area 3 "+area_card.get_name()+" stats: "+str(area_card.stats))
+	print("Top Card: ", top_card)
+	print("Right Card: ", right_card)
+	print("Bottom Card: ", bottom_card)
+	pass
+
+func area_4(area_card, top_card, left_card, right_card, bottom_card):
+	print("FUNCTION: area 4 "+area_card.get_name()+" stats: "+str(area_card.stats))
+	print("Top Card: ", top_card)
+	print("Left Card: ", left_card)
+	print("Right Card: ", right_card)
+	print("Bottom Card: ", bottom_card)
+	pass
+
+func area_5(area_card, top_card, left_card, bottom_card):
+	print("FUNCTION: area 5 "+area_card.get_name()+" stats: "+str(area_card.stats))
+	print("Top Card: ", top_card)
+	print("Left Card: ", left_card)
+	print("Bottom Card: ", bottom_card)
+	pass
+
+func area_6(area_card, top_card, right_card):
+	print("FUNCTION: area 6"+area_card.get_name()+" stats: "+str(area_card.stats))
+	print("Top Card: ", top_card)
+	print("Right Card: ", right_card)
+	pass
+
+func area_7(area_card, top_card, left_card, right_card):
+	print("FUNCTION: area 7 "+area_card.get_name()+" stats: "+str(area_card.stats))
+	print("Top Card: ", top_card.monster_name)
+	print("Left Card: ", left_card.monster_name)
+	print("Right Card: ", right_card.monster_name)
+	pass
+
+func area_8(area_card, top_card, left_card):
+	print("FUNCTION: area 8, "+area_card.get_name()+" stats: "+str(area_card.stats))
+	print("Top Card: ", top_card.monster_name)
+	print("Left Card: ", left_card.monster_name)
+	pass
