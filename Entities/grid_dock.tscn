@@ -9,7 +9,7 @@
 custom_solver_bias = 0.0
 extents = Vector2( 16, 16 )
 
-[node name="grid_dock" type="Position2D" index="0"]
+[node name="grid_dock" type="Position2D"]
 
 script = ExtResource( 1 )
 

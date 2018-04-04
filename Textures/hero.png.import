@@ -7,10 +7,10 @@ path="res://.import/hero.png-e22844935b5cdf3e9c6e1035643cf10e.stex"
 [deps]
 
 source_file="res://Textures/hero.png"
-source_md5="59cffbe49ff358238165b51667d4d882"
+source_md5="1c6a70089ea281d8b6e3ecde9521c006"
 
 dest_files=[ "res://.import/hero.png-e22844935b5cdf3e9c6e1035643cf10e.stex" ]
-dest_md5="5430c15eafdce77cf3c575f9581da93e"
+dest_md5="cbc017749678517346624764997eb772"
 
 [params]
 

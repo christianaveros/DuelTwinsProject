@@ -13,9 +13,12 @@ export onready var player_num = {
 	-1: "Blue",
 	1: "Red"
 }
+
+onready var scored = false
+
 export(int) onready var player_score = {
 	-1: 0,
-	1: 0
+	1: 1
 }
 onready var dir = {
 	0:"left",
@@ -32,6 +35,9 @@ var player = {
 	-1:[0,0,0,0,0,0,0,0,0,0],
 	1:[0,0,0,0,0,0,0,0,0,0]
 } setget set_player, get_player
+
+onready var play_count = 0
+const MAX_PLAY_COUNT = 6
 
 var s_card = [0,0,0,0,0,0,0,0,0,0] setget set_s_card, get_s_card
 const dock = preload("res://Entities/player_dock.tscn") #object call
@@ -52,7 +58,6 @@ onready var card_values = {
 
 onready var handle = card.instance()
 var area = ""
-onready var selecting_card = 1 # selecting 1, not selecting
 
 #set player turn
 func set_player_turn(value):
@@ -106,10 +111,8 @@ func set_cards():
 		player[1].remove(val)
 		arr_size -= 1
 	
-	#print test
 	print("all starting cards: ", s_card)
 	print("all players cards: ", player)
-	
 	
 	var y_offset = 40
 	for z in [-1, 1]:
@@ -146,9 +149,6 @@ func set_cards():
 		docks[0].get_node("area "+str(x)).connect("mouse_exited", docks[0].get_node("area "+str(x)), "mouse_exited")
 	get_node("/root/game_scene").add_child(docks[0])
 
-func end_turn():
-	print("signal received")
-	player_turn *= -1
 	
 func _ready():
 	randomize() #randomize seed
@@ -158,7 +158,18 @@ func _ready():
 
 func _physics_process(delta):
 	#label for turn
-	get_node("player turn label").set_text(player_num[player_turn] + "'s Turn")
+	if play_count < MAX_PLAY_COUNT:
+		get_node("player turn label").set_text(player_num[player_turn] + "'s Turn")
+	elif play_count >= MAX_PLAY_COUNT:
+		if player_score[1] == player_score[-1]:
+			get_node("player turn label").set_text("DRAW")
+		elif player_score[1] > player_score[-1]:
+			get_node("player turn label").set_text("RED WINS")
+		else:
+			get_node("player turn label").set_text("BLUE WINS")
+		
+	get_node("red score label").set_text(str(player_score[1]))
+	get_node("blue score label").set_text(str(player_score[-1]))
 	#print(handle)
 
 func area_0(area_card, right_card, bottom_card):
@@ -167,10 +178,17 @@ func area_0(area_card, right_card, bottom_card):
 	if right_card.monster_name != "" and right_card.stats[0] < area_card.stats[2]:
 		print("right win against ", right_card.monster_name)
 		right_card.player_ind = area_card.player_ind
+		scored = true
 	print("Bottom Card: ", bottom_card.monster_name)
 	if bottom_card.monster_name != "" and bottom_card.stats[1] < area_card.stats[3]:
 		print("bottom win against ", bottom_card.monster_name)
 		bottom_card.player_ind = area_card.player_ind
+		scored = true
+	
+	if scored:
+		player_score[area_card.player_ind] += 1
+		player_score[-area_card.player_ind] -= 1
+		scored = false
 	pass
 
 func area_1(area_card, left_card, right_card, bottom_card):
@@ -179,14 +197,22 @@ func area_1(area_card, left_card, right_card, bottom_card):
 	if left_card.monster_name != "" and left_card.stats[2] < area_card.stats[0]:
 		print("left win against ", left_card.monster_name)
 		left_card.player_ind = area_card.player_ind
+		scored = true
 	print("Right Card: ", right_card.monster_name)
 	if right_card.monster_name != "" and right_card.stats[0] < area_card.stats[2]:
 		print("right win against ", right_card.monster_name)
 		right_card.player_ind = area_card.player_ind
+		scored = true
 	print("Bottom Card: ", bottom_card.monster_name)
 	if bottom_card.monster_name != "" and bottom_card.stats[1] < area_card.stats[3]:
 		print("bottom win against ", bottom_card.monster_name)
 		bottom_card.player_ind = area_card.player_ind
+		scored = true
+	
+	if scored:
+		player_score[area_card.player_ind] += 1
+		player_score[-area_card.player_ind] -= 1
+		scored = false
 	pass
 
 func area_2(area_card, left_card, bottom_card):
@@ -195,10 +221,17 @@ func area_2(area_card, left_card, bottom_card):
 	if left_card.monster_name != "" and left_card.stats[2] < area_card.stats[0]:
 		print("left win against ", left_card.monster_name)
 		left_card.player_ind = area_card.player_ind
+		scored = true
 	print("Bottom Card: ", bottom_card.monster_name)
 	if bottom_card.monster_name != "" and bottom_card.stats[1] < area_card.stats[3]:
 		print("bottom win against ", bottom_card.monster_name)
 		bottom_card.player_ind = area_card.player_ind
+		scored = true
+	
+	if scored:
+		player_score[area_card.player_ind] += 1
+		player_score[-area_card.player_ind] -= 1
+		scored = false
 	pass
 
 func area_3(area_card, top_card, right_card, bottom_card):
@@ -207,14 +240,22 @@ func area_3(area_card, top_card, right_card, bottom_card):
 	if top_card.monster_name != "" and top_card.stats[3] < area_card.stats[1]:
 		print("top win against ", top_card.monster_name)
 		top_card.player_ind = area_card.player_ind
+		scored = true
 	print("Right Card: ", right_card.monster_name)
 	if right_card.monster_name != "" and right_card.stats[0] < area_card.stats[2]:
 		print("right win against ", right_card.monster_name)
 		right_card.player_ind = area_card.player_ind
+		scored = true
 	print("Bottom Card: ", bottom_card.monster_name)
 	if bottom_card.monster_name != "" and bottom_card.stats[1] < area_card.stats[3]:
 		print("bottom win against ", bottom_card.monster_name)
 		bottom_card.player_ind = area_card.player_ind
+		scored = true
+	
+	if scored:
+		player_score[area_card.player_ind] += 1
+		player_score[-area_card.player_ind] -= 1
+		scored = false
 	pass
 
 func area_4(area_card, top_card, left_card, right_card, bottom_card):
@@ -223,18 +264,27 @@ func area_4(area_card, top_card, left_card, right_card, bottom_card):
 	if top_card.monster_name != "" and top_card.stats[3] < area_card.stats[1]:
 		print("top win against ", top_card.monster_name)
 		top_card.player_ind = area_card.player_ind
+		scored = true
 	print("Left Card: ", left_card.monster_name)
 	if left_card.monster_name != "" and left_card.stats[2] < area_card.stats[0]:
 		print("left win against ", left_card.monster_name)
 		left_card.player_ind = area_card.player_ind
+		scored = true
 	print("Right Card: ", right_card.monster_name)
 	if right_card.monster_name != "" and right_card.stats[0] < area_card.stats[2]:
 		print("right win against ", right_card.monster_name)
 		right_card.player_ind = area_card.player_ind
+		scored = true
 	print("Bottom Card: ", bottom_card.monster_name)
 	if bottom_card.monster_name != "" and bottom_card.stats[1] < area_card.stats[3]:
 		print("bottom win against ", bottom_card.monster_name)
 		bottom_card.player_ind = area_card.player_ind
+		scored = true
+	
+	if scored:
+		player_score[area_card.player_ind] += 1
+		player_score[-area_card.player_ind] -= 1
+		scored = false
 	pass
 
 func area_5(area_card, top_card, left_card, bottom_card):
@@ -243,14 +293,22 @@ func area_5(area_card, top_card, left_card, bottom_card):
 	if top_card.monster_name != "" and top_card.stats[3] < area_card.stats[1]:
 		print("top win against ", top_card.monster_name)
 		top_card.player_ind = area_card.player_ind
+		scored = true
 	print("Left Card: ", left_card.monster_name)
 	if left_card.monster_name != "" and left_card.stats[2] < area_card.stats[0]:
 		print("left win against ", left_card.monster_name)
 		left_card.player_ind = area_card.player_ind
+		scored = true
 	print("Bottom Card: ", bottom_card.monster_name)
 	if bottom_card.monster_name != "" and bottom_card.stats[1] < area_card.stats[3]:
 		print("bottom win against ", bottom_card.monster_name)
 		bottom_card.player_ind = area_card.player_ind
+		scored = true
+	
+	if scored:
+		player_score[area_card.player_ind] += 1
+		player_score[-area_card.player_ind] -= 1
+		scored = false
 	pass
 
 func area_6(area_card, top_card, right_card):
@@ -259,10 +317,17 @@ func area_6(area_card, top_card, right_card):
 	if top_card.monster_name != "" and top_card.stats[3] < area_card.stats[1]:
 		print("top win against ", top_card.monster_name)
 		top_card.player_ind = area_card.player_ind
+		scored = true
 	print("Right Card: ", right_card.monster_name)
 	if right_card.monster_name != "" and right_card.stats[0] < area_card.stats[2]:
 		print("right win against ", right_card.monster_name)
 		right_card.player_ind = area_card.player_ind
+		scored = true
+	
+	if scored:
+		player_score[area_card.player_ind] += 1
+		player_score[-area_card.player_ind] -= 1
+		scored = false
 	pass
 
 func area_7(area_card, top_card, left_card, right_card):
@@ -271,14 +336,22 @@ func area_7(area_card, top_card, left_card, right_card):
 	if top_card.monster_name != "" and top_card.stats[3] < area_card.stats[1]:
 		print("top win against", top_card.monster_name)
 		top_card.player_ind = area_card.player_ind
+		scored = true
 	print("Left Card: ", left_card.monster_name)
 	if left_card.monster_name != "" and left_card.stats[2] < area_card.stats[0]:
 		print("left win against ", left_card.monster_name)
 		left_card.player_ind = area_card.player_ind
+		scored = true
 	print("Right Card: ", right_card.monster_name)
 	if right_card.monster_name != "" and right_card.stats[0] < area_card.stats[2]:
 		print("right win against ", right_card.monster_name)
 		right_card.player_ind = area_card.player_ind
+		scored = true
+	
+	if scored:
+		player_score[area_card.player_ind] += 1
+		player_score[-area_card.player_ind] -= 1
+		scored = false
 	pass
 
 func area_8(area_card, top_card, left_card):
@@ -287,8 +360,15 @@ func area_8(area_card, top_card, left_card):
 	if top_card.monster_name != "" and top_card.stats[3] < area_card.stats[1]:
 		print("top win against ", top_card.monster_name)
 		top_card.player_ind = area_card.player_ind
+		scored = true
 	print("Left Card: ", left_card.monster_name)
 	if left_card.monster_name != "" and left_card.stats[2] < area_card.stats[0]:
 		print("left win against ", left_card.monster_name)
 		left_card.player_ind = area_card.player_ind
+		scored = true
+	
+	if scored:
+		player_score[area_card.player_ind] += 1
+		player_score[-area_card.player_ind] -= 1
+		scored = false
 	pass

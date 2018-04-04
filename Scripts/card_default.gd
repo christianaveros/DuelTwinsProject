@@ -6,7 +6,7 @@ var monster_name = "" # need to be assigned
 var stats = [0,0,0,0] # need to be assigned
 
 #area related
-onready var within_area = 1
+onready var within_area = 1 # within area = 1, -1
 var area_pos = Vector2(0,0) setget set_area_pos, get_area_pos
 onready var pressed = -1 # -1, not_pressed, 1, pressed
 onready var placed = -1 # placed = 1, !placed = -1 # need to be assigned
@@ -17,18 +17,16 @@ func _ready():
 
 func _input(event):
 	if event is InputEventMouseButton and event.is_pressed() and !event.is_echo()\
-		 and player_ind == control.player_turn and placed == -1:
+		 and player_ind == control.player_turn and placed == -1 and control.play_count < control.MAX_PLAY_COUNT:
 		if (event.position.distance_to(rect_position) < CARD_OFFSET):
 			pressed *= -1
 			if pressed == 1:
 				print("pressed")
-				#control.selecting = 1
 				placed = -1
 				control.handle = self
 			else:
 				print("released")
 				area_pos = rect_position #set new position
-				#placed = 1
 
 func _physics_process(delta):
 	if within_area == 1 and pressed == -1:

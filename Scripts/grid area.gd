@@ -28,6 +28,8 @@ func _physics_process(delta):
 				occufied = 1
 				print("occufied")
 				control.player_turn *= -1
+				control.player_score[control.player_turn] += 1
+				control.play_count += 1
 				match get_name(): # this area card, 
 					"area 0":	control.area_0(card, get_node("../area 1").card, get_node("../area 3").card)
 					"area 1":	control.area_1(card, get_node("../area 0").card, get_node("../area 2").card, get_node("../area 4").card)
@@ -63,6 +65,7 @@ func mouse_exited():
 	if potential.pressed == 1:# and card.monster_name != "": #means occupied
 		within_area = -1
 		occufied = -1
+		potential = preload("res://Entities/card_default.tscn").instance()
 		print("card taken out")
 	#print("mouse exited "+get_name()+" at"+str(get_viewport().get_mouse_position()))
 	pass
