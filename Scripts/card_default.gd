@@ -17,7 +17,7 @@ func _ready():
 
 func _input(event):
 	if event is InputEventMouseButton and event.is_pressed() and !event.is_echo()\
-		 and player_ind == control.player_turn:
+		 and player_ind == control.player_turn and placed == -1:
 		if (event.position.distance_to(rect_position) < CARD_OFFSET):
 			pressed *= -1
 			if pressed == 1:
@@ -28,10 +28,7 @@ func _input(event):
 			else:
 				print("released")
 				area_pos = rect_position #set new position
-				control.player_turn *= -1
-				#control.selecting = -1
-				placed = 1
-				#call function here
+				#placed = 1
 
 func _physics_process(delta):
 	if within_area == 1 and pressed == -1:

@@ -13,6 +13,10 @@ export onready var player_num = {
 	-1: "Blue",
 	1: "Red"
 }
+export(int) onready var player_score = {
+	-1: 0,
+	1: 0
+}
 onready var dir = {
 	0:"left",
 	1:"top",
@@ -122,14 +126,8 @@ func set_cards():
 	for z in [-1, 1]:
 		for y in range(3): #0-2
 			cards[z][y].player_ind = z # player owned for sprite
-			cards[z][y].monster_name = card_values[s_card[y if z == 1 else y+3]][0] # monster name for sprite
-			#cards[z][y].placed = -1
+			cards[z][y].monster_name = card_values[s_card[y if z == 1 else y+3]][0]
 			cards[z][y].get_node("card_area/card_holder/card_sprite").set_texture(load(str("res://Textures/"+cards[z][y].monster_name+".png")))
-			#for w in range(3):
-			#	cards[z][y].get_node("card_area").connect("area_entered", docks[z].get_node("position "+str(w)+"/area"), "area_entered", [x_pos[z], 32+docks[z].get_node("position "+str(w)).position.y])
-			#	cards[z][y].get_node("card_area").connect("mouse_exited", docks[z].get_node("position "+str(w)+"/area"), "mouse_exited", [x_pos[z], 32+docks[z].get_node("position "+str(w)).position.y])
-			#	docks[z].get_node("position "+str(w)+"/area").connect("area_entered", cards[z][y].get_node("card_area"), "area_entered", [docks[z].get_node("position "+str(w)+"/area"), x_pos[z], 32+docks[z].get_node("position "+str(w)).position.y])
-			#	docks[z].get_node("position "+str(w)+"/area").connect("mouse_exited", cards[z][y].get_node("card_area"), "mouse_exited", [docks[z].get_node("position "+str(w)+"/area"), x_pos[z], 32+docks[z].get_node("position "+str(w)).position.y])
 			docks[z].get_node("position "+str(y)+"/area").connect("area_entered", cards[z][y].get_node("card_area"), "area_entered", [docks[z].get_node("position "+str(y)+"/area"), x_pos[z], 32+docks[z].get_node("position "+str(y)).position.y])
 			docks[z].get_node("position "+str(y)+"/area").connect("mouse_exited", cards[z][y].get_node("card_area"), "mouse_exited", [docks[z].get_node("position "+str(y)+"/area"), x_pos[z], 32+docks[z].get_node("position "+str(y)).position.y])
 			for x in range(4): #[0] = [1] 0,1,2,3 = 1,2,3,4
@@ -139,7 +137,6 @@ func set_cards():
 			cards[z][y].area_pos = Vector2(x_pos[z], 32+docks[z].get_node("position "+str(y)).position.y)
 			get_node("/root/game_scene").add_child(cards[z][y]) # add chil
 			print("card "+str(y)+": "+cards[z][y].monster_name+" stats: "+str(cards[z][y].stats)+" position:"+str(cards[z][y].rect_position)) # debug mode
-		#cards[z][0].get_node("card_area").connect("area_entered", docks[z].get_node("position "+str(w)+"/area"), "area_entered", [x_pos[z], 32+docks[z].get_node("position "+str(w)).position.y])
 	
 	# grid
 	docks[0].position = Vector2(79+15, 23+15)
@@ -166,60 +163,132 @@ func _physics_process(delta):
 
 func area_0(area_card, right_card, bottom_card):
 	print("FUNCTION: area 0 "+area_card.get_name()+" stats: "+str(area_card.stats))
-	print("Right Card: ", right_card)
-	print("Bottom Card: ", bottom_card)
+	print("Right Card: ", right_card.monster_name)
+	if right_card.monster_name != "" and right_card.stats[0] < area_card.stats[2]:
+		print("right win against ", right_card.monster_name)
+		right_card.player_ind = area_card.player_ind
+	print("Bottom Card: ", bottom_card.monster_name)
+	if bottom_card.monster_name != "" and bottom_card.stats[1] < area_card.stats[3]:
+		print("bottom win against ", bottom_card.monster_name)
+		bottom_card.player_ind = area_card.player_ind
 	pass
 
 func area_1(area_card, left_card, right_card, bottom_card):
 	print("FUNCTION: area 1 "+area_card.get_name()+" stats: "+str(area_card.stats))
-	print("Left Card: ", left_card)
-	print("Right Card: ", right_card)
-	print("Bottom Card: ", bottom_card)
+	print("Left Card: ", left_card.monster_name)
+	if left_card.monster_name != "" and left_card.stats[2] < area_card.stats[0]:
+		print("left win against ", left_card.monster_name)
+		left_card.player_ind = area_card.player_ind
+	print("Right Card: ", right_card.monster_name)
+	if right_card.monster_name != "" and right_card.stats[0] < area_card.stats[2]:
+		print("right win against ", right_card.monster_name)
+		right_card.player_ind = area_card.player_ind
+	print("Bottom Card: ", bottom_card.monster_name)
+	if bottom_card.monster_name != "" and bottom_card.stats[1] < area_card.stats[3]:
+		print("bottom win against ", bottom_card.monster_name)
+		bottom_card.player_ind = area_card.player_ind
 	pass
 
 func area_2(area_card, left_card, bottom_card):
 	print("FUNCTION: area 2 "+area_card.get_name()+" stats: "+str(area_card.stats))
-	print("Left Card: ", left_card)
-	print("Bottom Card: ", bottom_card)
+	print("Left Card: ", left_card.monster_name)
+	if left_card.monster_name != "" and left_card.stats[2] < area_card.stats[0]:
+		print("left win against ", left_card.monster_name)
+		left_card.player_ind = area_card.player_ind
+	print("Bottom Card: ", bottom_card.monster_name)
+	if bottom_card.monster_name != "" and bottom_card.stats[1] < area_card.stats[3]:
+		print("bottom win against ", bottom_card.monster_name)
+		bottom_card.player_ind = area_card.player_ind
 	pass
 
 func area_3(area_card, top_card, right_card, bottom_card):
 	print("FUNCTION: area 3 "+area_card.get_name()+" stats: "+str(area_card.stats))
-	print("Top Card: ", top_card)
-	print("Right Card: ", right_card)
-	print("Bottom Card: ", bottom_card)
+	print("Top Card: ", top_card.monster_name)
+	if top_card.monster_name != "" and top_card.stats[3] < area_card.stats[1]:
+		print("top win against ", top_card.monster_name)
+		top_card.player_ind = area_card.player_ind
+	print("Right Card: ", right_card.monster_name)
+	if right_card.monster_name != "" and right_card.stats[0] < area_card.stats[2]:
+		print("right win against ", right_card.monster_name)
+		right_card.player_ind = area_card.player_ind
+	print("Bottom Card: ", bottom_card.monster_name)
+	if bottom_card.monster_name != "" and bottom_card.stats[1] < area_card.stats[3]:
+		print("bottom win against ", bottom_card.monster_name)
+		bottom_card.player_ind = area_card.player_ind
 	pass
 
 func area_4(area_card, top_card, left_card, right_card, bottom_card):
 	print("FUNCTION: area 4 "+area_card.get_name()+" stats: "+str(area_card.stats))
-	print("Top Card: ", top_card)
-	print("Left Card: ", left_card)
-	print("Right Card: ", right_card)
-	print("Bottom Card: ", bottom_card)
+	print("Top Card: ", top_card.monster_name)
+	if top_card.monster_name != "" and top_card.stats[3] < area_card.stats[1]:
+		print("top win against ", top_card.monster_name)
+		top_card.player_ind = area_card.player_ind
+	print("Left Card: ", left_card.monster_name)
+	if left_card.monster_name != "" and left_card.stats[2] < area_card.stats[0]:
+		print("left win against ", left_card.monster_name)
+		left_card.player_ind = area_card.player_ind
+	print("Right Card: ", right_card.monster_name)
+	if right_card.monster_name != "" and right_card.stats[0] < area_card.stats[2]:
+		print("right win against ", right_card.monster_name)
+		right_card.player_ind = area_card.player_ind
+	print("Bottom Card: ", bottom_card.monster_name)
+	if bottom_card.monster_name != "" and bottom_card.stats[1] < area_card.stats[3]:
+		print("bottom win against ", bottom_card.monster_name)
+		bottom_card.player_ind = area_card.player_ind
 	pass
 
 func area_5(area_card, top_card, left_card, bottom_card):
-	print("FUNCTION: area 5 "+area_card.get_name()+" stats: "+str(area_card.stats))
-	print("Top Card: ", top_card)
-	print("Left Card: ", left_card)
-	print("Bottom Card: ", bottom_card)
+	print("FUNCTION: area 5, "+area_card.get_name()+" stats: "+str(area_card.stats))
+	print("Top Card: ", top_card.monster_name)
+	if top_card.monster_name != "" and top_card.stats[3] < area_card.stats[1]:
+		print("top win against ", top_card.monster_name)
+		top_card.player_ind = area_card.player_ind
+	print("Left Card: ", left_card.monster_name)
+	if left_card.monster_name != "" and left_card.stats[2] < area_card.stats[0]:
+		print("left win against ", left_card.monster_name)
+		left_card.player_ind = area_card.player_ind
+	print("Bottom Card: ", bottom_card.monster_name)
+	if bottom_card.monster_name != "" and bottom_card.stats[1] < area_card.stats[3]:
+		print("bottom win against ", bottom_card.monster_name)
+		bottom_card.player_ind = area_card.player_ind
 	pass
 
 func area_6(area_card, top_card, right_card):
-	print("FUNCTION: area 6"+area_card.get_name()+" stats: "+str(area_card.stats))
-	print("Top Card: ", top_card)
-	print("Right Card: ", right_card)
+	print("FUNCTION: area 6, "+area_card.get_name()+" stats: "+str(area_card.stats))
+	print("Top Card: ", top_card.monster_name)
+	if top_card.monster_name != "" and top_card.stats[3] < area_card.stats[1]:
+		print("top win against ", top_card.monster_name)
+		top_card.player_ind = area_card.player_ind
+	print("Right Card: ", right_card.monster_name)
+	if right_card.monster_name != "" and right_card.stats[0] < area_card.stats[2]:
+		print("right win against ", right_card.monster_name)
+		right_card.player_ind = area_card.player_ind
 	pass
 
 func area_7(area_card, top_card, left_card, right_card):
-	print("FUNCTION: area 7 "+area_card.get_name()+" stats: "+str(area_card.stats))
+	print("FUNCTION: area 7, "+area_card.get_name()+" stats: "+str(area_card.stats))
 	print("Top Card: ", top_card.monster_name)
+	if top_card.monster_name != "" and top_card.stats[3] < area_card.stats[1]:
+		print("top win against", top_card.monster_name)
+		top_card.player_ind = area_card.player_ind
 	print("Left Card: ", left_card.monster_name)
+	if left_card.monster_name != "" and left_card.stats[2] < area_card.stats[0]:
+		print("left win against ", left_card.monster_name)
+		left_card.player_ind = area_card.player_ind
 	print("Right Card: ", right_card.monster_name)
+	if right_card.monster_name != "" and right_card.stats[0] < area_card.stats[2]:
+		print("right win against ", right_card.monster_name)
+		right_card.player_ind = area_card.player_ind
 	pass
 
 func area_8(area_card, top_card, left_card):
 	print("FUNCTION: area 8, "+area_card.get_name()+" stats: "+str(area_card.stats))
 	print("Top Card: ", top_card.monster_name)
+	if top_card.monster_name != "" and top_card.stats[3] < area_card.stats[1]:
+		print("top win against ", top_card.monster_name)
+		top_card.player_ind = area_card.player_ind
 	print("Left Card: ", left_card.monster_name)
+	if left_card.monster_name != "" and left_card.stats[2] < area_card.stats[0]:
+		print("left win against ", left_card.monster_name)
+		left_card.player_ind = area_card.player_ind
 	pass
