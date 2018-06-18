@@ -36,9 +36,10 @@ onready var bottom = $card_holder/card_num_bottom
 
 func _ready(var num = 1, var obj_owner = 1):
 	# debug purposes
-	randomize()
-	num = randi()%23 + 1
-	obj_owner = randi()%2 + 1
+	position = Vector2(60, 35) # middle
+	randomize() # true randomize numbers
+	num = randi()%23 + 1 # 1, 2, 3,..., 23
+	obj_owner = randi()%2 + 1 # 1, 2
 	
 	# card initialization
 	card_value["obj_owner"] = obj_owner
@@ -47,9 +48,9 @@ func _ready(var num = 1, var obj_owner = 1):
 	card_value["top"] = card_values[card_value["name"]][2]
 	card_value["right"] = card_values[card_value["name"]][3]
 	card_value["bottom"] = card_values[card_value["name"]][4]
-	set_card_images()
+	set_images()
 
-func set_card_images():
+func set_images():
 	color.texture = load("res://Textures/"+str(card_colors[card_value["obj_owner"]])+".png") #color
 	avatar.texture = load("res://Textures/"+str(card_values[card_value["name"]][0])+".png") #monster avatar
 	left.texture = load("res://Textures/number"+str(card_value["left"])+".png")
@@ -57,3 +58,5 @@ func set_card_images():
 	right.texture = load("res://Textures/number"+str(card_value["right"])+".png")
 	bottom.texture = load("res://Textures/number"+str(card_value["bottom"])+".png")
 
+func change_owner_to(var to = 1):
+	card_value["obj_owner"] = to
