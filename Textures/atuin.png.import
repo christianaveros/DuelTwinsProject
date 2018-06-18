@@ -10,7 +10,7 @@ source_file="res://Textures/atuin.png"
 source_md5="f3f56a690bb519ea09acd48fa32a4470"
 
 dest_files=[ "res://.import/atuin.png-53cc9332554fdc79e56bebf626fcde46.stex" ]
-dest_md5="535b4e186f9b4894d4f87503c3558b90"
+dest_md5="f5cd3e59ea24358e5e314ce159e9cfc4"
 
 [params]
 
@@ -28,5 +28,5 @@ process/premult_alpha=false
 process/HDR_as_SRGB=false
 stream=false
 size_limit=0
-detect_3d=true
+detect_3d=false
 svg/scale=1.0

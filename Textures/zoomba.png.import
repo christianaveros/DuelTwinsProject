@@ -10,7 +10,7 @@ source_file="res://Textures/zoomba.png"
 source_md5="9ba1f7502f0f3ab7f4bdfe5adcbf488f"
 
 dest_files=[ "res://.import/zoomba.png-d396b5a1380d645eb8507271721db081.stex" ]
-dest_md5="aeca617d9b9469bb2746b83686854c90"
+dest_md5="2eec0a0317dbda27e7068160634ec3e2"
 
 [params]
 
@@ -28,5 +28,5 @@ process/premult_alpha=false
 process/HDR_as_SRGB=false
 stream=false
 size_limit=0
-detect_3d=true
+detect_3d=false
 svg/scale=1.0

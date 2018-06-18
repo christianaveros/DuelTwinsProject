@@ -10,7 +10,7 @@ source_file="res://Textures/villain.png"
 source_md5="7a24cf8dfb042aafe25b1f1e58327776"
 
 dest_files=[ "res://.import/villain.png-a5062828b3ffb74366d0ba3d437191b3.stex" ]
-dest_md5="125b3e5ba1237248dc962676e6d1ca9a"
+dest_md5="ce6b85074e5cbea877ddfa64a0ede301"
 
 [params]
 
@@ -28,5 +28,5 @@ process/premult_alpha=false
 process/HDR_as_SRGB=false
 stream=false
 size_limit=0
-detect_3d=true
+detect_3d=false
 svg/scale=1.0

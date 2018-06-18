@@ -10,7 +10,7 @@ source_file="res://Textures/deck.png"
 source_md5="5fe6a195bd484135d9487c07158c53c1"
 
 dest_files=[ "res://.import/deck.png-f78657da4aedf0e1c0738d27621b5520.stex" ]
-dest_md5="adb168794dc02c140bed5aca934b278c"
+dest_md5="c1da605a6abe68ce5ac19cc850e3c7bb"
 
 [params]
 
@@ -28,5 +28,5 @@ process/premult_alpha=false
 process/HDR_as_SRGB=false
 stream=false
 size_limit=0
-detect_3d=true
+detect_3d=false
 svg/scale=1.0

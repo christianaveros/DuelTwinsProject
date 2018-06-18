@@ -10,7 +10,7 @@ source_file="res://Textures/bg_wood_v2.png"
 source_md5="8b8ba0ef11a04400ca94f6e99f46c1b1"
 
 dest_files=[ "res://.import/bg_wood_v2.png-b53363e250e47e3f1a5c85b01a90a9c8.stex" ]
-dest_md5="ecbc80532e85cdb812016afb70145966"
+dest_md5="b3058d35f4c9c6fcb891fbadb67d865a"
 
 [params]
 
@@ -28,5 +28,5 @@ process/premult_alpha=false
 process/HDR_as_SRGB=false
 stream=false
 size_limit=0
-detect_3d=true
+detect_3d=false
 svg/scale=1.0

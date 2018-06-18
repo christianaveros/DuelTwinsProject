@@ -10,7 +10,7 @@ source_file="res://Textures/dock.png"
 source_md5="7f560094d18b50257ecc468f70dcaa6d"
 
 dest_files=[ "res://.import/dock.png-eeecfd8a229155d6e554ce44a58789bd.stex" ]
-dest_md5="6914f9163d2d47da92cf54de56483e89"
+dest_md5="e7b87982b6ebe7779beb82de024acb79"
 
 [params]
 
@@ -28,5 +28,5 @@ process/premult_alpha=false
 process/HDR_as_SRGB=false
 stream=false
 size_limit=0
-detect_3d=true
+detect_3d=false
 svg/scale=1.0

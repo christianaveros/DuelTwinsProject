@@ -7,10 +7,10 @@ path="res://.import/bg.png-d5d8cfd8985c88945c49218947b38597.stex"
 [deps]
 
 source_file="res://Textures/bg.png"
-source_md5="2962423eb8e4bf0dced18cd20a3ae746"
+source_md5="291cf9d52ec8a03a5ac302f4f9932336"
 
 dest_files=[ "res://.import/bg.png-d5d8cfd8985c88945c49218947b38597.stex" ]
-dest_md5="34e19bdaed8d91ba0fa4f431fc4f36ef"
+dest_md5="736fa961ecd636b5f8699f82f1dbe9a0"
 
 [params]
 
@@ -28,5 +28,5 @@ process/premult_alpha=false
 process/HDR_as_SRGB=false
 stream=false
 size_limit=0
-detect_3d=true
+detect_3d=false
 svg/scale=1.0

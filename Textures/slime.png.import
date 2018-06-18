@@ -10,7 +10,7 @@ source_file="res://Textures/slime.png"
 source_md5="55f4b742e5fa9bfcd12d91bccc270a4e"
 
 dest_files=[ "res://.import/slime.png-73b45882e19490d008a1d52f629aed30.stex" ]
-dest_md5="f3dbf939bf84afa6b7293a14a729113d"
+dest_md5="1749ff5702bf8bc4dd123fd9eb60d97b"
 
 [params]
 
@@ -28,5 +28,5 @@ process/premult_alpha=false
 process/HDR_as_SRGB=false
 stream=false
 size_limit=0
-detect_3d=true
+detect_3d=false
 svg/scale=1.0

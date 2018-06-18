@@ -10,7 +10,7 @@ source_file="res://Textures/hero.png"
 source_md5="1c6a70089ea281d8b6e3ecde9521c006"
 
 dest_files=[ "res://.import/hero.png-e22844935b5cdf3e9c6e1035643cf10e.stex" ]
-dest_md5="cbc017749678517346624764997eb772"
+dest_md5="42b3d317c3ec4a3a3591f741fda036d8"
 
 [params]
 
@@ -28,5 +28,5 @@ process/premult_alpha=false
 process/HDR_as_SRGB=false
 stream=false
 size_limit=0
-detect_3d=true
+detect_3d=false
 svg/scale=1.0

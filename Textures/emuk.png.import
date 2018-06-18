@@ -10,7 +10,7 @@ source_file="res://Textures/emuk.png"
 source_md5="dae51dd06df369315c46d8ecca38e189"
 
 dest_files=[ "res://.import/emuk.png-dbec70c47d6321dd9a349ba38be81ab3.stex" ]
-dest_md5="434648566c1423109d5c42748e43a053"
+dest_md5="39472aa72bda2020019c345f30767394"
 
 [params]
 
@@ -28,5 +28,5 @@ process/premult_alpha=false
 process/HDR_as_SRGB=false
 stream=false
 size_limit=0
-detect_3d=true
+detect_3d=false
 svg/scale=1.0

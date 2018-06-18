@@ -10,7 +10,7 @@ source_file="res://Textures/skeleton.png"
 source_md5="94e449daf26d900a94f6446fc6108992"
 
 dest_files=[ "res://.import/skeleton.png-bf4069a1e6069bfaa168a9f5e630bde0.stex" ]
-dest_md5="441b88bd88ccd3d3ceb44d54abe7782a"
+dest_md5="065fbf811681882f829a09b18044ecdf"
 
 [params]
 
@@ -28,5 +28,5 @@ process/premult_alpha=false
 process/HDR_as_SRGB=false
 stream=false
 size_limit=0
-detect_3d=true
+detect_3d=false
 svg/scale=1.0

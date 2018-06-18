@@ -10,7 +10,7 @@ source_file="res://Textures/undead_king.png"
 source_md5="0926e0a41306784ab90a0c59c24d590d"
 
 dest_files=[ "res://.import/undead_king.png-a8caad1876d61b945a6f6161e253be91.stex" ]
-dest_md5="12b6c9ccdd996f18d673e04410416a50"
+dest_md5="214598fbeaaf2f46599d3149ee824e1e"
 
 [params]
 
@@ -28,5 +28,5 @@ process/premult_alpha=false
 process/HDR_as_SRGB=false
 stream=false
 size_limit=0
-detect_3d=true
+detect_3d=false
 svg/scale=1.0

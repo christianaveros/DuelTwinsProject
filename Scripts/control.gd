@@ -1,5 +1,7 @@
 extends Node
 
+var difficulty = 0
+
 #global vars
 onready var player_turn = 1 setget set_player_turn, get_player_turn #P1 = 1, P2 = -1
 

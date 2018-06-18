@@ -10,7 +10,7 @@ source_file="res://Textures/card_back.png"
 source_md5="7bef1732e7b7f462ee9b7b2f3cbbfd96"
 
 dest_files=[ "res://.import/card_back.png-526837a2abeab462597c66efe44ef0cb.stex" ]
-dest_md5="fa63c9cf5267a0052ed308353a49598f"
+dest_md5="f8450d58eb28c6197e36501147921c58"
 
 [params]
 
@@ -28,5 +28,5 @@ process/premult_alpha=false
 process/HDR_as_SRGB=false
 stream=false
 size_limit=0
-detect_3d=true
+detect_3d=false
 svg/scale=1.0

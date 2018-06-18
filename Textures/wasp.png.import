@@ -10,7 +10,7 @@ source_file="res://Textures/wasp.png"
 source_md5="5dadf9d53313fc3132cb2948f5b49d65"
 
 dest_files=[ "res://.import/wasp.png-97bea57e1fa01fc6711423fa8a4d0a1c.stex" ]
-dest_md5="72052a6b104bc259ab6fd94fd5449a58"
+dest_md5="9ffce9dd88053acb2084b04b334fc57b"
 
 [params]
 
@@ -28,5 +28,5 @@ process/premult_alpha=false
 process/HDR_as_SRGB=false
 stream=false
 size_limit=0
-detect_3d=true
+detect_3d=false
 svg/scale=1.0

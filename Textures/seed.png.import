@@ -10,7 +10,7 @@ source_file="res://Textures/seed.png"
 source_md5="90debc789bce8ddcff360359fe801389"
 
 dest_files=[ "res://.import/seed.png-9b17391dc53a82f53e4a1d957c574b22.stex" ]
-dest_md5="04b9ad69a498c28090284ef0ef263f37"
+dest_md5="78db5f704f117e388e03ef0ccc4b5312"
 
 [params]
 
@@ -28,5 +28,5 @@ process/premult_alpha=false
 process/HDR_as_SRGB=false
 stream=false
 size_limit=0
-detect_3d=true
+detect_3d=false
 svg/scale=1.0

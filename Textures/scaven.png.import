@@ -10,7 +10,7 @@ source_file="res://Textures/scaven.png"
 source_md5="e6d136214f2b4dcdaf198b3cd4bd8f89"
 
 dest_files=[ "res://.import/scaven.png-a231ba38a7c091a2fe7f71d4604ccc36.stex" ]
-dest_md5="3706f7421dafdf7cea9a178227385215"
+dest_md5="86285da9a43dc90e96e3ca4bf7312da6"
 
 [params]
 
@@ -28,5 +28,5 @@ process/premult_alpha=false
 process/HDR_as_SRGB=false
 stream=false
 size_limit=0
-detect_3d=true
+detect_3d=false
 svg/scale=1.0

@@ -1,16 +1,240 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://Scripts/game_scene.gd" type="Script" id=1]
-[ext_resource path="res://Entities/background.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Textures/bg_v2.png" type="Texture" id=2]
+[ext_resource path="res://Textures/menu_pause_icon1.png" type="Texture" id=3]
+[ext_resource path="res://Textures/menu_pause_icon2.png" type="Texture" id=4]
+[ext_resource path="res://Textures/menu_pause_bg.png" type="Texture" id=5]
+[ext_resource path="res://Textures/menu_play_icon1.png" type="Texture" id=6]
+[ext_resource path="res://Textures/menu_play_icon2.png" type="Texture" id=7]
+[ext_resource path="res://Textures/menu_reset_icon1.png" type="Texture" id=8]
+[ext_resource path="res://Textures/menu_reset_icon2.png" type="Texture" id=9]
+[ext_resource path="res://Textures/menu_back_icon1.png" type="Texture" id=10]
+[ext_resource path="res://Textures/menu_back_icon2.png" type="Texture" id=11]
+[ext_resource path="res://Textures/menu_yesno3.png" type="Texture" id=12]
+[ext_resource path="res://Textures/menu_yesno4.png" type="Texture" id=13]
+[ext_resource path="res://Textures/menu_yesno1.png" type="Texture" id=14]
+[ext_resource path="res://Textures/menu_yesno2.png" type="Texture" id=15]
+[ext_resource path="res://Textures/menu_reset.png" type="Texture" id=16]
+[ext_resource path="res://Textures/menu_confirm.png" type="Texture" id=17]
+[ext_resource path="res://Textures/pause_banner.png" type="Texture" id=18]
 
-[node name="game_scene" type="Node2D" index="0"]
+[sub_resource type="RectangleShape2D" id=1]
+
+custom_solver_bias = 0.0
+extents = Vector2( 6, 4 )
+
+[sub_resource type="SpriteFrames" id=2]
+
+animations = [ {
+"frames": [ ExtResource( 16 ) ],
+"loop": false,
+"name": "reset",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 17 ) ],
+"loop": false,
+"name": "quit",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 18 ) ],
+"loop": false,
+"name": "pause",
+"speed": 5.0
+} ]
+
+[node name="game_scene" type="Node2D"]
 
 script = ExtResource( 1 )
 _sections_unfolded = [ "Transform", "Z Index" ]
+
+[node name="bg" type="Sprite" parent="." index="0"]
+
+z_index = -1
+texture = ExtResource( 2 )
+centered = false
+_sections_unfolded = [ "Offset", "Transform", "Z Index" ]
 __meta__ = {
-"_edit_group_": true
+"_edit_lock_": true
 }
 
-[node name="background" parent="." index="0" instance=ExtResource( 2 )]
+[node name="camera_pos" type="Position2D" parent="." index="1"]
+
+_sections_unfolded = [ "Transform" ]
+
+[node name="camera" type="Camera2D" parent="camera_pos" index="0"]
+
+anchor_mode = 0
+rotating = false
+current = true
+zoom = Vector2( 2, 2 )
+limit_left = -10000000
+limit_top = -10000000
+limit_right = 10000000
+limit_bottom = 10000000
+limit_smoothed = false
+drag_margin_h_enabled = true
+drag_margin_v_enabled = true
+smoothing_enabled = true
+smoothing_speed = 5.0
+offset_v = 0.0
+offset_h = 0.0
+drag_margin_left = 0.2
+drag_margin_top = 0.2
+drag_margin_right = 0.2
+drag_margin_bottom = 0.2
+editor_draw_screen = true
+editor_draw_limits = false
+editor_draw_drag_margin = false
+_sections_unfolded = [ "Editor", "Smoothing" ]
+
+[node name="UI" type="CanvasLayer" parent="." index="2"]
+
+layer = 2
+offset = Vector2( 0, 0 )
+rotation = 0.0
+scale = Vector2( 1, 1 )
+transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+
+[node name="pause_button" type="TouchScreenButton" parent="UI" index="0"]
+
+position = Vector2( 106, 2 )
+normal = ExtResource( 3 )
+pressed = ExtResource( 4 )
+bitmask = null
+shape = SubResource( 1 )
+shape_centered = true
+shape_visible = false
+passby_press = false
+action = ""
+visibility_mode = 0
+_sections_unfolded = [ "Transform" ]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="blurred_bg" type="Sprite" parent="UI" index="1"]
+
+visible = false
+texture = ExtResource( 5 )
+centered = false
+_sections_unfolded = [ "Offset" ]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="play_button" type="TouchScreenButton" parent="UI" index="2"]
+
+visible = false
+position = Vector2( 40, 48 )
+normal = ExtResource( 6 )
+pressed = ExtResource( 7 )
+bitmask = null
+shape = null
+shape_centered = true
+shape_visible = true
+passby_press = false
+action = ""
+visibility_mode = 0
+_sections_unfolded = [ "Transform" ]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="reset_button" type="TouchScreenButton" parent="UI" index="3"]
+
+visible = false
+position = Vector2( 70, 48 )
+normal = ExtResource( 8 )
+pressed = ExtResource( 9 )
+bitmask = null
+shape = null
+shape_centered = true
+shape_visible = true
+passby_press = false
+action = ""
+visibility_mode = 0
+_sections_unfolded = [ "Transform" ]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="back_button" type="TouchScreenButton" parent="UI" index="4"]
+
+visible = false
+position = Vector2( 106, 48 )
+normal = ExtResource( 10 )
+pressed = ExtResource( 11 )
+bitmask = null
+shape = null
+shape_centered = true
+shape_visible = true
+passby_press = false
+action = ""
+visibility_mode = 0
+_sections_unfolded = [ "Transform" ]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="confirm_button" type="TouchScreenButton" parent="UI" index="5"]
+
+visible = false
+position = Vector2( 40, 48 )
+normal = ExtResource( 12 )
+pressed = ExtResource( 13 )
+bitmask = null
+shape = null
+shape_centered = true
+shape_visible = true
+passby_press = false
+action = ""
+visibility_mode = 0
+_sections_unfolded = [ "Transform" ]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="cancel_button" type="TouchScreenButton" parent="UI" index="6"]
+
+visible = false
+position = Vector2( 70, 48 )
+normal = ExtResource( 14 )
+pressed = ExtResource( 15 )
+bitmask = null
+shape = null
+shape_centered = true
+shape_visible = true
+passby_press = false
+action = ""
+visibility_mode = 0
+_sections_unfolded = [ "Transform" ]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="confirm_banner" type="AnimatedSprite" parent="UI" index="7"]
+
+visible = false
+position = Vector2( 60, 32 )
+frames = SubResource( 2 )
+animation = "pause"
+playing = true
+_sections_unfolded = [ "Offset", "Transform" ]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[connection signal="released" from="UI/pause_button" to="." method="_on_pause_button_released"]
+
+[connection signal="released" from="UI/play_button" to="." method="_on_pause_button_released"]
+
+[connection signal="released" from="UI/reset_button" to="." method="_on_reset_button_released"]
+
+[connection signal="released" from="UI/back_button" to="." method="_on_back_button_released"]
+
+[connection signal="released" from="UI/confirm_button" to="." method="_on_confirm_button_released"]
+
+[connection signal="released" from="UI/cancel_button" to="." method="_on_cancel_button_released"]
 
 

@@ -10,7 +10,7 @@ source_file="res://Textures/unknown.png"
 source_md5="a686cd9aff1edcc15399dd88cd85be8e"
 
 dest_files=[ "res://.import/unknown.png-262edd0bed8e8c9a20fdf7a21698ce78.stex" ]
-dest_md5="f321b8925dfa6efe7b220bf494440de8"
+dest_md5="a478574f33f19813072ecf707cd99310"
 
 [params]
 
@@ -28,5 +28,5 @@ process/premult_alpha=false
 process/HDR_as_SRGB=false
 stream=false
 size_limit=0
-detect_3d=true
+detect_3d=false
 svg/scale=1.0

@@ -10,7 +10,7 @@ source_file="res://Textures/grid_dock.png"
 source_md5="4d45fe2d599ed42a52ec04e9984fba46"
 
 dest_files=[ "res://.import/grid_dock.png-be025cd805bf7a02f06972252dc48330.stex" ]
-dest_md5="9451c499919d60411b695ac0bec97b6a"
+dest_md5="c0cb4f117d6f63478ad87764b52ef84d"
 
 [params]
 
@@ -28,5 +28,5 @@ process/premult_alpha=false
 process/HDR_as_SRGB=false
 stream=false
 size_limit=0
-detect_3d=true
+detect_3d=false
 svg/scale=1.0

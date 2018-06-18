@@ -10,7 +10,7 @@ source_file="res://Textures/bahamut.png"
 source_md5="13ee2a2c7e8a60689d64d5a4f8a8ea09"
 
 dest_files=[ "res://.import/bahamut.png-af63878f612673bd450728ed0b40bcd4.stex" ]
-dest_md5="252682420bf2f49612e2e12fe48a3c26"
+dest_md5="ff72afec821a4fd588e687a70cbc0342"
 
 [params]
 
@@ -28,5 +28,5 @@ process/premult_alpha=false
 process/HDR_as_SRGB=false
 stream=false
 size_limit=0
-detect_3d=true
+detect_3d=false
 svg/scale=1.0

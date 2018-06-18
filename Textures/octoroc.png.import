@@ -10,7 +10,7 @@ source_file="res://Textures/octoroc.png"
 source_md5="efbdec0f1b7b1ef3b7e5dff8f0defb87"
 
 dest_files=[ "res://.import/octoroc.png-202d39a4d8d31322c6330c6a17bd9aca.stex" ]
-dest_md5="471af6bbab707df9f97fd118f4c27862"
+dest_md5="41a09f0b95c68a4bd3da73580d61b706"
 
 [params]
 
@@ -28,5 +28,5 @@ process/premult_alpha=false
 process/HDR_as_SRGB=false
 stream=false
 size_limit=0
-detect_3d=true
+detect_3d=false
 svg/scale=1.0
