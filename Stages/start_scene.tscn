@@ -94,6 +94,7 @@ _sections_unfolded = [ "Transform" ]
 
 [node name="bg" type="CanvasLayer" parent="." index="5"]
 
+editor/display_folded = true
 layer = -1
 offset = Vector2( 0, 0 )
 rotation = 0.0

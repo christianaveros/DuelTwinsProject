@@ -14,6 +14,10 @@ config/name="Duel Twins"
 run/main_scene="res://Stages/start_scene.tscn"
 config/icon="res://Textures/icon.png"
 
+[autoload]
+
+control="*res://Entities/control.tscn"
+
 [display]
 
 window/size/width=120

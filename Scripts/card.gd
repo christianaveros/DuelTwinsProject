@@ -18,14 +18,15 @@ onready var card_colors = {
 }
 
 onready var card_value = {
-	obj_owner: 0,
-	name: 0,
-	left: 0,
-	top: 0,
-	right: 0,
-	bottom: 0
+	"obj_owner": 0,
+	"name": 0,
+	"left": 0,
+	"top": 0,
+	"right": 0,
+	"bottom": 0
 }
 
+onready var placed = false
 onready var color = $card_color
 onready var holder = $card_holder
 onready var avatar = $card_holder/card_avatar
@@ -34,20 +35,23 @@ onready var top = $card_holder/card_num_top
 onready var right = $card_holder/card_num_right
 onready var bottom = $card_holder/card_num_bottom
 
-func _ready(var num = 1, var obj_owner = 1):
+func _ready():
+	pass
+
+func setValues(num, obj_ownr):
 	# debug purposes
-	position = Vector2(60, 35) # middle
-	randomize() # true randomize numbers
-	num = randi()%23 + 1 # 1, 2, 3,..., 23
-	obj_owner = randi()%2 + 1 # 1, 2
+	#position = Vector2(60, 35) # middle
+	#randomize() # true randomize numbers
+	#num = randi()%23 + 1 # 1, 2, 3,..., 23
+	#obj_owner = randi()%2 + 1 # 1, 2
 	
 	# card initialization
-	card_value["obj_owner"] = obj_owner
+	card_value["obj_owner"] = obj_ownr
 	card_value["name"] = num
-	card_value["left"] = card_values[card_value["name"]][1]
-	card_value["top"] = card_values[card_value["name"]][2]
-	card_value["right"] = card_values[card_value["name"]][3]
-	card_value["bottom"] = card_values[card_value["name"]][4]
+	card_value["left"] = card_values[num][1]
+	card_value["top"] = card_values[num][2]
+	card_value["right"] = card_values[num][3]
+	card_value["bottom"] = card_values[num][4]
 	set_images()
 
 func set_images():
@@ -60,3 +64,6 @@ func set_images():
 
 func change_owner_to(var to = 1):
 	card_value["obj_owner"] = to
+
+func change_position(var x = 0, var y = 0):
+	position = Vector2(x+16, y+16)
