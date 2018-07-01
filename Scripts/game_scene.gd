@@ -116,23 +116,144 @@ onready var card_in_play = {
 	5: 0
 }
 
+onready var button_status = [0, 0, 0, 0, 0, 0]
+onready var grid_status = [0, 0, 0, 0, 0, 0, 0, 0, 0]
+
+func show_card_status(card_values):
+	print(card_values)
+	#display banner
+	$UI/confirm_banner.position = Vector2($UI/confirm_banner.position.x+16*sign(1.5-card_values["obj_owner"]), $UI/confirm_banner.position.y)
+	$UI/confirm_banner.play("status")
+	$UI/confirm_banner.visible = !$UI/confirm_banner.visible
+	
+	#display exit button for status
+	$UI/return_button.position = Vector2($UI/return_button.position.x+16*sign(1.5-card_values["obj_owner"]), $UI/return_button.position.y)
+	$UI/return_button.visible = !$UI/return_button.visible
+	
+	#set and show the card status
+	$UI/card_color.position = Vector2($UI/card_color.position.x+24*sign(1.5-card_values["obj_owner"]), $UI/card_color.position.y)
+	$UI/card_holder.position = Vector2($UI/card_holder.position.x+24*sign(1.5-card_values["obj_owner"]), $UI/card_holder.position.y)
+	$UI/card_color.texture = load("res://Textures/blue.png") if card_values["obj_owner"] == 1 else load("res://Textures/red.png")
+	$UI/card_holder/card_avatar.texture = load("res://Textures/"+str(self.card_values[card_values["name"]][0])+".png")
+	$UI/card_holder/card_num_left.texture = load("res://Textures/number"+str(card_values["left"])+".png")
+	$UI/card_holder/card_num_top.texture = load("res://Textures/number"+str(card_values["top"])+".png")
+	$UI/card_holder/card_num_right.texture = load("res://Textures/number"+str(card_values["right"])+".png")
+	$UI/card_holder/card_num_bottom.texture = load("res://Textures/number"+str(card_values["bottom"])+".png")
+	
+	$UI/card_color.visible = !$UI/card_color.visible
+	$UI/card_holder.visible = !$UI/card_holder.visible
+	$UI/card_holder/card_avatar.visible = !$UI/card_holder/card_avatar.visible
+	$UI/card_holder/card_num_left.visible = !$UI/card_holder/card_num_left.visible
+	$UI/card_holder/card_num_top.visible = !$UI/card_holder/card_num_top.visible
+	$UI/card_holder/card_num_right.visible = !$UI/card_holder/card_num_right.visible
+	$UI/card_holder/card_num_bottom.visible = !$UI/card_holder/card_num_bottom.visible
+	
+	$UI/blurred_bg.visible = !$UI/blurred_bg.visible
+	$UI/pause_button.visible = !$UI/pause_button.visible
+	
+	# enable/disable Game buttons
+	for i in range(0, 2):
+		for j in range(0, 3):
+			get_node("p"+str(i+1)+str(j+1)).disabled = !get_node("p"+str(i+1)+str(j+1)).disabled
+	
+	for i in range(0, 9):
+		get_node("g"+str(i)).disabled = !get_node("g"+str(i)).disabled
+
+func check_available_grid():
+	for i in range(0, 9):
+		get_node("g"+str(i)).texture_normal = load("res://Textures/select1.png") if grid_status[i] != 0 \
+		else load("res://Textures/select2.png") #check if not placed
+
+func reset_p_button_status():
+	for i in range(0, 6): button_status[i] = 0
+
+func reset_p_button_texture():
+	for i in range(0, 2):
+		for j in range(0, 3):
+			get_node("p"+str(i+1)+str(j+1)).texture_normal = load("res://Textures/select2.png")
+
+func plus_button_status(num):
+	button_status[num] += 1	#increment by 1
+	if button_status[num] > 1:
+		button_status[num] = 0
+
 func _on_p11_button_up():
-	print("p11")
+	print("pressed p11")
+	match(button_status[0]):
+		0:
+			reset_p_button_texture()
+			$p11.texture_normal = load("res://Textures/select1.png")
+			check_available_grid()
+			reset_p_button_status()
+		1:
+			reset_p_button_texture()
+			show_card_status(card_in_play[0].card_value)
+	plus_button_status(0)
 
 func _on_p12_button_up():
-	print("p12")
+	print("pressed p12")
+	match(button_status[1]):
+		0:
+			reset_p_button_texture()
+			$p12.texture_normal = load("res://Textures/select1.png")
+			check_available_grid()
+			reset_p_button_status()
+		1:
+			reset_p_button_texture()
+			show_card_status(card_in_play[1].card_value)
+	plus_button_status(1)
 
 func _on_p13_button_up():
 	print("p13")
+	match(button_status[2]):
+		0:
+			reset_p_button_texture()
+			$p13.texture_normal = load("res://Textures/select1.png")
+			check_available_grid()
+			reset_p_button_status()
+		1:
+			reset_p_button_texture()
+			show_card_status(card_in_play[2].card_value)
+	plus_button_status(2)
 
 func _on_p21_button_up():
 	print("p21")
+	match(button_status[3]):
+		0:
+			reset_p_button_texture()
+			$p21.texture_normal = load("res://Textures/select1.png")
+			check_available_grid()
+			reset_p_button_status()
+		1:
+			reset_p_button_texture()
+			show_card_status(card_in_play[3].card_value)
+	plus_button_status(3)
 
 func _on_p22_button_up():
 	print("p22")
+	match(button_status[4]):
+		0:
+			reset_p_button_texture()
+			$p22.texture_normal = load("res://Textures/select1.png")
+			check_available_grid()
+			reset_p_button_status()
+		1:
+			reset_p_button_texture()
+			show_card_status(card_in_play[4].card_value)
+	plus_button_status(4)
 
 func _on_p23_button_up():
 	print("p23")
+	match(button_status[5]):
+		0:
+			reset_p_button_texture()
+			$p23.texture_normal = load("res://Textures/select1.png")
+			check_available_grid()
+			reset_p_button_status()
+		1:
+			reset_p_button_texture()
+			show_card_status(card_in_play[5].card_value)
+	plus_button_status(5)
 
 #----------------------------------UI-buttons-----------------------------
 
@@ -149,7 +270,6 @@ func _on_pause_button_released():
 	$UI/back_button.visible = !$UI/back_button.visible
 	
 	# change card visibility and camera pos
-	
 	for j in range(0, 5):
 		if player[control.turn]["cards"][j].placed == false:
 			player[control.turn]["cards"][j].holder.texture = load("res://Textures/card_back.png") \
@@ -216,3 +336,37 @@ func _on_cancel_button_released():
 	$UI/play_button.visible = !$UI/play_button.visible
 	$UI/reset_button.visible = !$UI/reset_button.visible
 	$UI/back_button.visible = !$UI/back_button.visible
+
+func _on_return_button_released():
+	#hide banner
+	$UI/confirm_banner.position = Vector2(60, 32)
+	$UI/confirm_banner.play("pause")
+	$UI/confirm_banner.visible = !$UI/confirm_banner.visible
+	
+	#hide this button
+	$UI/return_button.position = Vector2(87, 5)
+	$UI/return_button.visible = !$UI/return_button.visible
+	
+	#reset position
+	$UI/card_color.position = Vector2(60, 32)
+	$UI/card_holder.position = Vector2(60, 32)
+	
+	#hide the overlay, blurred bg and show pause button
+	$UI/card_color.visible = !$UI/card_color.visible
+	$UI/card_holder.visible = !$UI/card_holder.visible
+	$UI/card_holder/card_avatar.visible = !$UI/card_holder/card_avatar.visible
+	$UI/card_holder/card_num_left.visible = !$UI/card_holder/card_num_left.visible
+	$UI/card_holder/card_num_top.visible = !$UI/card_holder/card_num_top.visible
+	$UI/card_holder/card_num_right.visible = !$UI/card_holder/card_num_right.visible
+	$UI/card_holder/card_num_bottom.visible = !$UI/card_holder/card_num_bottom.visible
+	
+	$UI/blurred_bg.visible = !$UI/blurred_bg.visible
+	$UI/pause_button.visible = !$UI/pause_button.visible
+	
+	# enable/disable Game buttons
+	for i in range(0, 2):
+		for j in range(0, 3):
+			get_node("p"+str(i+1)+str(j+1)).disabled = !get_node("p"+str(i+1)+str(j+1)).disabled
+	
+	for i in range(0, 9):
+		get_node("g"+str(i)).disabled = !get_node("g"+str(i)).disabled
