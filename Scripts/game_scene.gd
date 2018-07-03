@@ -4,10 +4,23 @@ const card = preload("res://Entities/card.tscn") #object call
 
 onready var player = {
 	1: {
-		"score": 0, "cards": [card.instance(),card.instance(),card.instance(),card.instance(),card.instance()]
+		"score": 0,
+		"cards": [
+			card.instance(),
+			card.instance(),
+			card.instance(),
+			card.instance(),
+			card.instance()
+		]
 	},
 	2: {
-		"score": 0, "cards": [card.instance(),card.instance(),card.instance(),card.instance(),card.instance()]
+		"score": 0,
+		"cards": [
+			card.instance(),
+			card.instance(),
+			card.instance(),
+			card.instance(),
+			card.instance()]
 	}
 }
 
@@ -32,6 +45,7 @@ func change_camera_view(var mode = "pause"):
 	match(mode):
 		"pause":	$camera_pos.position = Vector2(40, 0)
 		"unpause":	$camera_pos.position = Vector2((control.turn-1)*80, 0)
+		"change turn":	$camera_pos.position = Vector2((control.turn-1)*80, 0)
 		"game start":	$camera_pos.position = Vector2((control.g_turn-1)*80, 0)
 
 func set_cards():
@@ -68,18 +82,18 @@ func set_cards():
 						player[i+1]["cards"][j].bottom.visible = !player[i+1]["cards"][j].bottom.visible
 					if j < 3:
 						if i+1 == 1: #respawn in
-							player[i+1]["cards"][j].change_position(32, 16+(40*cnt))
+							player[i+1]["cards"][j].change_position(Vector2(32, 16+(40*cnt)))
 							card_in_play[j] = player[i+1]["cards"][j]
 						elif i+1 == 2:
-							player[i+1]["cards"][j].change_position(258, 16+(40*cnt))
+							player[i+1]["cards"][j].change_position(Vector2(258, 16+(40*cnt)))
 							card_in_play[j+3] = player[i+1]["cards"][j]
 						cnt += 1
 						if cnt > 2: cnt = 0
 					else:
 						if i+1 == 1:
-							player[i+1]["cards"][j].change_position(32, -36)
+							player[i+1]["cards"][j].change_position(Vector2(32, -36))
 						else:
-							player[i+1]["cards"][j].change_position(258, -36)
+							player[i+1]["cards"][j].change_position(Vector2(258, -36))
 					in_array = true #proceed
 
 func change_turn():
@@ -106,6 +120,14 @@ func change_turn():
 			player[control.turn]["cards"][j].top.visible = !player[control.turn]["cards"][j].top.visible
 			player[control.turn]["cards"][j].right.visible = !player[control.turn]["cards"][j].right.visible
 			player[control.turn]["cards"][j].bottom.visible = !player[control.turn]["cards"][j].bottom.visible
+	reset_p_button_status()
+	reset_p_button_texture()
+	reset_g_button_texture()
+
+onready var card_counter = {
+	1: 3,
+	2: 3
+}
 
 onready var card_in_play = {
 	0: 0,
@@ -116,11 +138,22 @@ onready var card_in_play = {
 	5: 0
 }
 
+onready var card_in_grid = {
+	0: 0,
+	1: 0,
+	2: 0,
+	3: 0,
+	4: 0,
+	5: 0,
+	6: 0,
+	7: 0,
+	8: 0
+}
+
 onready var button_status = [0, 0, 0, 0, 0, 0]
 onready var grid_status = [0, 0, 0, 0, 0, 0, 0, 0, 0]
 
 func show_card_status(card_values):
-	print(card_values)
 	#display banner
 	$UI/confirm_banner.position = Vector2($UI/confirm_banner.position.x+16*sign(1.5-card_values["obj_owner"]), $UI/confirm_banner.position.y)
 	$UI/confirm_banner.play("status")
@@ -151,6 +184,7 @@ func show_card_status(card_values):
 	$UI/blurred_bg.visible = !$UI/blurred_bg.visible
 	$UI/pause_button.visible = !$UI/pause_button.visible
 	
+	reset_g_button_texture()
 	# enable/disable Game buttons
 	for i in range(0, 2):
 		for j in range(0, 3):
@@ -161,8 +195,12 @@ func show_card_status(card_values):
 
 func check_available_grid():
 	for i in range(0, 9):
-		get_node("g"+str(i)).texture_normal = load("res://Textures/select1.png") if grid_status[i] != 0 \
+		get_node("g"+str(i)).texture_normal = load("res://Textures/select1.png") if grid_status[i] == 0 \
 		else load("res://Textures/select2.png") #check if not placed
+
+func reset_g_button_texture():
+	for i in range(0, 9):
+		get_node("g"+str(i)).texture_normal = load("res://Textures/select2.png")
 
 func reset_p_button_status():
 	for i in range(0, 6): button_status[i] = 0
@@ -186,6 +224,7 @@ func _on_p11_button_up():
 			check_available_grid()
 			reset_p_button_status()
 		1:
+			reset_g_button_texture()
 			reset_p_button_texture()
 			show_card_status(card_in_play[0].card_value)
 	plus_button_status(0)
@@ -255,6 +294,433 @@ func _on_p23_button_up():
 			show_card_status(card_in_play[5].card_value)
 	plus_button_status(5)
 
+func _on_g0_button_up():
+	print(button_status)
+	if button_status.has(1) and grid_status[0] == 0: #change this
+		for i in range(0, 6):
+			if button_status[i] == 1:
+				print("button: "+str(i))
+				print(card_in_play[i].card_value)
+				
+				#change position and change card values
+				card_in_play[i].change_position($g0.rect_position + Vector2(2, 2)) #change this
+				card_in_grid[0] = card_in_play[i] #change this
+				card_in_grid[0].placed = true #change this, []
+				if card_counter[control.turn] < 5:
+					card_in_play[i] = player[control.turn]["cards"][card_counter[control.turn]]
+					card_counter[control.turn] += 1
+					card_in_play[i].change_position(get_node("p"+str(control.turn)+str(i+1-((control.turn-1)*3))).rect_position + Vector2(2, 2))
+				else:
+					get_node("p"+str(control.turn)+str(i+1-((control.turn-1)*3))).disabled = true
+				
+				#change grid status
+				$g0.texture_hover = load("res://Textures/select2.png") #change this
+				grid_status[0] = 1 #change this
+				
+				#check neighboring grid 1, 3
+				if grid_status[1] == 1: #change this
+					if card_in_grid[0].card_value["right"] > card_in_grid[1].card_value["left"]: #change this
+						card_in_grid[1].card_value["obj_owner"] = control.turn #change this
+						card_in_grid[1].set_images() #change this
+				
+				if grid_status[3] == 1: #change this
+					if card_in_grid[0].card_value["bottom"] > card_in_grid[3].card_value["top"]: #change this
+						card_in_grid[3].card_value["obj_owner"] = control.turn #change this
+						card_in_grid[3].set_images() #change this
+				
+				#change textures
+				reset_g_button_texture()
+				reset_p_button_texture()
+				reset_p_button_status()
+				
+				#change camera view and turn
+				change_turn()
+				change_camera_view("change turn")
+				break
+
+func _on_g1_button_up():
+	print(button_status)
+	if button_status.has(1) and grid_status[1] == 0: #change this
+		for i in range(0, 6):
+			if button_status[i] == 1:
+				print("button: "+str(i))
+				print(card_in_play[i].card_value)
+				
+				#change position and change card values
+				card_in_play[i].change_position($g1.rect_position + Vector2(2, 2)) #change this
+				card_in_grid[1] = card_in_play[i] #change this
+				card_in_grid[1].placed = true #change this, []
+				if card_counter[control.turn] < 5:
+					card_in_play[i] = player[control.turn]["cards"][card_counter[control.turn]]
+					card_counter[control.turn] += 1
+					card_in_play[i].change_position(get_node("p"+str(control.turn)+str(i+1-((control.turn-1)*3))).rect_position + Vector2(2, 2))
+				else:
+					get_node("p"+str(control.turn)+str(i+1-((control.turn-1)*3))).disabled = true
+				
+				#change grid status
+				$g1.texture_hover = load("res://Textures/select2.png") #change this
+				grid_status[1] = 1 #change this
+				
+				#check neighboring grid 0, 2, 4
+				if grid_status[0] == 1: #change this
+					if card_in_grid[1].card_value["left"] > card_in_grid[0].card_value["right"]: #change this
+						card_in_grid[0].card_value["obj_owner"] = control.turn #change this
+						card_in_grid[0].set_images() #change this
+				
+				if grid_status[2] == 1: #change this
+					if card_in_grid[1].card_value["right"] > card_in_grid[2].card_value["left"]: #change this
+						card_in_grid[2].card_value["obj_owner"] = control.turn #change this
+						card_in_grid[2].set_images() #change this
+				
+				if grid_status[4] == 1: #change this
+					if card_in_grid[1].card_value["bottom"] > card_in_grid[4].card_value["top"]: #change this
+						card_in_grid[4].card_value["obj_owner"] = control.turn #change this
+						card_in_grid[4].set_images() #change this
+				
+				#change textures
+				reset_g_button_texture()
+				reset_p_button_texture()
+				reset_p_button_status()
+				
+				#change camera view and turn
+				change_turn()
+				change_camera_view("change turn")
+				break
+
+func _on_g2_button_up():
+	print(button_status)
+	if button_status.has(1) and grid_status[2] == 0: #change this, []
+		for i in range(0, 6):
+			if button_status[i] == 1:
+				print("button: "+str(i))
+				print(card_in_play[i].card_value)
+				
+				#change position and change card values
+				card_in_play[i].change_position($g2.rect_position + Vector2(2, 2)) #change this, g
+				card_in_grid[2] = card_in_play[i] #change this, []
+				card_in_grid[2].placed = true #change this, []
+				if card_counter[control.turn] < 5:
+					card_in_play[i] = player[control.turn]["cards"][card_counter[control.turn]]
+					card_counter[control.turn] += 1
+					card_in_play[i].change_position(get_node("p"+str(control.turn)+str(i+1-((control.turn-1)*3))).rect_position + Vector2(2, 2))
+				else:
+					get_node("p"+str(control.turn)+str(i+1-((control.turn-1)*3))).disabled = true
+				
+				#change grid status
+				$g2.texture_hover = load("res://Textures/select2.png") #change this, g
+				grid_status[2] = 1 #change this, []
+				
+				#check neighboring grid 1, 5
+				if grid_status[1] == 1: #change this
+					if card_in_grid[2].card_value["left"] > card_in_grid[1].card_value["right"]: #change this, [], [], [], []
+						card_in_grid[1].card_value["obj_owner"] = control.turn #change this, []
+						card_in_grid[1].set_images() #change this, []
+				
+				if grid_status[5] == 1: #change this
+					if card_in_grid[2].card_value["bottom"] > card_in_grid[5].card_value["top"]: #change this, [], [], [], []
+						card_in_grid[5].card_value["obj_owner"] = control.turn #change this, []
+						card_in_grid[5].set_images() #change this, []
+				
+				#change textures
+				reset_g_button_texture()
+				reset_p_button_texture()
+				reset_p_button_status()
+				
+				#change camera view and turn
+				change_turn()
+				change_camera_view("change turn")
+				break
+
+func _on_g3_button_up():
+	print(button_status)
+	if button_status.has(1) and grid_status[3] == 0: #change this, []
+		for i in range(0, 6):
+			if button_status[i] == 1:
+				print("button: "+str(i))
+				print(card_in_play[i].card_value)
+				
+				#change position and change card values
+				card_in_play[i].change_position($g3.rect_position + Vector2(2, 2)) #change this, g
+				card_in_grid[3] = card_in_play[i] #change this, []
+				card_in_grid[3].placed = true #change this, []
+				if card_counter[control.turn] < 5:
+					card_in_play[i] = player[control.turn]["cards"][card_counter[control.turn]]
+					card_counter[control.turn] += 1
+					card_in_play[i].change_position(get_node("p"+str(control.turn)+str(i+1-((control.turn-1)*3))).rect_position + Vector2(2, 2))
+				else:
+					card_in_grid[3].placed = true #change this, []
+					get_node("p"+str(control.turn)+str(i+1-((control.turn-1)*3))).disabled = true
+				
+				#change grid status
+				$g3.texture_hover = load("res://Textures/select2.png") #change this, g
+				grid_status[3] = 1 #change this, []
+				
+				#check neighboring grid 0, 4, 6
+				if grid_status[0] == 1: #change this
+					if card_in_grid[3].card_value["top"] > card_in_grid[0].card_value["bottom"]: #change this, [], [], [], []
+						card_in_grid[0].card_value["obj_owner"] = control.turn #change this, []
+						card_in_grid[0].set_images() #change this, []
+				
+				if grid_status[4] == 1: #change this
+					if card_in_grid[3].card_value["right"] > card_in_grid[4].card_value["left"]: #change this, [], [], [], []
+						card_in_grid[4].card_value["obj_owner"] = control.turn #change this, []
+						card_in_grid[4].set_images() #change this, []
+				
+				if grid_status[6] == 1: #change this
+					if card_in_grid[3].card_value["bottom"] > card_in_grid[6].card_value["top"]: #change this, [], [], [], []
+						card_in_grid[6].card_value["obj_owner"] = control.turn #change this, []
+						card_in_grid[6].set_images() #change this, []
+				
+				#change textures
+				reset_g_button_texture()
+				reset_p_button_texture()
+				reset_p_button_status()
+				
+				#change camera view and turn
+				change_turn()
+				change_camera_view("change turn")
+				break
+
+func _on_g4_button_up():
+	print(button_status)
+	if button_status.has(1) and grid_status[4] == 0: #change this, []
+		for i in range(0, 6):
+			if button_status[i] == 1:
+				print("button: "+str(i))
+				print(card_in_play[i].card_value)
+				
+				#change position and change card values
+				card_in_play[i].change_position($g4.rect_position + Vector2(2, 2)) #change this, g
+				card_in_grid[4] = card_in_play[i] #change this, []
+				card_in_grid[4].placed = true #change this, []
+				if card_counter[control.turn] < 5:
+					card_in_play[i] = player[control.turn]["cards"][card_counter[control.turn]]
+					card_counter[control.turn] += 1
+					card_in_play[i].change_position(get_node("p"+str(control.turn)+str(i+1-((control.turn-1)*3))).rect_position + Vector2(2, 2))
+				else:
+					get_node("p"+str(control.turn)+str(i+1-((control.turn-1)*3))).disabled = true
+				
+				#change grid status
+				$g4.texture_hover = load("res://Textures/select2.png") #change this, g
+				grid_status[4] = 1 #change this, []
+				
+				#check neighboring grid 1, 3, 5, 7
+				if grid_status[1] == 1: #change this, []
+					if card_in_grid[4].card_value["top"] > card_in_grid[1].card_value["bottom"]: #change this, [], [], [], []
+						card_in_grid[1].card_value["obj_owner"] = control.turn #change this, []
+						card_in_grid[1].set_images() #change this, []
+				
+				if grid_status[3] == 1: #change this, []
+					if card_in_grid[4].card_value["left"] > card_in_grid[3].card_value["right"]: #change this, [], [], [], []
+						card_in_grid[3].card_value["obj_owner"] = control.turn #change this, []
+						card_in_grid[3].set_images() #change this, []
+				
+				if grid_status[5] == 1: #change this, []
+					if card_in_grid[4].card_value["right"] > card_in_grid[5].card_value["left"]: #change this, [], [], [], []
+						card_in_grid[5].card_value["obj_owner"] = control.turn #change this, []
+						card_in_grid[5].set_images() #change this, []
+				
+				if grid_status[7] == 1: #change this
+					if card_in_grid[4].card_value["bottom"] > card_in_grid[7].card_value["top"]: #change this, [], [], [], []
+						card_in_grid[7].card_value["obj_owner"] = control.turn #change this, []
+						card_in_grid[7].set_images() #change this, []
+				
+				#change textures
+				reset_g_button_texture()
+				reset_p_button_texture()
+				reset_p_button_status()
+				
+				#change camera view and turn
+				change_turn()
+				change_camera_view("change turn")
+				break
+
+func _on_g5_button_up():
+	print(button_status)
+	if button_status.has(1) and grid_status[5] == 0: #change this, []
+		for i in range(0, 6):
+			if button_status[i] == 1:
+				print("button: "+str(i))
+				print(card_in_play[i].card_value)
+				
+				#change position and change card values
+				card_in_play[i].change_position($g5.rect_position + Vector2(2, 2)) #change this, g
+				card_in_grid[5] = card_in_play[i] #change this, []
+				card_in_grid[5].placed = true #change this, []
+				if card_counter[control.turn] < 5:
+					card_in_play[i] = player[control.turn]["cards"][card_counter[control.turn]]
+					card_counter[control.turn] += 1
+					card_in_play[i].change_position(get_node("p"+str(control.turn)+str(i+1-((control.turn-1)*3))).rect_position + Vector2(2, 2))
+				else:
+					get_node("p"+str(control.turn)+str(i+1-((control.turn-1)*3))).disabled = true
+				
+				#change grid status
+				$g5.texture_hover = load("res://Textures/select2.png") #change this, g
+				grid_status[5] = 1 #change this, []
+				
+				#check neighboring grid 2, 4, 8
+				if grid_status[2] == 1: #change this, []
+					if card_in_grid[5].card_value["top"] > card_in_grid[2].card_value["bottom"]: #change this, [], [], [], []
+						card_in_grid[2].card_value["obj_owner"] = control.turn #change this, []
+						card_in_grid[2].set_images() #change this, []
+				
+				if grid_status[4] == 1: #change this, []
+					if card_in_grid[5].card_value["left"] > card_in_grid[4].card_value["right"]: #change this, [], [], [], []
+						card_in_grid[4].card_value["obj_owner"] = control.turn #change this, []
+						card_in_grid[4].set_images() #change this, []
+				
+				if grid_status[8] == 1: #change this, []
+					if card_in_grid[5].card_value["bottom"] > card_in_grid[8].card_value["top"]: #change this, [], [], [], []
+						card_in_grid[8].card_value["obj_owner"] = control.turn #change this, []
+						card_in_grid[8].set_images() #change this, []
+				
+				#change textures
+				reset_g_button_texture()
+				reset_p_button_texture()
+				reset_p_button_status()
+				
+				#change camera view and turn
+				change_turn()
+				change_camera_view("change turn")
+				break
+
+func _on_g6_button_up():
+	print(button_status)
+	if button_status.has(1) and grid_status[6] == 0: #change this, []
+		for i in range(0, 6):
+			if button_status[i] == 1:
+				print("button: "+str(i))
+				print(card_in_play[i].card_value)
+				
+				#change position and change card values
+				card_in_play[i].change_position($g6.rect_position + Vector2(2, 2)) #change this, g
+				card_in_grid[6] = card_in_play[i] #change this, []
+				card_in_grid[6].placed = true #change this, []
+				if card_counter[control.turn] < 5:
+					card_in_play[i] = player[control.turn]["cards"][card_counter[control.turn]]
+					card_counter[control.turn] += 1
+					card_in_play[i].change_position(get_node("p"+str(control.turn)+str(i+1-((control.turn-1)*3))).rect_position + Vector2(2, 2))
+				else:
+					get_node("p"+str(control.turn)+str(i+1-((control.turn-1)*3))).disabled = true
+				
+				#change grid status
+				$g6.texture_hover = load("res://Textures/select2.png") #change this, g
+				grid_status[6] = 1 #change this, []
+				
+				#check neighboring grid 3, 7
+				if grid_status[3] == 1: #change this, []
+					if card_in_grid[6].card_value["top"] > card_in_grid[3].card_value["bottom"]: #change this, [], [], [], []
+						card_in_grid[3].card_value["obj_owner"] = control.turn #change this, []
+						card_in_grid[3].set_images() #change this, []
+				
+				if grid_status[7] == 1: #change this, []
+					if card_in_grid[6].card_value["right"] > card_in_grid[7].card_value["left"]: #change this, [], [], [], []
+						card_in_grid[7].card_value["obj_owner"] = control.turn #change this, []
+						card_in_grid[7].set_images() #change this, []
+				
+				#change textures
+				reset_g_button_texture()
+				reset_p_button_texture()
+				reset_p_button_status()
+				
+				#change camera view and turn
+				change_turn()
+				change_camera_view("change turn")
+				break
+
+func _on_g7_button_up():
+	print(button_status)
+	if button_status.has(1) and grid_status[7] == 0: #change this, []
+		for i in range(0, 6):
+			if button_status[i] == 1:
+				print("button: "+str(i))
+				print(card_in_play[i].card_value)
+				
+				#change position and change card values
+				card_in_play[i].change_position($g7.rect_position + Vector2(2, 2)) #change this, g
+				card_in_grid[7] = card_in_play[i] #change this, []
+				card_in_grid[7].placed = true #change this, []
+				if card_counter[control.turn] < 5:
+					card_in_play[i] = player[control.turn]["cards"][card_counter[control.turn]]
+					card_counter[control.turn] += 1
+					card_in_play[i].change_position(get_node("p"+str(control.turn)+str(i+1-((control.turn-1)*3))).rect_position + Vector2(2, 2))
+				else:
+					get_node("p"+str(control.turn)+str(i+1-((control.turn-1)*3))).disabled = true
+				
+				#change grid status
+				$g7.texture_hover = load("res://Textures/select2.png") #change this, g
+				grid_status[7] = 1 #change this, []
+				
+				#check neighboring grid 4, 6, 8
+				if grid_status[4] == 1: #change this, []
+					if card_in_grid[7].card_value["top"] > card_in_grid[4].card_value["bottom"]: #change this, [], [], [], []
+						card_in_grid[4].card_value["obj_owner"] = control.turn #change this, []
+						card_in_grid[4].set_images() #change this, []
+				
+				if grid_status[6] == 1: #change this, []
+					if card_in_grid[7].card_value["left"] > card_in_grid[6].card_value["right"]: #change this, [], [], [], []
+						card_in_grid[6].card_value["obj_owner"] = control.turn #change this, []
+						card_in_grid[6].set_images() #change this, []
+				
+				if grid_status[8] == 1: #change this, []
+					if card_in_grid[7].card_value["right"] > card_in_grid[8].card_value["left"]: #change this, [], [], [], []
+						card_in_grid[8].card_value["obj_owner"] = control.turn #change this, []
+						card_in_grid[8].set_images() #change this, []
+				
+				#change textures
+				reset_g_button_texture()
+				reset_p_button_texture()
+				reset_p_button_status()
+				
+				#change camera view and turn
+				change_turn()
+				change_camera_view("change turn")
+				break
+
+func _on_g8_button_up():
+	print(button_status)
+	if button_status.has(1) and grid_status[8] == 0: #change this, []
+		for i in range(0, 6):
+			if button_status[i] == 1:
+				print("button: "+str(i))
+				print(card_in_play[i].card_value)
+				
+				#change position and change card values
+				card_in_play[i].change_position($g8.rect_position + Vector2(2, 2)) #change this, g
+				card_in_grid[8] = card_in_play[i] #change this, []
+				card_in_grid[8].placed = true #change this, []
+				if card_counter[control.turn] < 5:
+					card_in_play[i] = player[control.turn]["cards"][card_counter[control.turn]]
+					card_counter[control.turn] += 1
+					card_in_play[i].change_position(get_node("p"+str(control.turn)+str(i+1-((control.turn-1)*3))).rect_position + Vector2(2, 2))
+				else:
+					get_node("p"+str(control.turn)+str(i+1-((control.turn-1)*3))).disabled = true
+				
+				#change grid status
+				$g8.texture_hover = load("res://Textures/select2.png") #change this, g
+				grid_status[8] = 1 #change this, []
+				
+				#check neighboring grid 5, 7
+				if grid_status[5] == 1: #change this, []
+					if card_in_grid[8].card_value["top"] > card_in_grid[5].card_value["bottom"]: #change this, [], [], [], []
+						card_in_grid[5].card_value["obj_owner"] = control.turn #change this, []
+						card_in_grid[5].set_images() #change this, []
+				
+				if grid_status[7] == 1: #change this, []
+					if card_in_grid[8].card_value["left"] > card_in_grid[7].card_value["right"]: #change this, [], [], [], []
+						card_in_grid[7].card_value["obj_owner"] = control.turn #change this, []
+						card_in_grid[7].set_images() #change this, []
+				
+				#change textures
+				reset_g_button_texture()
+				reset_p_button_texture()
+				reset_p_button_status()
+				
+				#change camera view and turn
+				change_turn()
+				change_camera_view("change turn")
+				break
+
 #----------------------------------UI-buttons-----------------------------
 
 func _on_pause_button_released():
@@ -289,7 +755,6 @@ func _on_pause_button_released():
 	for i in range(0, 9):
 		get_node("g"+str(i)).disabled = !get_node("g"+str(i)).disabled
 	
-	if !$UI/confirm_banner.visible: change_turn()
 	change_camera_view("pause" if $UI/confirm_banner.visible else "unpause")
 
 func _on_reset_button_released():
@@ -370,3 +835,6 @@ func _on_return_button_released():
 	
 	for i in range(0, 9):
 		get_node("g"+str(i)).disabled = !get_node("g"+str(i)).disabled
+	
+	print(button_status)
+	print(grid_status)

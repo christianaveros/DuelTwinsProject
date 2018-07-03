@@ -19,8 +19,8 @@
 [ext_resource path="res://Textures/menu_yesno2.png" type="Texture" id=17]
 [ext_resource path="res://Textures/menu_reset.png" type="Texture" id=18]
 [ext_resource path="res://Textures/menu_confirm.png" type="Texture" id=19]
-[ext_resource path="res://Textures/menu_status.png" type="Texture" id=20]
-[ext_resource path="res://Textures/pause_banner.png" type="Texture" id=21]
+[ext_resource path="res://Textures/pause_banner.png" type="Texture" id=20]
+[ext_resource path="res://Textures/menu_status.png" type="Texture" id=21]
 [ext_resource path="res://Textures/blue.png" type="Texture" id=22]
 [ext_resource path="res://Textures/card_placeholder.png" type="Texture" id=23]
 [ext_resource path="res://Textures/clone.png" type="Texture" id=24]
@@ -73,12 +73,12 @@ animations = [ {
 }, {
 "frames": [ ExtResource( 20 ) ],
 "loop": false,
-"name": "status",
+"name": "pause",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 21 ) ],
 "loop": false,
-"name": "pause",
+"name": "status",
 "speed": 5.0
 } ]
 
@@ -776,6 +776,24 @@ _sections_unfolded = [ "Transform" ]
 [connection signal="button_up" from="p22" to="." method="_on_p22_button_up"]
 
 [connection signal="button_up" from="p23" to="." method="_on_p23_button_up"]
+
+[connection signal="button_up" from="g0" to="." method="_on_g0_button_up"]
+
+[connection signal="button_up" from="g1" to="." method="_on_g1_button_up"]
+
+[connection signal="button_up" from="g2" to="." method="_on_g2_button_up"]
+
+[connection signal="button_up" from="g3" to="." method="_on_g3_button_up"]
+
+[connection signal="button_up" from="g4" to="." method="_on_g4_button_up"]
+
+[connection signal="button_up" from="g5" to="." method="_on_g5_button_up"]
+
+[connection signal="button_up" from="g6" to="." method="_on_g6_button_up"]
+
+[connection signal="button_up" from="g7" to="." method="_on_g7_button_up"]
+
+[connection signal="button_up" from="g8" to="." method="_on_g8_button_up"]
 
 [connection signal="released" from="UI/pause_button" to="." method="_on_pause_button_released"]
 

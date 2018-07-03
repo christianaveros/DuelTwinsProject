@@ -65,5 +65,5 @@ func set_images():
 func change_owner_to(var to = 1):
 	card_value["obj_owner"] = to
 
-func change_position(var x = 0, var y = 0):
-	position = Vector2(x+16, y+16)
+func change_position(var pos = Vector2(0, 0)):
+	position = pos + Vector2(16, 16)
