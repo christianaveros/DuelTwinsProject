@@ -20,7 +20,8 @@ onready var player = {
 			card.instance(),
 			card.instance(),
 			card.instance(),
-			card.instance()]
+			card.instance()
+		]
 	}
 }
 
@@ -188,7 +189,8 @@ func show_card_status(card_values):
 	# enable/disable Game buttons
 	for i in range(0, 2):
 		for j in range(0, 3):
-			get_node("p"+str(i+1)+str(j+1)).disabled = !get_node("p"+str(i+1)+str(j+1)).disabled
+			if button_status[(i*3)+j] != 2:
+				get_node("p"+str(i+1)+str(j+1)).disabled = !get_node("p"+str(i+1)+str(j+1)).disabled
 	
 	for i in range(0, 9):
 		get_node("g"+str(i)).disabled = !get_node("g"+str(i)).disabled
@@ -203,7 +205,9 @@ func reset_g_button_texture():
 		get_node("g"+str(i)).texture_normal = load("res://Textures/select2.png")
 
 func reset_p_button_status():
-	for i in range(0, 6): button_status[i] = 0
+	for i in range(0, 6):
+		if button_status[i] != 2:
+			button_status[i] = 0
 
 func reset_p_button_texture():
 	for i in range(0, 2):
@@ -214,15 +218,16 @@ func plus_button_status(num):
 	button_status[num] += 1	#increment by 1
 	if button_status[num] > 1:
 		button_status[num] = 0
+	print(button_status)
 
 func _on_p11_button_up():
 	print("pressed p11")
 	match(button_status[0]):
 		0:
 			reset_p_button_texture()
+			reset_p_button_texture()
 			$p11.texture_normal = load("res://Textures/select1.png")
 			check_available_grid()
-			reset_p_button_status()
 		1:
 			reset_g_button_texture()
 			reset_p_button_texture()
@@ -311,10 +316,12 @@ func _on_g0_button_up():
 					card_counter[control.turn] += 1
 					card_in_play[i].change_position(get_node("p"+str(control.turn)+str(i+1-((control.turn-1)*3))).rect_position + Vector2(2, 2))
 				else:
+					button_status[i] = 2 # disabled 4 ever
 					get_node("p"+str(control.turn)+str(i+1-((control.turn-1)*3))).disabled = true
 				
 				#change grid status
 				$g0.texture_hover = load("res://Textures/select2.png") #change this
+				$g0.texture_pressed = load("res://Textures/select2.png") #change this
 				grid_status[0] = 1 #change this
 				
 				#check neighboring grid 1, 3
@@ -355,10 +362,12 @@ func _on_g1_button_up():
 					card_counter[control.turn] += 1
 					card_in_play[i].change_position(get_node("p"+str(control.turn)+str(i+1-((control.turn-1)*3))).rect_position + Vector2(2, 2))
 				else:
+					button_status[i] = 2 # disabled 4 ever
 					get_node("p"+str(control.turn)+str(i+1-((control.turn-1)*3))).disabled = true
 				
 				#change grid status
 				$g1.texture_hover = load("res://Textures/select2.png") #change this
+				$g1.texture_pressed = load("res://Textures/select2.png") #change this
 				grid_status[1] = 1 #change this
 				
 				#check neighboring grid 0, 2, 4
@@ -404,10 +413,12 @@ func _on_g2_button_up():
 					card_counter[control.turn] += 1
 					card_in_play[i].change_position(get_node("p"+str(control.turn)+str(i+1-((control.turn-1)*3))).rect_position + Vector2(2, 2))
 				else:
+					button_status[i] = 2 # disabled 4 ever
 					get_node("p"+str(control.turn)+str(i+1-((control.turn-1)*3))).disabled = true
 				
 				#change grid status
 				$g2.texture_hover = load("res://Textures/select2.png") #change this, g
+				$g2.texture_pressed = load("res://Textures/select2.png") #change this
 				grid_status[2] = 1 #change this, []
 				
 				#check neighboring grid 1, 5
@@ -448,11 +459,13 @@ func _on_g3_button_up():
 					card_counter[control.turn] += 1
 					card_in_play[i].change_position(get_node("p"+str(control.turn)+str(i+1-((control.turn-1)*3))).rect_position + Vector2(2, 2))
 				else:
-					card_in_grid[3].placed = true #change this, []
+					button_status[i] = 2 # disabled 4 ever
+					#card_in_grid[3].placed = true #change this, []
 					get_node("p"+str(control.turn)+str(i+1-((control.turn-1)*3))).disabled = true
 				
 				#change grid status
 				$g3.texture_hover = load("res://Textures/select2.png") #change this, g
+				$g3.texture_pressed = load("res://Textures/select2.png") #change this
 				grid_status[3] = 1 #change this, []
 				
 				#check neighboring grid 0, 4, 6
@@ -498,10 +511,12 @@ func _on_g4_button_up():
 					card_counter[control.turn] += 1
 					card_in_play[i].change_position(get_node("p"+str(control.turn)+str(i+1-((control.turn-1)*3))).rect_position + Vector2(2, 2))
 				else:
+					button_status[i] = 2 # disabled 4 ever
 					get_node("p"+str(control.turn)+str(i+1-((control.turn-1)*3))).disabled = true
 				
 				#change grid status
 				$g4.texture_hover = load("res://Textures/select2.png") #change this, g
+				$g4.texture_pressed = load("res://Textures/select2.png") #change this
 				grid_status[4] = 1 #change this, []
 				
 				#check neighboring grid 1, 3, 5, 7
@@ -552,10 +567,12 @@ func _on_g5_button_up():
 					card_counter[control.turn] += 1
 					card_in_play[i].change_position(get_node("p"+str(control.turn)+str(i+1-((control.turn-1)*3))).rect_position + Vector2(2, 2))
 				else:
+					button_status[i] = 2 # disabled 4 ever
 					get_node("p"+str(control.turn)+str(i+1-((control.turn-1)*3))).disabled = true
 				
 				#change grid status
 				$g5.texture_hover = load("res://Textures/select2.png") #change this, g
+				$g5.texture_pressed = load("res://Textures/select2.png") #change this
 				grid_status[5] = 1 #change this, []
 				
 				#check neighboring grid 2, 4, 8
@@ -601,10 +618,12 @@ func _on_g6_button_up():
 					card_counter[control.turn] += 1
 					card_in_play[i].change_position(get_node("p"+str(control.turn)+str(i+1-((control.turn-1)*3))).rect_position + Vector2(2, 2))
 				else:
+					button_status[i] = 2 # disabled 4 ever
 					get_node("p"+str(control.turn)+str(i+1-((control.turn-1)*3))).disabled = true
 				
 				#change grid status
 				$g6.texture_hover = load("res://Textures/select2.png") #change this, g
+				$g6.texture_pressed = load("res://Textures/select2.png") #change this
 				grid_status[6] = 1 #change this, []
 				
 				#check neighboring grid 3, 7
@@ -645,10 +664,12 @@ func _on_g7_button_up():
 					card_counter[control.turn] += 1
 					card_in_play[i].change_position(get_node("p"+str(control.turn)+str(i+1-((control.turn-1)*3))).rect_position + Vector2(2, 2))
 				else:
+					button_status[i] = 2 # disabled 4 ever
 					get_node("p"+str(control.turn)+str(i+1-((control.turn-1)*3))).disabled = true
 				
 				#change grid status
 				$g7.texture_hover = load("res://Textures/select2.png") #change this, g
+				$g7.texture_pressed = load("res://Textures/select2.png") #change this
 				grid_status[7] = 1 #change this, []
 				
 				#check neighboring grid 4, 6, 8
@@ -694,10 +715,12 @@ func _on_g8_button_up():
 					card_counter[control.turn] += 1
 					card_in_play[i].change_position(get_node("p"+str(control.turn)+str(i+1-((control.turn-1)*3))).rect_position + Vector2(2, 2))
 				else:
+					button_status[i] = 2 # disabled 4 ever
 					get_node("p"+str(control.turn)+str(i+1-((control.turn-1)*3))).disabled = true
 				
 				#change grid status
 				$g8.texture_hover = load("res://Textures/select2.png") #change this, g
+				$g8.texture_pressed = load("res://Textures/select2.png") #change this
 				grid_status[8] = 1 #change this, []
 				
 				#check neighboring grid 5, 7
@@ -735,7 +758,7 @@ func _on_pause_button_released():
 	$UI/reset_button.visible = !$UI/reset_button.visible
 	$UI/back_button.visible = !$UI/back_button.visible
 	
-	# change card visibility and camera pos
+	# change card visibility in p buttons and camera pos
 	for j in range(0, 5):
 		if player[control.turn]["cards"][j].placed == false:
 			player[control.turn]["cards"][j].holder.texture = load("res://Textures/card_back.png") \
@@ -750,10 +773,12 @@ func _on_pause_button_released():
 	# enable/disable Game buttons
 	for i in range(0, 2):
 		for j in range(0, 3):
-			get_node("p"+str(i+1)+str(j+1)).disabled = !get_node("p"+str(i+1)+str(j+1)).disabled
+			if button_status[(i*3)+j] != 2:
+				get_node("p"+str(i+1)+str(j+1)).disabled = !get_node("p"+str(i+1)+str(j+1)).disabled
 	
 	for i in range(0, 9):
-		get_node("g"+str(i)).disabled = !get_node("g"+str(i)).disabled
+		if grid_status[i] == 0:
+			get_node("g"+str(i)).disabled = !get_node("g"+str(i)).disabled
 	
 	change_camera_view("pause" if $UI/confirm_banner.visible else "unpause")
 

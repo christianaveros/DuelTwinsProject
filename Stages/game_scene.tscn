@@ -19,8 +19,8 @@
 [ext_resource path="res://Textures/menu_yesno2.png" type="Texture" id=17]
 [ext_resource path="res://Textures/menu_reset.png" type="Texture" id=18]
 [ext_resource path="res://Textures/menu_confirm.png" type="Texture" id=19]
-[ext_resource path="res://Textures/pause_banner.png" type="Texture" id=20]
-[ext_resource path="res://Textures/menu_status.png" type="Texture" id=21]
+[ext_resource path="res://Textures/menu_status.png" type="Texture" id=20]
+[ext_resource path="res://Textures/pause_banner.png" type="Texture" id=21]
 [ext_resource path="res://Textures/blue.png" type="Texture" id=22]
 [ext_resource path="res://Textures/card_placeholder.png" type="Texture" id=23]
 [ext_resource path="res://Textures/clone.png" type="Texture" id=24]
@@ -73,12 +73,12 @@ animations = [ {
 }, {
 "frames": [ ExtResource( 20 ) ],
 "loop": false,
-"name": "pause",
+"name": "status",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 21 ) ],
 "loop": false,
-"name": "status",
+"name": "pause",
 "speed": 5.0
 } ]
 
