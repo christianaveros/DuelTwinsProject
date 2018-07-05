@@ -38,7 +38,17 @@ onready var card_values = {
 }
 
 func _ready():
+	#save original state of the game
 	control.turn = control.g_turn
+	
+	#set UI scores
+	get_node("UI/p"+str(control.turn)+"_score").texture = load("res://Textures/number"+ str(player[control.turn]["score"]) + ".png")
+	var turn = control.turn + 1
+	if turn > 2:
+		turn = 1
+	get_node("UI/p"+str(turn)+"_score").texture = load("res://Textures/number"+ str(player[turn]["score"]) + ".png")
+	
+	#prepare game
 	change_camera_view("game start")
 	set_cards()
 
@@ -48,6 +58,7 @@ func change_camera_view(var mode = "pause"):
 		"unpause":	$camera_pos.position = Vector2((control.turn-1)*80, 0)
 		"change turn":	$camera_pos.position = Vector2((control.turn-1)*80, 0)
 		"game start":	$camera_pos.position = Vector2((control.g_turn-1)*80, 0)
+		"game end":	$camera_pos.position = Vector2(40, 0)
 
 func set_cards():
 	# set card min and max strenths level
@@ -98,7 +109,7 @@ func set_cards():
 					in_array = true #proceed
 
 func change_turn():
-	#disable other players Game button
+	#hide card of other player
 	for j in range(0, 5):
 		if player[control.turn]["cards"][j].placed == false:
 			player[control.turn]["cards"][j].holder.texture = load("res://Textures/card_back.png")
@@ -108,10 +119,14 @@ func change_turn():
 			player[control.turn]["cards"][j].top.visible = !player[control.turn]["cards"][j].top.visible
 			player[control.turn]["cards"][j].right.visible = !player[control.turn]["cards"][j].right.visible
 			player[control.turn]["cards"][j].bottom.visible = !player[control.turn]["cards"][j].bottom.visible
-	control.turn += 1			#change turn
-	if control.turn > 2:		#change turn
-		control.turn = 1		#change turn
+	
+	#change turn
+	control.turn += 1
+	if control.turn > 2:
+		control.turn = 1
 	print("turn: " + str(control.turn))
+	
+	#display card
 	for j in range(0, 5):
 		if player[control.turn]["cards"][j].placed == false:
 			player[control.turn]["cards"][j].holder.texture = load("res://Textures/card_placeholder.png")
@@ -124,6 +139,32 @@ func change_turn():
 	reset_p_button_status()
 	reset_p_button_texture()
 	reset_g_button_texture()
+	
+	#check if game has ended
+	var check_end_game = true
+	for i in range(0, 9):
+		if grid_status[i] == 0:
+			check_end_game = false
+			break
+	
+	if check_end_game == true:
+		change_camera_view("game end")
+		
+		#display UI confirm banner
+		$UI/confirm_banner.play("red win" if player[1]["score"] > player[2]["score"] else "blue win")
+		$UI/confirm_banner.visible = !$UI/confirm_banner.visible
+		
+		#display blurred bg
+		$UI/blurred_bg.visible = !$UI/blurred_bg.visible
+		
+		#display UI buttons
+		$UI/back_button.visible = !$UI/back_button.visible
+		$UI/reset_button.visible = !$UI/reset_button.visible
+	else:
+		#added one point start
+		player[control.turn]["score"] += 1
+		get_node("UI/p"+str(control.turn)+"_score").texture = load("res://Textures/number"+ str(player[control.turn]["score"]) + ".png")
+		change_camera_view("change turn")
 
 onready var card_counter = {
 	1: 3,
@@ -324,16 +365,25 @@ func _on_g0_button_up():
 				$g0.texture_pressed = load("res://Textures/select2.png") #change this
 				grid_status[0] = 1 #change this
 				
+				var scored = false
+				
 				#check neighboring grid 1, 3
 				if grid_status[1] == 1: #change this
 					if card_in_grid[0].card_value["right"] > card_in_grid[1].card_value["left"]: #change this
 						card_in_grid[1].card_value["obj_owner"] = control.turn #change this
 						card_in_grid[1].set_images() #change this
+						scored = true
 				
 				if grid_status[3] == 1: #change this
 					if card_in_grid[0].card_value["bottom"] > card_in_grid[3].card_value["top"]: #change this
 						card_in_grid[3].card_value["obj_owner"] = control.turn #change this
 						card_in_grid[3].set_images() #change this
+						scored = true
+				
+				#check if scored
+				if scored:
+					player[control.turn]["score"] += 1
+					get_node("UI/p"+str(control.turn)+"_score").texture = load("res://Textures/number"+ str(player[control.turn]["score"]) + ".png")
 				
 				#change textures
 				reset_g_button_texture()
@@ -342,7 +392,6 @@ func _on_g0_button_up():
 				
 				#change camera view and turn
 				change_turn()
-				change_camera_view("change turn")
 				break
 
 func _on_g1_button_up():
@@ -370,21 +419,31 @@ func _on_g1_button_up():
 				$g1.texture_pressed = load("res://Textures/select2.png") #change this
 				grid_status[1] = 1 #change this
 				
+				var scored = false
+				
 				#check neighboring grid 0, 2, 4
 				if grid_status[0] == 1: #change this
 					if card_in_grid[1].card_value["left"] > card_in_grid[0].card_value["right"]: #change this
 						card_in_grid[0].card_value["obj_owner"] = control.turn #change this
 						card_in_grid[0].set_images() #change this
+						scored = true
 				
 				if grid_status[2] == 1: #change this
 					if card_in_grid[1].card_value["right"] > card_in_grid[2].card_value["left"]: #change this
 						card_in_grid[2].card_value["obj_owner"] = control.turn #change this
 						card_in_grid[2].set_images() #change this
+						scored = true
 				
 				if grid_status[4] == 1: #change this
 					if card_in_grid[1].card_value["bottom"] > card_in_grid[4].card_value["top"]: #change this
 						card_in_grid[4].card_value["obj_owner"] = control.turn #change this
 						card_in_grid[4].set_images() #change this
+						scored = true
+				
+				#check if scored
+				if scored:
+					player[control.turn]["score"] += 1
+					get_node("UI/p"+str(control.turn)+"_score").texture = load("res://Textures/number"+ str(player[control.turn]["score"]) + ".png")
 				
 				#change textures
 				reset_g_button_texture()
@@ -393,7 +452,6 @@ func _on_g1_button_up():
 				
 				#change camera view and turn
 				change_turn()
-				change_camera_view("change turn")
 				break
 
 func _on_g2_button_up():
@@ -421,16 +479,25 @@ func _on_g2_button_up():
 				$g2.texture_pressed = load("res://Textures/select2.png") #change this
 				grid_status[2] = 1 #change this, []
 				
+				var scored = false
+				
 				#check neighboring grid 1, 5
 				if grid_status[1] == 1: #change this
 					if card_in_grid[2].card_value["left"] > card_in_grid[1].card_value["right"]: #change this, [], [], [], []
 						card_in_grid[1].card_value["obj_owner"] = control.turn #change this, []
 						card_in_grid[1].set_images() #change this, []
+						scored = true
 				
 				if grid_status[5] == 1: #change this
 					if card_in_grid[2].card_value["bottom"] > card_in_grid[5].card_value["top"]: #change this, [], [], [], []
 						card_in_grid[5].card_value["obj_owner"] = control.turn #change this, []
 						card_in_grid[5].set_images() #change this, []
+						scored = true
+				
+				#check if scored
+				if scored:
+					player[control.turn]["score"] += 1
+					get_node("UI/p"+str(control.turn)+"_score").texture = load("res://Textures/number"+ str(player[control.turn]["score"]) + ".png")
 				
 				#change textures
 				reset_g_button_texture()
@@ -439,7 +506,6 @@ func _on_g2_button_up():
 				
 				#change camera view and turn
 				change_turn()
-				change_camera_view("change turn")
 				break
 
 func _on_g3_button_up():
@@ -468,21 +534,31 @@ func _on_g3_button_up():
 				$g3.texture_pressed = load("res://Textures/select2.png") #change this
 				grid_status[3] = 1 #change this, []
 				
+				var scored = false
+				
 				#check neighboring grid 0, 4, 6
 				if grid_status[0] == 1: #change this
 					if card_in_grid[3].card_value["top"] > card_in_grid[0].card_value["bottom"]: #change this, [], [], [], []
 						card_in_grid[0].card_value["obj_owner"] = control.turn #change this, []
 						card_in_grid[0].set_images() #change this, []
+						scored = true
 				
 				if grid_status[4] == 1: #change this
 					if card_in_grid[3].card_value["right"] > card_in_grid[4].card_value["left"]: #change this, [], [], [], []
 						card_in_grid[4].card_value["obj_owner"] = control.turn #change this, []
 						card_in_grid[4].set_images() #change this, []
+						scored = true
 				
 				if grid_status[6] == 1: #change this
 					if card_in_grid[3].card_value["bottom"] > card_in_grid[6].card_value["top"]: #change this, [], [], [], []
 						card_in_grid[6].card_value["obj_owner"] = control.turn #change this, []
 						card_in_grid[6].set_images() #change this, []
+						scored = true
+				
+				#check if scored
+				if scored:
+					player[control.turn]["score"] += 1
+					get_node("UI/p"+str(control.turn)+"_score").texture = load("res://Textures/number"+ str(player[control.turn]["score"]) + ".png")
 				
 				#change textures
 				reset_g_button_texture()
@@ -491,7 +567,6 @@ func _on_g3_button_up():
 				
 				#change camera view and turn
 				change_turn()
-				change_camera_view("change turn")
 				break
 
 func _on_g4_button_up():
@@ -519,26 +594,37 @@ func _on_g4_button_up():
 				$g4.texture_pressed = load("res://Textures/select2.png") #change this
 				grid_status[4] = 1 #change this, []
 				
+				var scored = false
+				
 				#check neighboring grid 1, 3, 5, 7
 				if grid_status[1] == 1: #change this, []
 					if card_in_grid[4].card_value["top"] > card_in_grid[1].card_value["bottom"]: #change this, [], [], [], []
 						card_in_grid[1].card_value["obj_owner"] = control.turn #change this, []
 						card_in_grid[1].set_images() #change this, []
+						scored = true
 				
 				if grid_status[3] == 1: #change this, []
 					if card_in_grid[4].card_value["left"] > card_in_grid[3].card_value["right"]: #change this, [], [], [], []
 						card_in_grid[3].card_value["obj_owner"] = control.turn #change this, []
 						card_in_grid[3].set_images() #change this, []
+						scored = true
 				
 				if grid_status[5] == 1: #change this, []
 					if card_in_grid[4].card_value["right"] > card_in_grid[5].card_value["left"]: #change this, [], [], [], []
 						card_in_grid[5].card_value["obj_owner"] = control.turn #change this, []
 						card_in_grid[5].set_images() #change this, []
+						scored = true
 				
 				if grid_status[7] == 1: #change this
 					if card_in_grid[4].card_value["bottom"] > card_in_grid[7].card_value["top"]: #change this, [], [], [], []
 						card_in_grid[7].card_value["obj_owner"] = control.turn #change this, []
 						card_in_grid[7].set_images() #change this, []
+						scored = true
+				
+				#check if scored
+				if scored:
+					player[control.turn]["score"] += 1
+					get_node("UI/p"+str(control.turn)+"_score").texture = load("res://Textures/number"+ str(player[control.turn]["score"]) + ".png")
 				
 				#change textures
 				reset_g_button_texture()
@@ -547,7 +633,6 @@ func _on_g4_button_up():
 				
 				#change camera view and turn
 				change_turn()
-				change_camera_view("change turn")
 				break
 
 func _on_g5_button_up():
@@ -575,21 +660,31 @@ func _on_g5_button_up():
 				$g5.texture_pressed = load("res://Textures/select2.png") #change this
 				grid_status[5] = 1 #change this, []
 				
+				var scored = false
+				
 				#check neighboring grid 2, 4, 8
 				if grid_status[2] == 1: #change this, []
 					if card_in_grid[5].card_value["top"] > card_in_grid[2].card_value["bottom"]: #change this, [], [], [], []
 						card_in_grid[2].card_value["obj_owner"] = control.turn #change this, []
 						card_in_grid[2].set_images() #change this, []
+						scored = true
 				
 				if grid_status[4] == 1: #change this, []
 					if card_in_grid[5].card_value["left"] > card_in_grid[4].card_value["right"]: #change this, [], [], [], []
 						card_in_grid[4].card_value["obj_owner"] = control.turn #change this, []
 						card_in_grid[4].set_images() #change this, []
+						scored = true
 				
 				if grid_status[8] == 1: #change this, []
 					if card_in_grid[5].card_value["bottom"] > card_in_grid[8].card_value["top"]: #change this, [], [], [], []
 						card_in_grid[8].card_value["obj_owner"] = control.turn #change this, []
 						card_in_grid[8].set_images() #change this, []
+						scored = true
+				
+				#check if scored
+				if scored:
+					player[control.turn]["score"] += 1
+					get_node("UI/p"+str(control.turn)+"_score").texture = load("res://Textures/number"+ str(player[control.turn]["score"]) + ".png")
 				
 				#change textures
 				reset_g_button_texture()
@@ -598,7 +693,6 @@ func _on_g5_button_up():
 				
 				#change camera view and turn
 				change_turn()
-				change_camera_view("change turn")
 				break
 
 func _on_g6_button_up():
@@ -626,16 +720,25 @@ func _on_g6_button_up():
 				$g6.texture_pressed = load("res://Textures/select2.png") #change this
 				grid_status[6] = 1 #change this, []
 				
+				var scored = false
+				
 				#check neighboring grid 3, 7
 				if grid_status[3] == 1: #change this, []
 					if card_in_grid[6].card_value["top"] > card_in_grid[3].card_value["bottom"]: #change this, [], [], [], []
 						card_in_grid[3].card_value["obj_owner"] = control.turn #change this, []
 						card_in_grid[3].set_images() #change this, []
+						scored = true
 				
 				if grid_status[7] == 1: #change this, []
 					if card_in_grid[6].card_value["right"] > card_in_grid[7].card_value["left"]: #change this, [], [], [], []
 						card_in_grid[7].card_value["obj_owner"] = control.turn #change this, []
 						card_in_grid[7].set_images() #change this, []
+						scored = true
+				
+				#check if scored
+				if scored:
+					player[control.turn]["score"] += 1
+					get_node("UI/p"+str(control.turn)+"_score").texture = load("res://Textures/number"+ str(player[control.turn]["score"]) + ".png")
 				
 				#change textures
 				reset_g_button_texture()
@@ -644,7 +747,6 @@ func _on_g6_button_up():
 				
 				#change camera view and turn
 				change_turn()
-				change_camera_view("change turn")
 				break
 
 func _on_g7_button_up():
@@ -672,21 +774,31 @@ func _on_g7_button_up():
 				$g7.texture_pressed = load("res://Textures/select2.png") #change this
 				grid_status[7] = 1 #change this, []
 				
+				var scored = false
+				
 				#check neighboring grid 4, 6, 8
 				if grid_status[4] == 1: #change this, []
 					if card_in_grid[7].card_value["top"] > card_in_grid[4].card_value["bottom"]: #change this, [], [], [], []
 						card_in_grid[4].card_value["obj_owner"] = control.turn #change this, []
 						card_in_grid[4].set_images() #change this, []
+						scored = true
 				
 				if grid_status[6] == 1: #change this, []
 					if card_in_grid[7].card_value["left"] > card_in_grid[6].card_value["right"]: #change this, [], [], [], []
 						card_in_grid[6].card_value["obj_owner"] = control.turn #change this, []
 						card_in_grid[6].set_images() #change this, []
+						scored = true
 				
 				if grid_status[8] == 1: #change this, []
 					if card_in_grid[7].card_value["right"] > card_in_grid[8].card_value["left"]: #change this, [], [], [], []
 						card_in_grid[8].card_value["obj_owner"] = control.turn #change this, []
 						card_in_grid[8].set_images() #change this, []
+						scored = true
+				
+				#check if scored
+				if scored:
+					player[control.turn]["score"] += 1
+					get_node("UI/p"+str(control.turn)+"_score").texture = load("res://Textures/number"+ str(player[control.turn]["score"]) + ".png")
 				
 				#change textures
 				reset_g_button_texture()
@@ -695,7 +807,6 @@ func _on_g7_button_up():
 				
 				#change camera view and turn
 				change_turn()
-				change_camera_view("change turn")
 				break
 
 func _on_g8_button_up():
@@ -723,16 +834,25 @@ func _on_g8_button_up():
 				$g8.texture_pressed = load("res://Textures/select2.png") #change this
 				grid_status[8] = 1 #change this, []
 				
+				var scored = false
+				
 				#check neighboring grid 5, 7
 				if grid_status[5] == 1: #change this, []
 					if card_in_grid[8].card_value["top"] > card_in_grid[5].card_value["bottom"]: #change this, [], [], [], []
 						card_in_grid[5].card_value["obj_owner"] = control.turn #change this, []
 						card_in_grid[5].set_images() #change this, []
+						scored = true
 				
 				if grid_status[7] == 1: #change this, []
 					if card_in_grid[8].card_value["left"] > card_in_grid[7].card_value["right"]: #change this, [], [], [], []
 						card_in_grid[7].card_value["obj_owner"] = control.turn #change this, []
 						card_in_grid[7].set_images() #change this, []
+						scored = true
+				
+				#check if scored
+				if scored:
+					player[control.turn]["score"] += 1
+					get_node("UI/p"+str(control.turn)+"_score").texture = load("res://Textures/number"+ str(player[control.turn]["score"]) + ".png")
 				
 				#change textures
 				reset_g_button_texture()
@@ -741,7 +861,6 @@ func _on_g8_button_up():
 				
 				#change camera view and turn
 				change_turn()
-				change_camera_view("change turn")
 				break
 
 #----------------------------------UI-buttons-----------------------------
@@ -856,7 +975,8 @@ func _on_return_button_released():
 	# enable/disable Game buttons
 	for i in range(0, 2):
 		for j in range(0, 3):
-			get_node("p"+str(i+1)+str(j+1)).disabled = !get_node("p"+str(i+1)+str(j+1)).disabled
+			if button_status[(i*3)+j] != 2:
+				get_node("p"+str(i+1)+str(j+1)).disabled = !get_node("p"+str(i+1)+str(j+1)).disabled
 	
 	for i in range(0, 9):
 		get_node("g"+str(i)).disabled = !get_node("g"+str(i)).disabled
