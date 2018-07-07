@@ -7,10 +7,7 @@ path="res://.import/octoroc.png-202d39a4d8d31322c6330c6a17bd9aca.stex"
 [deps]
 
 source_file="res://Textures/octoroc.png"
-source_md5="efbdec0f1b7b1ef3b7e5dff8f0defb87"
-
 dest_files=[ "res://.import/octoroc.png-202d39a4d8d31322c6330c6a17bd9aca.stex" ]
-dest_md5="41a09f0b95c68a4bd3da73580d61b706"
 
 [params]
 

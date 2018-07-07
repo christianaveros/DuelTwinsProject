@@ -7,10 +7,7 @@ path="res://.import/menu_confirm.png-a71e35acda3a0651bec16a84a456b63c.stex"
 [deps]
 
 source_file="res://Textures/menu_confirm.png"
-source_md5="c9a42a3cf207f441dfcfee30363d2210"
-
 dest_files=[ "res://.import/menu_confirm.png-a71e35acda3a0651bec16a84a456b63c.stex" ]
-dest_md5="a91c2b3aaa33b24ca3990b7c630670a3"
 
 [params]
 

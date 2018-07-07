@@ -7,10 +7,7 @@ path="res://.import/spider.png-6c803dcf705792127b05419032d4392b.stex"
 [deps]
 
 source_file="res://Textures/spider.png"
-source_md5="e461d58c33e884127fb401a5186527d9"
-
 dest_files=[ "res://.import/spider.png-6c803dcf705792127b05419032d4392b.stex" ]
-dest_md5="0a99debc095e4ac6b30494e0063401b9"
 
 [params]
 

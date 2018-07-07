@@ -7,10 +7,7 @@ path="res://.import/number1.png-52f9d30b039989ceb6607171f0043987.stex"
 [deps]
 
 source_file="res://Textures/number1.png"
-source_md5="1358e5284a18e213833edf24e831b180"
-
 dest_files=[ "res://.import/number1.png-52f9d30b039989ceb6607171f0043987.stex" ]
-dest_md5="7f2f5171de980606db787f19dc38c50d"
 
 [params]
 

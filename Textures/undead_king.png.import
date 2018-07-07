@@ -7,10 +7,7 @@ path="res://.import/undead_king.png-a8caad1876d61b945a6f6161e253be91.stex"
 [deps]
 
 source_file="res://Textures/undead_king.png"
-source_md5="0926e0a41306784ab90a0c59c24d590d"
-
 dest_files=[ "res://.import/undead_king.png-a8caad1876d61b945a6f6161e253be91.stex" ]
-dest_md5="214598fbeaaf2f46599d3149ee824e1e"
 
 [params]
 

@@ -7,10 +7,7 @@ path="res://.import/menu_start_icon1.png-0ae7ce5be34a50db7e9aec0dea0f8e78.stex"
 [deps]
 
 source_file="res://Textures/menu_start_icon1.png"
-source_md5="8f7cc5d8d4dd1bffa40c8d84c002a67e"
-
 dest_files=[ "res://.import/menu_start_icon1.png-0ae7ce5be34a50db7e9aec0dea0f8e78.stex" ]
-dest_md5="d768d061dccff1b0ef677cd73b099514"
 
 [params]
 

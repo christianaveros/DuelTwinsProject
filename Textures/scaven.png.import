@@ -7,10 +7,7 @@ path="res://.import/scaven.png-a231ba38a7c091a2fe7f71d4604ccc36.stex"
 [deps]
 
 source_file="res://Textures/scaven.png"
-source_md5="e6d136214f2b4dcdaf198b3cd4bd8f89"
-
 dest_files=[ "res://.import/scaven.png-a231ba38a7c091a2fe7f71d4604ccc36.stex" ]
-dest_md5="86285da9a43dc90e96e3ca4bf7312da6"
 
 [params]
 

@@ -7,10 +7,7 @@ path="res://.import/bahamut.png-af63878f612673bd450728ed0b40bcd4.stex"
 [deps]
 
 source_file="res://Textures/bahamut.png"
-source_md5="13ee2a2c7e8a60689d64d5a4f8a8ea09"
-
 dest_files=[ "res://.import/bahamut.png-af63878f612673bd450728ed0b40bcd4.stex" ]
-dest_md5="ff72afec821a4fd588e687a70cbc0342"
 
 [params]
 

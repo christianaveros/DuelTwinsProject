@@ -7,10 +7,7 @@ path="res://.import/menu_difficulty7.png-c5baeacbd003edbd2b41ea24bc4afbf4.stex"
 [deps]
 
 source_file="res://Textures/menu_difficulty7.png"
-source_md5="3ea93235900d911a4ca5c955686f9a25"
-
 dest_files=[ "res://.import/menu_difficulty7.png-c5baeacbd003edbd2b41ea24bc4afbf4.stex" ]
-dest_md5="e8b5b7b38b56e8c1566265f0d074a338"
 
 [params]
 

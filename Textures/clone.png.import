@@ -7,10 +7,7 @@ path="res://.import/clone.png-d25d5211de3a580deda8dbded3d46ae3.stex"
 [deps]
 
 source_file="res://Textures/clone.png"
-source_md5="54b7fba10c4130c5c3eb83bd01dcc2ae"
-
 dest_files=[ "res://.import/clone.png-d25d5211de3a580deda8dbded3d46ae3.stex" ]
-dest_md5="3a799004e2059a163d19d4267c9197d0"
 
 [params]
 

@@ -7,10 +7,7 @@ path="res://.import/bg.png-d5d8cfd8985c88945c49218947b38597.stex"
 [deps]
 
 source_file="res://Textures/bg.png"
-source_md5="291cf9d52ec8a03a5ac302f4f9932336"
-
 dest_files=[ "res://.import/bg.png-d5d8cfd8985c88945c49218947b38597.stex" ]
-dest_md5="736fa961ecd636b5f8699f82f1dbe9a0"
 
 [params]
 

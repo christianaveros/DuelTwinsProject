@@ -7,10 +7,7 @@ path="res://.import/emuk.png-dbec70c47d6321dd9a349ba38be81ab3.stex"
 [deps]
 
 source_file="res://Textures/emuk.png"
-source_md5="dae51dd06df369315c46d8ecca38e189"
-
 dest_files=[ "res://.import/emuk.png-dbec70c47d6321dd9a349ba38be81ab3.stex" ]
-dest_md5="39472aa72bda2020019c345f30767394"
 
 [params]
 

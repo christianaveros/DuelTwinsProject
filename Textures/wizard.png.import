@@ -7,10 +7,7 @@ path="res://.import/wizard.png-e6d6485246428c4c044c6e0999051f34.stex"
 [deps]
 
 source_file="res://Textures/wizard.png"
-source_md5="8c003dad9b32d1405884eaeaa2295ad3"
-
 dest_files=[ "res://.import/wizard.png-e6d6485246428c4c044c6e0999051f34.stex" ]
-dest_md5="4aea4e44d061fde88526a3f0ac36f588"
 
 [params]
 

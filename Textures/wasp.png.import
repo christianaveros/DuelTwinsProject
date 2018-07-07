@@ -7,10 +7,7 @@ path="res://.import/wasp.png-97bea57e1fa01fc6711423fa8a4d0a1c.stex"
 [deps]
 
 source_file="res://Textures/wasp.png"
-source_md5="5dadf9d53313fc3132cb2948f5b49d65"
-
 dest_files=[ "res://.import/wasp.png-97bea57e1fa01fc6711423fa8a4d0a1c.stex" ]
-dest_md5="9ffce9dd88053acb2084b04b334fc57b"
 
 [params]
 

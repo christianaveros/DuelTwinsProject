@@ -7,10 +7,7 @@ path="res://.import/red.png-8696b1d4cecea20dc0bf01647aef59d4.stex"
 [deps]
 
 source_file="res://Textures/red.png"
-source_md5="413f0027f12cf429fed9d6aa8de7bb8b"
-
 dest_files=[ "res://.import/red.png-8696b1d4cecea20dc0bf01647aef59d4.stex" ]
-dest_md5="f67db1619b1c5d44728c033a12162108"
 
 [params]
 

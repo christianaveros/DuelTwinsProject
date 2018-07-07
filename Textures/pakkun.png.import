@@ -7,10 +7,7 @@ path="res://.import/pakkun.png-4c16e8434afcc2f7d18f10435a036449.stex"
 [deps]
 
 source_file="res://Textures/pakkun.png"
-source_md5="215f9261fd01c758709dbf9e11f5c61b"
-
 dest_files=[ "res://.import/pakkun.png-4c16e8434afcc2f7d18f10435a036449.stex" ]
-dest_md5="a1ba8ac43a04e3ef9ac2773de4dab2fb"
 
 [params]
 

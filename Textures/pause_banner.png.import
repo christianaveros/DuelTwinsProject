@@ -7,10 +7,7 @@ path="res://.import/pause_banner.png-65ec6c1f2dceaf3b0fff558c39425e76.stex"
 [deps]
 
 source_file="res://Textures/pause_banner.png"
-source_md5="68dbec7c64c2d8d5e5c3fe7ce7e572e4"
-
 dest_files=[ "res://.import/pause_banner.png-65ec6c1f2dceaf3b0fff558c39425e76.stex" ]
-dest_md5="c90050b01cf2189460982f8f32fd5ae6"
 
 [params]
 

@@ -7,10 +7,7 @@ path="res://.import/menu_yesno2.png-bfaf3bb7b694267cee5992de154197ce.stex"
 [deps]
 
 source_file="res://Textures/menu_yesno2.png"
-source_md5="f3f33d537644c7b2ccb9ddfc639c2d43"
-
 dest_files=[ "res://.import/menu_yesno2.png-bfaf3bb7b694267cee5992de154197ce.stex" ]
-dest_md5="8a30493db3d879aeddf3acc4eaedf619"
 
 [params]
 

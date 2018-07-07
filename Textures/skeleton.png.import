@@ -7,10 +7,7 @@ path="res://.import/skeleton.png-bf4069a1e6069bfaa168a9f5e630bde0.stex"
 [deps]
 
 source_file="res://Textures/skeleton.png"
-source_md5="94e449daf26d900a94f6446fc6108992"
-
 dest_files=[ "res://.import/skeleton.png-bf4069a1e6069bfaa168a9f5e630bde0.stex" ]
-dest_md5="065fbf811681882f829a09b18044ecdf"
 
 [params]
 

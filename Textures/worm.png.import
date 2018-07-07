@@ -7,10 +7,7 @@ path="res://.import/worm.png-77b34594c721d31ac1b36629cec87837.stex"
 [deps]
 
 source_file="res://Textures/worm.png"
-source_md5="106b78d8e67776328ad8e7e2641c7074"
-
 dest_files=[ "res://.import/worm.png-77b34594c721d31ac1b36629cec87837.stex" ]
-dest_md5="addb591c9da93b9dfe57150b9f0f109a"
 
 [params]
 

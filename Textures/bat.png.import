@@ -7,10 +7,7 @@ path="res://.import/bat.png-ccd29f8f08cb68039f6b8e0e850d87dd.stex"
 [deps]
 
 source_file="res://Textures/bat.png"
-source_md5="d1057362635851bcb7d7c8f74df324cc"
-
 dest_files=[ "res://.import/bat.png-ccd29f8f08cb68039f6b8e0e850d87dd.stex" ]
-dest_md5="18036d3c7ecefe1a3cdddde235f6f7e1"
 
 [params]
 

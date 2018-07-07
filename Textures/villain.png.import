@@ -7,10 +7,7 @@ path="res://.import/villain.png-a5062828b3ffb74366d0ba3d437191b3.stex"
 [deps]
 
 source_file="res://Textures/villain.png"
-source_md5="7a24cf8dfb042aafe25b1f1e58327776"
-
 dest_files=[ "res://.import/villain.png-a5062828b3ffb74366d0ba3d437191b3.stex" ]
-dest_md5="ce6b85074e5cbea877ddfa64a0ede301"
 
 [params]
 
