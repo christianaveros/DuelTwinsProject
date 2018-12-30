@@ -30,3 +30,6 @@ func _on_turn_button_released():
 		control.g_turn = 1
 	$turn_button.normal = load("res://Textures/menu_turn"+str(control.turn+(control.turn-1))+".png")
 	$turn_button.pressed = load("res://Textures/menu_turn"+str(control.turn+1+(control.turn-1))+".png")
+
+func _on_info_button_released():
+	get_tree().change_scene("res://Stages/info_scene.tscn")

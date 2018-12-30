@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=2]
+[gd_scene load_steps=39 format=2]
 
 [ext_resource path="res://Scripts/game_scene.gd" type="Script" id=1]
 [ext_resource path="res://Textures/bg_v2.png" type="Texture" id=2]
@@ -17,19 +17,20 @@
 [ext_resource path="res://Textures/menu_yesno4.png" type="Texture" id=15]
 [ext_resource path="res://Textures/menu_yesno1.png" type="Texture" id=16]
 [ext_resource path="res://Textures/menu_yesno2.png" type="Texture" id=17]
-[ext_resource path="res://Textures/menu_reset.png" type="Texture" id=18]
-[ext_resource path="res://Textures/menu_confirm.png" type="Texture" id=19]
-[ext_resource path="res://Textures/menu_status.png" type="Texture" id=20]
-[ext_resource path="res://Textures/pause_banner.png" type="Texture" id=21]
-[ext_resource path="res://Textures/menu_red.png" type="Texture" id=22]
-[ext_resource path="res://Textures/menu_blue.png" type="Texture" id=23]
-[ext_resource path="res://Textures/blue.png" type="Texture" id=24]
-[ext_resource path="res://Textures/card_placeholder.png" type="Texture" id=25]
-[ext_resource path="res://Textures/clone.png" type="Texture" id=26]
-[ext_resource path="res://Textures/number1.png" type="Texture" id=27]
-[ext_resource path="res://Textures/menu_return1.png" type="Texture" id=28]
-[ext_resource path="res://Textures/menu_return2.png" type="Texture" id=29]
-[ext_resource path="res://Textures/number10.png" type="Texture" id=30]
+[ext_resource path="res://Textures/menu_draw.png" type="Texture" id=18]
+[ext_resource path="res://Textures/menu_reset.png" type="Texture" id=19]
+[ext_resource path="res://Textures/menu_confirm.png" type="Texture" id=20]
+[ext_resource path="res://Textures/menu_status.png" type="Texture" id=21]
+[ext_resource path="res://Textures/menu_blue.png" type="Texture" id=22]
+[ext_resource path="res://Textures/pause_banner.png" type="Texture" id=23]
+[ext_resource path="res://Textures/menu_red.png" type="Texture" id=24]
+[ext_resource path="res://Textures/blue.png" type="Texture" id=25]
+[ext_resource path="res://Textures/card_placeholder.png" type="Texture" id=26]
+[ext_resource path="res://Textures/clone.png" type="Texture" id=27]
+[ext_resource path="res://Textures/number1.png" type="Texture" id=28]
+[ext_resource path="res://Textures/menu_return1.png" type="Texture" id=29]
+[ext_resource path="res://Textures/menu_return2.png" type="Texture" id=30]
+[ext_resource path="res://Textures/number10.png" type="Texture" id=31]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -66,32 +67,37 @@ extents = Vector2( 6, 4 )
 animations = [ {
 "frames": [ ExtResource( 18 ) ],
 "loop": false,
-"name": "reset",
+"name": "draw",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 19 ) ],
 "loop": false,
-"name": "quit",
+"name": "reset",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 20 ) ],
 "loop": false,
-"name": "status",
+"name": "quit",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 21 ) ],
 "loop": false,
-"name": "pause",
+"name": "status",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 22 ) ],
 "loop": false,
-"name": "red win",
+"name": "blue win",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 23 ) ],
 "loop": false,
-"name": "blue win",
+"name": "pause",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 24 ) ],
+"loop": false,
+"name": "red win",
 "speed": 5.0
 } ]
 
@@ -716,7 +722,7 @@ __meta__ = {
 
 visible = false
 position = Vector2( 60, 32 )
-texture = ExtResource( 24 )
+texture = ExtResource( 25 )
 _sections_unfolded = [ "Transform" ]
 
 [node name="card_holder" type="Sprite" parent="UI" index="9"]
@@ -724,7 +730,7 @@ _sections_unfolded = [ "Transform" ]
 editor/display_folded = true
 visible = false
 position = Vector2( 60, 32 )
-texture = ExtResource( 25 )
+texture = ExtResource( 26 )
 _sections_unfolded = [ "Transform" ]
 __meta__ = {
 "_edit_group_": true
@@ -733,42 +739,42 @@ __meta__ = {
 [node name="card_avatar" type="Sprite" parent="UI/card_holder" index="0"]
 
 visible = false
-texture = ExtResource( 26 )
+texture = ExtResource( 27 )
 
 [node name="card_num_left" type="Sprite" parent="UI/card_holder" index="1"]
 
 visible = false
 position = Vector2( -16, 0 )
-texture = ExtResource( 27 )
+texture = ExtResource( 28 )
 _sections_unfolded = [ "Transform" ]
 
 [node name="card_num_top" type="Sprite" parent="UI/card_holder" index="2"]
 
 visible = false
 position = Vector2( 0, -16 )
-texture = ExtResource( 27 )
+texture = ExtResource( 28 )
 _sections_unfolded = [ "Transform" ]
 
 [node name="card_num_right" type="Sprite" parent="UI/card_holder" index="3"]
 
 visible = false
 position = Vector2( 16, 0 )
-texture = ExtResource( 27 )
+texture = ExtResource( 28 )
 _sections_unfolded = [ "Transform" ]
 
 [node name="card_num_bottom" type="Sprite" parent="UI/card_holder" index="4"]
 
 visible = false
 position = Vector2( 0, 16 )
-texture = ExtResource( 27 )
+texture = ExtResource( 28 )
 _sections_unfolded = [ "Transform" ]
 
 [node name="return_button" type="TouchScreenButton" parent="UI" index="10"]
 
 visible = false
 position = Vector2( 87, 5 )
-normal = ExtResource( 28 )
-pressed = ExtResource( 29 )
+normal = ExtResource( 29 )
+pressed = ExtResource( 30 )
 bitmask = null
 shape = null
 shape_centered = true
@@ -781,13 +787,13 @@ _sections_unfolded = [ "Transform" ]
 [node name="p1_score" type="Sprite" parent="UI" index="11"]
 
 position = Vector2( 45, 8 )
-texture = ExtResource( 30 )
+texture = ExtResource( 31 )
 _sections_unfolded = [ "Transform" ]
 
 [node name="p2_score" type="Sprite" parent="UI" index="12"]
 
 position = Vector2( 75, 8 )
-texture = ExtResource( 30 )
+texture = ExtResource( 31 )
 _sections_unfolded = [ "Transform" ]
 
 [connection signal="button_up" from="p11" to="." method="_on_p11_button_up"]

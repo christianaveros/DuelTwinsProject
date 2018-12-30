@@ -147,11 +147,21 @@ func change_turn():
 			check_end_game = false
 			break
 	
+	player[control.turn]["score"] += 1
+	print("score: " + str(player[control.turn]["score"]))
+	#added one point start
+	get_node("UI/p"+str(control.turn)+"_score").texture = load("res://Textures/number"+ str(player[control.turn]["score"]) + ".png")
+	
 	if check_end_game == true:
 		change_camera_view("game end")
 		
 		#display UI confirm banner
-		$UI/confirm_banner.play("red win" if player[1]["score"] > player[2]["score"] else "blue win")
+		if player[1]["score"] == player[2]["score"]:
+			$UI/confirm_banner.play("draw")
+		elif player[1]["score"] < player[2]["score"]:
+			$UI/confirm_banner.play("red win")
+		else:
+			$UI/confirm_banner.play("blue win")
 		$UI/confirm_banner.visible = !$UI/confirm_banner.visible
 		
 		#display blurred bg
@@ -161,9 +171,6 @@ func change_turn():
 		$UI/back_button.visible = !$UI/back_button.visible
 		$UI/reset_button.visible = !$UI/reset_button.visible
 	else:
-		#added one point start
-		player[control.turn]["score"] += 1
-		get_node("UI/p"+str(control.turn)+"_score").texture = load("res://Textures/number"+ str(player[control.turn]["score"]) + ".png")
 		change_camera_view("change turn")
 
 onready var card_counter = {
