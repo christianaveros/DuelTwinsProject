@@ -20,9 +20,9 @@
 [ext_resource path="res://Textures/menu_draw.png" type="Texture" id=18]
 [ext_resource path="res://Textures/menu_reset.png" type="Texture" id=19]
 [ext_resource path="res://Textures/menu_confirm.png" type="Texture" id=20]
-[ext_resource path="res://Textures/menu_status.png" type="Texture" id=21]
-[ext_resource path="res://Textures/menu_blue.png" type="Texture" id=22]
-[ext_resource path="res://Textures/pause_banner.png" type="Texture" id=23]
+[ext_resource path="res://Textures/pause_banner.png" type="Texture" id=21]
+[ext_resource path="res://Textures/menu_status.png" type="Texture" id=22]
+[ext_resource path="res://Textures/menu_blue.png" type="Texture" id=23]
 [ext_resource path="res://Textures/menu_red.png" type="Texture" id=24]
 [ext_resource path="res://Textures/blue.png" type="Texture" id=25]
 [ext_resource path="res://Textures/card_placeholder.png" type="Texture" id=26]
@@ -82,17 +82,17 @@ animations = [ {
 }, {
 "frames": [ ExtResource( 21 ) ],
 "loop": false,
-"name": "status",
+"name": "pause",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 22 ) ],
 "loop": false,
-"name": "blue win",
+"name": "status",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 23 ) ],
 "loop": false,
-"name": "pause",
+"name": "blue win",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 24 ) ],
@@ -773,6 +773,7 @@ _sections_unfolded = [ "Transform" ]
 
 visible = false
 position = Vector2( 87, 5 )
+z_index = 10
 normal = ExtResource( 29 )
 pressed = ExtResource( 30 )
 bitmask = null
@@ -782,7 +783,7 @@ shape_visible = true
 passby_press = false
 action = ""
 visibility_mode = 0
-_sections_unfolded = [ "Transform" ]
+_sections_unfolded = [ "Transform", "Z Index" ]
 
 [node name="p1_score" type="Sprite" parent="UI" index="11"]
 

@@ -147,7 +147,7 @@ func change_turn():
 			check_end_game = false
 			break
 	
-	player[control.turn]["score"] += 1
+	#player[control.turn]["score"] += 1
 	print("score: " + str(player[control.turn]["score"]))
 	#added one point start
 	get_node("UI/p"+str(control.turn)+"_score").texture = load("res://Textures/number"+ str(player[control.turn]["score"]) + ".png")
